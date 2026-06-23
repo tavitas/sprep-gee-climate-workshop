@@ -14,9 +14,9 @@ be able to open the Code Editor and see your project name in the corner.
 ---
 
 ## Step 1 — Sign in with your Google account
-1. Open Chrome and go to **https://code.earthengine.google.com/register**
+1. Open Chrome and go to **[code.earthengine.google.com/register](https://code.earthengine.google.com/register){:target="_blank"}**
 2. Sign in with your Google/Gmail account (or create one first at
-   https://accounts.google.com/signup).
+   [accounts.google.com/signup](https://accounts.google.com/signup){:target="_blank"}).
 
 ## Step 2 — Create your Cloud project
 On the **Register a project** page:
@@ -66,7 +66,7 @@ that fit a training workshop:
 ![Registration confirmed — you are registered for noncommercial use](../assets/images/gee-signup/cloud9.png)
 
 ## Step 6 — Open the Code Editor
-1. Go to **https://code.earthengine.google.com**
+1. Go to **[code.earthengine.google.com](https://code.earthengine.google.com){:target="_blank"}**
 2. Top-right corner: you should see your project name / ID.
 
 ![Code Editor — your project appears in the top-right corner](../assets/images/gee-signup/cloud10.png)
@@ -107,5 +107,5 @@ account. (Facilitators: run this before the session.)
 ---
 
 > 📸 **Screenshot credits:** Sign-up flow screenshots adapted from
-> [Spatial Thoughts](https://courses.spatialthoughts.com/gee-sign-up.html)
+> [Spatial Thoughts](https://courses.spatialthoughts.com/gee-sign-up.html){:target="_blank"}
 > (Ujaval Gandhi), used with gratitude for the Earth Engine education community.
