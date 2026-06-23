@@ -28,7 +28,7 @@ Everything you need offline. The scripts are also browsable and copyable under
     All JavaScript and Python scripts live in the `/scripts` folder of the
     course repository.
 
-    [:octicons-arrow-right-24: Browse on GitHub](https://github.com/YOUR-GITHUB-USERNAME/sprep-gee-climate-workshop/tree/main/scripts)
+    [:octicons-arrow-right-24: Browse on GitHub](https://github.com/tavitas/sprep-gee-climate-workshop/tree/main/scripts)
 
 </div>
 

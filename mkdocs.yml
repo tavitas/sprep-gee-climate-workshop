@@ -8,9 +8,9 @@ copyright: >-
   © 2026 SPREP / UNEP CIS-Pac5 — Regional Capacity Building on GIS & Data Management.
   Course content shared for educational use.
 
-# IMPORTANT: set these two for GitHub Pages. Replace YOUR-GITHUB-USERNAME.
-site_url: https://YOUR-GITHUB-USERNAME.github.io/sprep-gee-climate-workshop/
-repo_url: https://github.com/YOUR-GITHUB-USERNAME/sprep-gee-climate-workshop
+# IMPORTANT: set these two for GitHub Pages. Replace tavitas.
+site_url: https://tavitas.github.io/sprep-gee-climate-workshop/
+repo_url: https://github.com/tavitas/sprep-gee-climate-workshop
 repo_name: sprep-gee-climate-workshop
 edit_uri: edit/main/docs/
 
