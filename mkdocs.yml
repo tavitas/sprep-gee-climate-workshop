@@ -1,0 +1,107 @@
+site_name: Pacific Climate Data in Google Earth Engine
+site_description: >-
+  A hands-on training course for finding, processing and localizing global
+  climate datasets for Pacific Island nations using Google Earth Engine.
+  SPREP / UNEP CIS-Pac5 — Regional Capacity Building on GIS & Data Management.
+site_author: SPREP / UNEP CIS-Pac5
+copyright: >-
+  © 2026 SPREP / UNEP CIS-Pac5 — Regional Capacity Building on GIS & Data Management.
+  Course content shared for educational use.
+
+# IMPORTANT: set these two for GitHub Pages. Replace YOUR-GITHUB-USERNAME.
+site_url: https://YOUR-GITHUB-USERNAME.github.io/sprep-gee-climate-workshop/
+repo_url: https://github.com/YOUR-GITHUB-USERNAME/sprep-gee-climate-workshop
+repo_name: sprep-gee-climate-workshop
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/earth
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+nav:
+  - Home: index.md
+  - Course details:
+      - Overview: course-details/overview.md
+      - Navigating this course: course-details/navigation.md
+      - Downloads: course-details/downloads.md
+  - Climate datasets:
+      - What is Earth Engine?: datasets/what-is-gee.md
+      - The four climate themes: datasets/themes.md
+      - Dataset quick reference: datasets/reference.md
+  - Exercises:
+      - "1 · Set up your account": exercises/account-setup.md
+      - "2 · Code Editor basics": exercises/code-editor.md
+      - "3 · Rainfall & drought": exercises/rainfall.md
+      - "4 · Temperature & heat": exercises/temperature.md
+      - "5 · Ocean, reefs & coast": exercises/ocean-coast.md
+  - Scripts & code:
+      - Using the scripts: scripts/index.md
+      - JavaScript (Code Editor): scripts/javascript.md
+      - Python (geemap): scripts/python.md
+      - Live diagnostic check: scripts/diagnostic.md
+  - Resources:
+      - Glossary: resources/glossary.md
+      - Validation report: resources/validation.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://www.sprep.org
+      name: SPREP
+  generator: false
