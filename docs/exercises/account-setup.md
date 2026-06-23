@@ -22,9 +22,13 @@ be able to open the Code Editor and see your project name in the corner.
 On the **Register a project** page:
 1. Choose **Create a new Google Cloud Project**.
 2. **Project name:** type something you'll recognise, e.g.
-   `SPREP Google Earth Engine Climate Data Workshop 2026` (include the words *Earth Engine*).
+   `SPREP GEE Data 2026`.
 3. **Organization** and **Location:** choose **No organization**.
 4. Click **Continue** / **Create**.
+
+> 💡 **Include your country in the name** — e.g. `SPREP GEE Data 2026 — Samoa`
+> helps identify your project later. The name field has a 30-character limit,
+> so keep it short.
 
 ![Register a project page — project name, organization, and location fields](../assets/images/gee-signup/cloud1.png)
 
