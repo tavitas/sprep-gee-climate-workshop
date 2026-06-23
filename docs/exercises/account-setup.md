@@ -26,30 +26,50 @@ On the **Register a project** page:
 3. **Organization** and **Location:** choose **No organization**.
 4. Click **Continue** / **Create**.
 
+![Register a project page — project name, organization, and location fields](../assets/images/gee-signup/cloud1.png)
+
 > A *Project ID* is generated automatically (something like
 > `ee-yourname`). Write it down — you'll need it for the Python scripts.
 
 ## Step 3 — Verify noncommercial eligibility
+
+![Configuration page — click Verify to proceed](../assets/images/gee-signup/cloud2.png)
 You'll be taken to a short configuration questionnaire. Choose the options
 that fit a training workshop:
 1. **Organization type:** select **Earth Engine trainer or trainee**, then **Next**.
+
+![Select your organization type — Earth Engine trainer or trainee](../assets/images/gee-signup/cloud3.png)
 2. **Check noncommercial eligibility:** choose role **Participant** and
    enter the workshop start and end dates. Click **Check eligibility**.
+
+![Check noncommercial eligibility — role, dates, Check eligibility button](../assets/images/gee-signup/cloud4.png)
 3. You'll see a note confirming you're **eligible for noncommercial Earth
    Engine**. Click **Next**.
+
+![Confirmation — you are eligible for noncommercial Earth Engine](../assets/images/gee-signup/cloud5.png)
 
 ## Step 4 — Choose your free plan
 1. Under **Choose your plan**, select the **Community** tier
    (free, no billing needed — perfect for learning).
+
+![Choose your plan — select the Community tier](../assets/images/gee-signup/cloud6.png)
 2. **Describe your work:** choose **Classroom or education**. Click **Next**.
+
+![Describe your work — Classroom or education](../assets/images/gee-signup/cloud7.png)
 
 ## Step 5 — Register
 1. Review the summary and click **Register**.
+
+![Review the summary before registering](../assets/images/gee-signup/cloud8.png)
 2. When you see the confirmation, click **Continue**.
+
+![Registration confirmed — you are registered for noncommercial use](../assets/images/gee-signup/cloud9.png)
 
 ## Step 6 — Open the Code Editor
 1. Go to **https://code.earthengine.google.com**
 2. Top-right corner: you should see your project name / ID.
+
+![Code Editor — your project appears in the top-right corner](../assets/images/gee-signup/cloud10.png)
 
 ---
 
@@ -83,3 +103,9 @@ names are available and confirms every workshop dataset loads in your
 account. (Facilitators: run this before the session.)
 
 **Next:** [Exercise 2 — Code Editor basics & your country](code-editor.md)
+
+---
+
+> 📸 **Screenshot credits:** Sign-up flow screenshots adapted from
+> [Spatial Thoughts](https://courses.spatialthoughts.com/gee-sign-up.html)
+> (Ujaval Gandhi), used with gratitude for the Earth Engine education community.
