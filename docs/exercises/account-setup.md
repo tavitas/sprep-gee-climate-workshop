@@ -22,7 +22,7 @@ be able to open the Code Editor and see your project name in the corner.
 On the **Register a project** page:
 1. Choose **Create a new Google Cloud Project**.
 2. **Project name:** type something you'll recognise, e.g.
-   `Earth Engine Samoa` (include the words *Earth Engine*).
+   `SPREP Google Earth Engine Climate Data Workshop 2026` (include the words *Earth Engine*).
 3. **Organization** and **Location:** choose **No organization**.
 4. Click **Continue** / **Create**.
 
