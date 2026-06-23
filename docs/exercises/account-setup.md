@@ -26,7 +26,7 @@ On the **Register a project** page:
 3. **Organization** and **Location:** choose **No organization**.
 4. Click **Continue** / **Create**.
 
-> 💡 **Include your country in the name** — e.g. `SPREP GEE Data 2026 — Samoa`
+> 💡 **Include your country in the name** — e.g. `Samoa GEE Data 2026`
 > helps identify your project later. The name field has a 30-character limit,
 > so keep it short.
 
