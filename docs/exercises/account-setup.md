@@ -69,6 +69,15 @@ that fit a training workshop:
 
 ![Registration confirmed — you are registered for noncommercial use](../assets/images/gee-signup/cloud9.png)
 
+
+> ⚠️ **If you see an "Enable Earth Engine API" page** — this sometimes
+> appears after clicking **Continue**. Click the **Enable** button to
+> activate the Earth Engine API for your project.
+>
+> ![Enable the Earth Engine API page](../assets/images/gee-signup/enable-api.png)
+>
+> After enabling, you'll be taken to the Google Cloud Console. Close that
+> tab and go to the Code Editor in the next step.
 ## Step 6 — Open the Code Editor
 1. Go to **[code.earthengine.google.com](https://code.earthengine.google.com){:target="_blank"}**
 2. Top-right corner: you should see your project name / ID.
