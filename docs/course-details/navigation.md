@@ -15,7 +15,7 @@
 1. [Set up your account](../exercises/account-setup.md) — do this first.
 2. [Code Editor basics](../exercises/code-editor.md) — find your way around.
 3. Work through exercises **3 → 5** in order; each builds on the last.
-4. Dip into [Climate datasets](../datasets/what-is-gee.md) and the
+4. Dip into [Google Earth Engine](../datasets/what-is-gee.md) and the
    [Glossary](../resources/glossary.md) whenever you want background.
 
 ## Copying code

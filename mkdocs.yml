@@ -55,7 +55,8 @@ nav:
       - Overview: course-details/overview.md
       - Navigating this course: course-details/navigation.md
       - Downloads: course-details/downloads.md
-  - Climate datasets:
+  - Datasets: datasets/index.md
+  - Google Earth Engine:
       - What is Earth Engine?: datasets/what-is-gee.md
       - The four climate themes: datasets/themes.md
       - Dataset quick reference: datasets/reference.md

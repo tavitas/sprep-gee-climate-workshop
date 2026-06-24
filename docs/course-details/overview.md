@@ -33,7 +33,7 @@ country.
 
 ## How it's structured
 
-- **Climate datasets** — the concepts and the datasets, for reference.
+  - **Google Earth Engine** — Earth Engine concepts and the datasets we use.
 - **Exercises** — five hands-on activities that build on each other.
 - **Scripts & code** — every script, ready to copy, in JavaScript and Python.
 - **Resources** — glossary, dataset reference, downloads and a validation report.
