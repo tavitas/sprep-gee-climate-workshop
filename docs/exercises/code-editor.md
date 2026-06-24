@@ -61,8 +61,10 @@ The map at the bottom should jump to your country with a red outline.
 
 ## Step 4 — Save your script
 1. Click **Save** (top of editor).
-2. If prompted, create a repository, e.g. `pacific-climate-2026`.
+2. If prompted, create a repository, e.g. `sprep-gee-data-workshop-2026`.
 3. Name the file `02-my-country`. It now lives in the **Scripts** panel.
+
+![Save script — create repository and name your file dialogue](../assets/images/gee-signup/save-repo.png)
 
 ---
 
