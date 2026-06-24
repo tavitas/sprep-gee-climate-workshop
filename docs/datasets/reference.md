@@ -12,7 +12,7 @@ Earth Engine Data Catalog in **June 2026**.
 | Sea-surface temp | `NOAA/CDR/OISST/V2_1` | 0.25° | `sst`, `anom` | °C, scale ×0.01 |
 | Elevation / coast | `NASA/NASADEM_HGT/001` | ~30 m | `elevation` (m) | `ee.Image` |
 | Surface water | `JRC/GSW1_4/GlobalSurfaceWater` | 30 m | `occurrence` (%) | `ee.Image` |
-| Boundaries | `USDOS/LSIB_SIMPLE/2017` | vector | `country_na` | excludes small islands |
+| Boundaries | `USDOS/LSIB_SIMPLE/2017` | vector | `country_na` | all 21 PICTs present; small polygons imprecise |
 
 ## Unit gotchas — apply before mapping
 
@@ -29,20 +29,21 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has two quirks:
 
 1. It uses **US State Department spellings** — e.g. it stores `Solomon Is`, not
    "Solomon Islands".
-2. It **excludes medium and smaller islands**, so the tiniest nations have **no
-   polygon at all**.
+2. While all 21 SPREP PICTs are in LSIB, **polygon outlines for small/atoll
+   nations can be imprecise** — tiny landmasses may be poorly resolved.
 
 The course scripts handle this with a **hybrid** country selector:
 
 - **Larger high islands** (use LSIB outlines): Fiji, Samoa, Vanuatu, Papua New
-  Guinea, Solomon Islands (LSIB: `Solomon Is`), New Caledonia (LSIB:
-  `New Caledonia (Fr)`).
-- **Small / atoll / territory nations** (use point + buffer, including nations
-  whose LSIB polygons are too coarse for small islands): American Samoa,
-  Cook Islands (LSIB: `Cook Is (NZ)`), Federated States of Micronesia (LSIB:
-  `Micronesia, Fed States of`), French Polynesia, Guam, Kiribati, Marshall
-  Islands (LSIB: `Marshall Is`), Nauru, Niue (LSIB: `Niue (NZ)`), Northern
-  Mariana Islands, Palau, Tokelau, Tonga, Tuvalu, Wallis and Futuna.
+  Guinea, Solomon Islands (LSIB: `Solomon Is`), New Caledonia.
+- **Small / atoll / territory nations** (use point + buffer — all 21 PICTs are
+  in LSIB, but point+buffer is recommended for small/atoll nations because LSIB
+  polygons may be imprecise for tiny landmasses): American Samoa, Cook Islands
+  (LSIB: `Cook Is`), Federated States of Micronesia (LSIB:
+  `Fed States of Micronesia`), French Polynesia, Guam, Kiribati, Marshall
+  Islands (LSIB: `Marshall Is`), Nauru, Niue (LSIB: `Niue`), Northern Mariana
+  Islands (LSIB: `Northern Mariana Is`), Palau, Tokelau, Tonga, Tuvalu, Wallis
+  and Futuna (LSIB: `Wallis & Futuna`).
 
 You just type the friendly name; the script picks the right area. Confirm it
 live in your own account with the

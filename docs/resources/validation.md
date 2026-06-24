@@ -33,39 +33,46 @@ All Kelvin→°C conversions and scale factors in the scripts match the catalog.
 
 ## 3. Country boundaries — ISSUE FOUND & FIXED ⚠️→✅
 **Finding:** `USDOS/LSIB_SIMPLE/2017` (a) uses US State Department spellings
-and (b) **excludes medium and smaller islands**. Several country names in
+and (b) includes all 21 SPREP PICTs, though polygons for small atolls may be imprecise. Several country names in
 the first draft did not match and would have produced **blank maps**.
-The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):
+The complete SPREP PICT mapping (all 21 PICTs are in LSIB):
 
 | Friendly name | LSIB name |
 |---|---|
-| Cook Islands | `Cook Is (NZ)` |
-| Federated States of Micronesia | `Micronesia, Fed States of` |
+| American Samoa | `American Samoa` |
+| Cook Islands | `Cook Is` |
+| Federated States of Micronesia | `Fed States of Micronesia` |
 | Fiji | `Fiji` |
+| French Polynesia | `French Polynesia` |
+| Guam | `Guam` |
 | Kiribati | `Kiribati` |
 | Marshall Islands | `Marshall Is` |
 | Nauru | `Nauru` |
-| New Caledonia | `New Caledonia (Fr)` |
-| Niue | `Niue (NZ)` |
+| New Caledonia | `New Caledonia` |
+| Niue | `Niue` |
+| Northern Mariana Is | `Northern Mariana Is` |
 | Palau | `Palau` |
 | Papua New Guinea | `Papua New Guinea` |
 | Samoa | `Samoa` |
 | Solomon Islands | `Solomon Is` |
 | Tonga | `Tonga` |
+| Tokelau | `Tokelau` |
 | Tuvalu | `Tuvalu` |
 | Vanuatu | `Vanuatu` |
+| Wallis & Futuna | `Wallis & Futuna` |
 
-The six remaining PICTs have no separate LSIB entry and always use
-point+buffer: American Samoa, French Polynesia, Guam, Northern Mariana
-Islands, Tokelau, and Wallis and Futuna.
+All 21 PICTs are present in LSIB (see table above). Point+buffer remains
+recommended for small/atoll nations because LSIB polygons can be imprecise
+for tiny islands, making point+buffer more reliable for coarse climate grids.
 **Fix applied (hybrid approach):**
 - Larger high islands (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
   Guinea, New Caledonia) → real LSIB outline with the correct spelling.
 - Small / atoll nations and territories (Tonga, Palau, Tuvalu, Kiribati, Nauru,
   Niue, Cook Islands, Marshall Islands, Federated States of Micronesia,
   American Samoa, French Polynesia, Guam, Northern Mariana Islands, Tokelau,
-  Wallis and Futuna) → point + buffer, which
-  always works for the coarse climate grids.
+  Wallis and Futuna) → point + buffer. All of these DO have LSIB entries,
+  but LSIB polygons may be imprecise for small/atoll islands, while
+  point+buffer always works for the coarse climate grids.
 - A country selector is built into every JS script and into
   `python/_pacific_aoi.py`; participants type a **friendly name** and the
   right area is chosen automatically.
