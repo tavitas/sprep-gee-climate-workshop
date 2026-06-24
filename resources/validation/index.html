@@ -1530,19 +1530,16 @@ Earth Engine Data Catalog:</p>
 <h2 id="3-country-boundaries-issue-found-fixed">3. Country boundaries — ISSUE FOUND &amp; FIXED ⚠️→✅<a class="headerlink" href="#3-country-boundaries-issue-found-fixed" title="Permanent link">&para;</a></h2>
 <p><strong>Finding:</strong> <code>USDOS/LSIB_SIMPLE/2017</code> (a) uses US State Department spellings
 and (b) <strong>excludes medium and smaller islands</strong>. Several country names in
-the first draft did not match and would have produced <strong>blank maps</strong>:</p>
+the first draft did not match and would have produced <strong>blank maps</strong>.
+The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):</p>
 <table>
 <thead>
 <tr>
-<th>Draft (wrong)</th>
-<th>LSIB actual</th>
+<th>Friendly name</th>
+<th>LSIB name</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Solomon Islands</td>
-<td><code>Solomon Is</code></td>
-</tr>
 <tr>
 <td>Cook Islands</td>
 <td><code>Cook Is (NZ)</code></td>
@@ -1552,25 +1549,74 @@ the first draft did not match and would have produced <strong>blank maps</strong
 <td><code>Micronesia, Fed States of</code></td>
 </tr>
 <tr>
+<td>Fiji</td>
+<td><code>Fiji</code></td>
+</tr>
+<tr>
+<td>Kiribati</td>
+<td><code>Kiribati</code></td>
+</tr>
+<tr>
 <td>Marshall Islands</td>
 <td><code>Marshall Is</code></td>
+</tr>
+<tr>
+<td>Nauru</td>
+<td><code>Nauru</code></td>
+</tr>
+<tr>
+<td>New Caledonia</td>
+<td><code>New Caledonia (Fr)</code></td>
 </tr>
 <tr>
 <td>Niue</td>
 <td><code>Niue (NZ)</code></td>
 </tr>
+<tr>
+<td>Palau</td>
+<td><code>Palau</code></td>
+</tr>
+<tr>
+<td>Papua New Guinea</td>
+<td><code>Papua New Guinea</code></td>
+</tr>
+<tr>
+<td>Samoa</td>
+<td><code>Samoa</code></td>
+</tr>
+<tr>
+<td>Solomon Islands</td>
+<td><code>Solomon Is</code></td>
+</tr>
+<tr>
+<td>Tonga</td>
+<td><code>Tonga</code></td>
+</tr>
+<tr>
+<td>Tuvalu</td>
+<td><code>Tuvalu</code></td>
+</tr>
+<tr>
+<td>Vanuatu</td>
+<td><code>Vanuatu</code></td>
+</tr>
 </tbody>
 </table>
-<p><strong>Fix applied (hybrid approach):</strong>
+<p>The six remaining PICTs have no separate LSIB entry and always use
+point+buffer: American Samoa, French Polynesia, Guam, Northern Mariana
+Islands, Tokelau, and Wallis and Futuna.
+<strong>Fix applied (hybrid approach):</strong>
 - Larger high islands (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
   Guinea, New Caledonia) → real LSIB outline with the correct spelling.
-- Small / atoll nations (Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook
-  Islands, Marshall Islands, Micronesia, Tokelau) → point + buffer, which
+- Small / atoll nations and territories (Tonga, Palau, Tuvalu, Kiribati, Nauru,
+  Niue, Cook Islands, Marshall Islands, Federated States of Micronesia,
+  American Samoa, French Polynesia, Guam, Northern Mariana Islands, Tokelau,
+  Wallis and Futuna) → point + buffer, which
   always works for the coarse climate grids.
 - A country selector is built into every JS script and into
   <code>python/_pacific_aoi.py</code>; participants type a <strong>friendly name</strong> and the
   right area is chosen automatically.
-- Selector logic was unit-tested offline: all 17 nations resolve via the
+- Selector logic was unit-tested offline: all 21 PICTs resolve via the
   correct branch; unknown names raise a clear error.</p>
 <h2 id="4-scripts-pass">4. Scripts — PASS<a class="headerlink" href="#4-scripts-pass" title="Permanent link">&para;</a></h2>
 <p>All JavaScript pass <code>node --check</code>; all Python pass <code>py_compile</code>. Dataset

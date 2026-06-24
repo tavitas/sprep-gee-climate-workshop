@@ -1479,10 +1479,15 @@ Earth Engine Data Catalog in <strong>June 2026</strong>.</p>
 </ol>
 <p>The course scripts handle this with a <strong>hybrid</strong> country selector:</p>
 <ul>
-<li><strong>Larger high islands</strong> (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
-  Guinea, New Caledonia) → the real LSIB outline.</li>
-<li><strong>Small / atoll nations</strong> (Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook
-  Islands, Marshall Islands, Micronesia, Tokelau) → a point + buffer area.</li>
+<li><strong>Larger high islands</strong> (use LSIB outlines): Fiji, Samoa, Vanuatu, Papua New
+  Guinea, Solomon Islands (LSIB: <code>Solomon Is</code>), New Caledonia (LSIB:
+  <code>New Caledonia (Fr)</code>).</li>
+<li><strong>Small / atoll / territory nations</strong> (use point + buffer, including nations
+  whose LSIB polygons are too coarse for small islands): American Samoa,
+  Cook Islands (LSIB: <code>Cook Is (NZ)</code>), Federated States of Micronesia (LSIB:
+  <code>Micronesia, Fed States of</code>), French Polynesia, Guam, Kiribati, Marshall
+  Islands (LSIB: <code>Marshall Is</code>), Nauru, Niue (LSIB: <code>Niue (NZ)</code>), Northern
+  Mariana Islands, Palau, Tokelau, Tonga, Tuvalu, Wallis and Futuna.</li>
 </ul>
 <p>You just type the friendly name; the script picks the right area. Confirm it
 live in your own account with the
