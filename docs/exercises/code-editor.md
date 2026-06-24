@@ -30,7 +30,10 @@ Output appears in the **Console** on the right.
 We use the global **LSIB** boundary dataset. Change `'Samoa'` to your
 country. Run it:
 ```javascript
-// 1. Pick your country (exact spelling matters)
+// 1. Pick your country — exact spelling matters. Pacific LSIB names:
+//    'Fiji', 'Samoa', 'Vanuatu', 'Papua New Guinea', 'Solomon Is'
+//    (not "Islands"), 'New Caledonia (Fr)'.
+//    Atoll nations (Tonga, Tuvalu, Kiribati, etc.) → use point+buffer below.
 var countryName = 'Samoa';
 
 // 2. Load the global boundaries and keep just your country
