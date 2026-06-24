@@ -83,7 +83,7 @@ var chart = ui.Chart.image.series({
   region: aoi, reducer: ee.Reducer.mean(), scale: 5000
 }).setOptions({
   title: 'Total annual rainfall over ' + COUNTRY + ' (' + START_YEAR + '-' + END_YEAR + ')',
-  vAxis: {title: 'Rainfall (mm/year)'}, hAxis: {title: 'Year', format: '####'},
+  vAxis: {title: 'mm/year'}, hAxis: {title: 'Year'},
   lineWidth: 2, pointSize: 4, legend: {position: 'none'}
 });
 print(chart);

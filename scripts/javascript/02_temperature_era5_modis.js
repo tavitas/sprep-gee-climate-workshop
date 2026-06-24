@@ -70,7 +70,7 @@ print(ui.Chart.image.series({
   reducer: ee.Reducer.mean(), scale: 11000
 }).setOptions({
   title: 'Average annual air temperature over ' + COUNTRY + ' (' + START_YEAR + '-' + END_YEAR + ')',
-  vAxis: {title: 'Temperature (°C)'}, hAxis: {title: 'Year', format: '####'},
+  vAxis: {title: 'Temperature (°C)'}, hAxis: {title: 'Year'},
   trendlines: {0: {color: 'red', visibleInLegend: true}},
   lineWidth: 2, pointSize: 3, legend: {position: 'none'}
 }));
