@@ -36,10 +36,12 @@ Google Colab or a notebook.
 Set `COUNTRY` to your nation using the **friendly name** — the scripts translate
 it automatically:
 
-`Fiji` · `Samoa` · `Tonga` · `Vanuatu` · `Solomon Islands` ·
-`Papua New Guinea` · `Palau` · `Niue` · `Cook Islands` ·
-`Federated States of Micronesia` · `Marshall Islands` · `Kiribati` ·
-`Nauru` · `Tuvalu` · `Tokelau` · `New Caledonia`
+`American Samoa` · `Cook Islands` · `Federated States of Micronesia` ·
+`Fiji` · `French Polynesia` · `Guam` · `Kiribati` ·
+`Marshall Islands` · `Nauru` · `New Caledonia` · `Niue` ·
+`Northern Mariana Islands` · `Palau` · `Papua New Guinea` · `Samoa` ·
+`Solomon Islands` · `Tokelau` · `Tonga` · `Tuvalu` ·
+`Vanuatu` · `Wallis and Futuna`
 
 !!! warning "Why a country selector?"
     The global boundary layer uses State Department spellings (e.g.

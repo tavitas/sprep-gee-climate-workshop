@@ -34,10 +34,15 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has two quirks:
 
 The course scripts handle this with a **hybrid** country selector:
 
-- **Larger high islands** (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
-  Guinea, New Caledonia) → the real LSIB outline.
-- **Small / atoll nations** (Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook
-  Islands, Marshall Islands, Micronesia, Tokelau) → a point + buffer area.
+- **Larger high islands** (use LSIB outlines): Fiji, Samoa, Vanuatu, Papua New
+  Guinea, Solomon Islands (LSIB: `Solomon Is`), New Caledonia (LSIB:
+  `New Caledonia (Fr)`).
+- **Small / atoll / territory nations** (use point + buffer, including nations
+  whose LSIB polygons are too coarse for small islands): American Samoa,
+  Cook Islands (LSIB: `Cook Is (NZ)`), Federated States of Micronesia (LSIB:
+  `Micronesia, Fed States of`), French Polynesia, Guam, Kiribati, Marshall
+  Islands (LSIB: `Marshall Is`), Nauru, Niue (LSIB: `Niue (NZ)`), Northern
+  Mariana Islands, Palau, Tokelau, Tonga, Tuvalu, Wallis and Futuna.
 
 You just type the friendly name; the script picks the right area. Confirm it
 live in your own account with the

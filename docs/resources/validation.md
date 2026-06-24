@@ -34,26 +34,42 @@ All Kelvin→°C conversions and scale factors in the scripts match the catalog.
 ## 3. Country boundaries — ISSUE FOUND & FIXED ⚠️→✅
 **Finding:** `USDOS/LSIB_SIMPLE/2017` (a) uses US State Department spellings
 and (b) **excludes medium and smaller islands**. Several country names in
-the first draft did not match and would have produced **blank maps**:
+the first draft did not match and would have produced **blank maps**.
+The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):
 
-| Draft (wrong) | LSIB actual |
+| Friendly name | LSIB name |
 |---|---|
-| Solomon Islands | `Solomon Is` |
 | Cook Islands | `Cook Is (NZ)` |
 | Federated States of Micronesia | `Micronesia, Fed States of` |
+| Fiji | `Fiji` |
+| Kiribati | `Kiribati` |
 | Marshall Islands | `Marshall Is` |
+| Nauru | `Nauru` |
+| New Caledonia | `New Caledonia (Fr)` |
 | Niue | `Niue (NZ)` |
+| Palau | `Palau` |
+| Papua New Guinea | `Papua New Guinea` |
+| Samoa | `Samoa` |
+| Solomon Islands | `Solomon Is` |
+| Tonga | `Tonga` |
+| Tuvalu | `Tuvalu` |
+| Vanuatu | `Vanuatu` |
 
+The six remaining PICTs have no separate LSIB entry and always use
+point+buffer: American Samoa, French Polynesia, Guam, Northern Mariana
+Islands, Tokelau, and Wallis and Futuna.
 **Fix applied (hybrid approach):**
 - Larger high islands (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
   Guinea, New Caledonia) → real LSIB outline with the correct spelling.
-- Small / atoll nations (Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook
-  Islands, Marshall Islands, Micronesia, Tokelau) → point + buffer, which
+- Small / atoll nations and territories (Tonga, Palau, Tuvalu, Kiribati, Nauru,
+  Niue, Cook Islands, Marshall Islands, Federated States of Micronesia,
+  American Samoa, French Polynesia, Guam, Northern Mariana Islands, Tokelau,
+  Wallis and Futuna) → point + buffer, which
   always works for the coarse climate grids.
 - A country selector is built into every JS script and into
   `python/_pacific_aoi.py`; participants type a **friendly name** and the
   right area is chosen automatically.
-- Selector logic was unit-tested offline: all 17 nations resolve via the
+- Selector logic was unit-tested offline: all 21 PICTs resolve via the
   correct branch; unknown names raise a clear error.
 
 ## 4. Scripts — PASS

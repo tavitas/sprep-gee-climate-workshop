@@ -30,10 +30,16 @@ Output appears in the **Console** on the right.
 We use the global **LSIB** boundary dataset. Change `'Samoa'` to your
 country. Run it:
 ```javascript
-// 1. Pick your country — exact spelling matters. Pacific LSIB names:
-//    'Fiji', 'Samoa', 'Vanuatu', 'Papua New Guinea', 'Solomon Is'
-//    (not "Islands"), 'New Caledonia (Fr)'.
-//    Atoll nations (Tonga, Tuvalu, Kiribati, etc.) → use point+buffer below.
+// 1. Pick your country — exact spelling matters.
+//    All 21 SPREP Pacific Island nations and territories:
+//    ── LSIB polygons work for these (use exact LSIB spelling):
+//    'Fiji', 'Samoa', 'Vanuatu', 'Papua New Guinea', 'Solomon Is',
+//    'New Caledonia (Fr)', 'Tonga', 'Kiribati', 'Nauru', 'Tuvalu',
+//    'Palau', 'Marshall Is', 'Micronesia, Fed States of',
+//    'Cook Is (NZ)', 'Niue (NZ)'
+//    ── Use point+buffer for these (not in LSIB separately):
+//    American Samoa, French Polynesia, Guam, Northern Mariana Is,
+//    Tokelau, Wallis and Futuna (→ see point+buffer section below)
 var countryName = 'Samoa';
 
 // 2. Load the global boundaries and keep just your country
@@ -81,13 +87,25 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
 | `Papua New Guinea` | works |
 | `Solomon Is` | works (note: **not** "Solomon Islands") |
 | `New Caledonia (Fr)` | works |
+| `Tonga` | works |
+| `Kiribati` | works |
+| `Nauru` | works |
+| `Tuvalu` | works |
+| `Palau` | works |
+| `Marshall Is` | works |
+| `Micronesia, Fed States of` | works |
+| `Cook Is (NZ)` | works |
+| `Niue (NZ)` | works |
 
-### Small / atoll nations — use a point + buffer instead
+### Small islands and territories — use a point + buffer instead
 
-For **Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook Islands, Marshall
-Islands, Federated States of Micronesia, Tokelau**, LSIB has no usable
-polygon. Define your area as a **point with a circle (buffer)** — this also
-suits the coarse (5–28 km) climate grids:
+Six territories have **no LSIB entry at all**: American Samoa, French
+Polynesia, Guam, Northern Mariana Islands, Tokelau, Wallis and Futuna.
+Nine more (Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook Islands,
+Marshall Islands, Federated States of Micronesia) **do** have LSIB polygons
+but their tiny atolls are too small for the coarse (5–28 km) climate grids —
+a point + buffer is more reliable.  **All 21 PICTs** can use this approach.
+Define your area as a **point with a circle (buffer)**:
 ```javascript
 // Funafuti, Tuvalu + 350 km of surrounding ocean/atolls
 var country = ee.Geometry.Point([178.5, -7.8]).buffer(350000);
