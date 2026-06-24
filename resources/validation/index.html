@@ -1529,9 +1529,9 @@ Earth Engine Data Catalog:</p>
 <p>All Kelvin→°C conversions and scale factors in the scripts match the catalog.</p>
 <h2 id="3-country-boundaries-issue-found-fixed">3. Country boundaries — ISSUE FOUND &amp; FIXED ⚠️→✅<a class="headerlink" href="#3-country-boundaries-issue-found-fixed" title="Permanent link">&para;</a></h2>
 <p><strong>Finding:</strong> <code>USDOS/LSIB_SIMPLE/2017</code> (a) uses US State Department spellings
-and (b) <strong>excludes medium and smaller islands</strong>. Several country names in
+and (b) includes all 21 SPREP PICTs, though polygons for small atolls may be imprecise. Several country names in
 the first draft did not match and would have produced <strong>blank maps</strong>.
-The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):</p>
+The complete SPREP PICT mapping (all 21 PICTs are in LSIB):</p>
 <table>
 <thead>
 <tr>
@@ -1541,16 +1541,28 @@ The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):</p>
 </thead>
 <tbody>
 <tr>
+<td>American Samoa</td>
+<td><code>American Samoa</code></td>
+</tr>
+<tr>
 <td>Cook Islands</td>
-<td><code>Cook Is (NZ)</code></td>
+<td><code>Cook Is</code></td>
 </tr>
 <tr>
 <td>Federated States of Micronesia</td>
-<td><code>Micronesia, Fed States of</code></td>
+<td><code>Fed States of Micronesia</code></td>
 </tr>
 <tr>
 <td>Fiji</td>
 <td><code>Fiji</code></td>
+</tr>
+<tr>
+<td>French Polynesia</td>
+<td><code>French Polynesia</code></td>
+</tr>
+<tr>
+<td>Guam</td>
+<td><code>Guam</code></td>
 </tr>
 <tr>
 <td>Kiribati</td>
@@ -1566,11 +1578,15 @@ The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):</p>
 </tr>
 <tr>
 <td>New Caledonia</td>
-<td><code>New Caledonia (Fr)</code></td>
+<td><code>New Caledonia</code></td>
 </tr>
 <tr>
 <td>Niue</td>
-<td><code>Niue (NZ)</code></td>
+<td><code>Niue</code></td>
+</tr>
+<tr>
+<td>Northern Mariana Is</td>
+<td><code>Northern Mariana Is</code></td>
 </tr>
 <tr>
 <td>Palau</td>
@@ -1593,6 +1609,10 @@ The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):</p>
 <td><code>Tonga</code></td>
 </tr>
 <tr>
+<td>Tokelau</td>
+<td><code>Tokelau</code></td>
+</tr>
+<tr>
 <td>Tuvalu</td>
 <td><code>Tuvalu</code></td>
 </tr>
@@ -1600,19 +1620,24 @@ The complete SPREP PICT mapping (15 LSIB entries, 6 point+buffer):</p>
 <td>Vanuatu</td>
 <td><code>Vanuatu</code></td>
 </tr>
+<tr>
+<td>Wallis &amp; Futuna</td>
+<td><code>Wallis &amp; Futuna</code></td>
+</tr>
 </tbody>
 </table>
-<p>The six remaining PICTs have no separate LSIB entry and always use
-point+buffer: American Samoa, French Polynesia, Guam, Northern Mariana
-Islands, Tokelau, and Wallis and Futuna.
+<p>All 21 PICTs are present in LSIB (see table above). Point+buffer remains
+recommended for small/atoll nations because LSIB polygons can be imprecise
+for tiny islands, making point+buffer more reliable for coarse climate grids.
 <strong>Fix applied (hybrid approach):</strong>
 - Larger high islands (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
   Guinea, New Caledonia) → real LSIB outline with the correct spelling.
 - Small / atoll nations and territories (Tonga, Palau, Tuvalu, Kiribati, Nauru,
   Niue, Cook Islands, Marshall Islands, Federated States of Micronesia,
   American Samoa, French Polynesia, Guam, Northern Mariana Islands, Tokelau,
-  Wallis and Futuna) → point + buffer, which
-  always works for the coarse climate grids.
+  Wallis and Futuna) → point + buffer. All of these DO have LSIB entries,
+  but LSIB polygons may be imprecise for small/atoll islands, while
+  point+buffer always works for the coarse climate grids.
 - A country selector is built into every JS script and into
   <code>python/_pacific_aoi.py</code>; participants type a <strong>friendly name</strong> and the
   right area is chosen automatically.

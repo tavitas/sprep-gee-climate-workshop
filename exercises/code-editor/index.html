@@ -957,21 +957,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#larger-high-islands-use-the-lsib-outline-exact-spelling-matters" class="md-nav__link">
+  <a href="#lsib-country-names-use-these-exact-spellings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Larger high islands — use the LSIB outline (exact spelling matters)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#small-islands-and-territories-use-a-point-buffer-instead" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Small islands and territories — use a point + buffer instead
+        LSIB country names — use these exact spellings
       
     </span>
   </a>
@@ -1484,21 +1473,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#larger-high-islands-use-the-lsib-outline-exact-spelling-matters" class="md-nav__link">
+  <a href="#lsib-country-names-use-these-exact-spellings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Larger high islands — use the LSIB outline (exact spelling matters)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#small-islands-and-territories-use-a-point-buffer-instead" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Small islands and territories — use a point + buffer instead
+        LSIB country names — use these exact spellings
       
     </span>
   </a>
@@ -1576,27 +1554,26 @@ Output appears in the <strong>Console</strong> on the right.</p>
 <h2 id="step-2-load-your-countrys-boundary">Step 2 — Load your country's boundary<a class="headerlink" href="#step-2-load-your-countrys-boundary" title="Permanent link">&para;</a></h2>
 <p>We use the global <strong>LSIB</strong> boundary dataset. Change <code>'Samoa'</code> to your
 country. Run it:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// 1. Pick your country — exact spelling matters.</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">//    All 21 SPREP Pacific Island nations and territories:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">//    ── LSIB polygons work for these (use exact LSIB spelling):</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">//    &#39;Fiji&#39;, &#39;Samoa&#39;, &#39;Vanuatu&#39;, &#39;Papua New Guinea&#39;, &#39;Solomon Is&#39;,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">//    &#39;New Caledonia (Fr)&#39;, &#39;Tonga&#39;, &#39;Kiribati&#39;, &#39;Nauru&#39;, &#39;Tuvalu&#39;,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">//    &#39;Palau&#39;, &#39;Marshall Is&#39;, &#39;Micronesia, Fed States of&#39;,</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">//    &#39;Cook Is (NZ)&#39;, &#39;Niue (NZ)&#39;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1">//    ── Use point+buffer for these (not in LSIB separately):</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">//    American Samoa, French Polynesia, Guam, Northern Mariana Is,</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">//    Tokelau, Wallis and Futuna (→ see point+buffer section below)</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="kd">var</span><span class="w"> </span><span class="nx">countryName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Samoa&#39;</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1">// 2. Load the global boundaries and keep just your country</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="kd">var</span><span class="w"> </span><span class="nx">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;USDOS/LSIB_SIMPLE/2017&#39;</span><span class="p">)</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">                </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;country_na&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">countryName</span><span class="p">));</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="c1">// 3. Center and zoom the map to fit your country</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">country</span><span class="p">);</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="c1">// 4. Draw it</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">country</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">},</span><span class="w"> </span><span class="nx">countryName</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//    All 21 SPREP Pacific Island nations and territories:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">//    ── All 21 have LSIB entries (use exact LSIB spelling):</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">//    &#39;Fiji&#39;, &#39;Samoa&#39;, &#39;Vanuatu&#39;, &#39;Papua New Guinea&#39;, &#39;Solomon Is&#39;,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">//    &#39;New Caledonia&#39;, &#39;Tonga&#39;, &#39;Kiribati&#39;, &#39;Nauru&#39;, &#39;Tuvalu&#39;,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">//    &#39;Palau&#39;, &#39;Marshall Is&#39;, &#39;Fed States of Micronesia&#39;,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">//    &#39;Cook Is&#39;, &#39;Niue&#39;, &#39;American Samoa&#39;, &#39;French Polynesia&#39;,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">//    &#39;Guam&#39;, &#39;Northern Mariana Is&#39;, &#39;Tokelau&#39;, &#39;Wallis &amp; Futuna&#39;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1">//    ── Small island/atoll nations may benefit from point+buffer</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">//    (LSIB polygons can be imprecise for tiny atolls; see below)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="kd">var</span><span class="w"> </span><span class="nx">countryName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Samoa&#39;</span><span class="p">;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1">// 2. Load the global boundaries and keep just your country</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="kd">var</span><span class="w"> </span><span class="nx">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;USDOS/LSIB_SIMPLE/2017&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">                </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;country_na&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">countryName</span><span class="p">));</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1">// 3. Center and zoom the map to fit your country</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">country</span><span class="p">);</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1">// 4. Draw it</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">country</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">},</span><span class="w"> </span><span class="nx">countryName</span><span class="p">);</span>
 </code></pre></div></p>
 <p>The map at the bottom should jump to your country with a red outline.</p>
 <h2 id="step-3-use-the-inspector">Step 3 — Use the Inspector<a class="headerlink" href="#step-3-use-the-inspector" title="Permanent link">&para;</a></h2>
@@ -1618,10 +1595,11 @@ country. Run it:
 <li>It uses <strong>US State Department spellings</strong>, which are not always the
    plain-English name. For example you must filter on <code>Solomon Is</code>, not
    <code>Solomon Islands</code>.</li>
-<li>It <strong>excludes medium and smaller islands</strong>, so the tiniest nations have
-   <strong>no polygon at all</strong> — filtering returns an empty result (a blank map).</li>
+<li>It uses a <strong>coarse simplification</strong>, so tiny atoll polygons may be
+   imprecise — a point + buffer is more reliable for small nations
+   (see the next section). All 21 PICTs <strong>do</strong> have LSIB entries.</li>
 </ol>
-<h3 id="larger-high-islands-use-the-lsib-outline-exact-spelling-matters">Larger high islands — use the LSIB outline (exact spelling matters)<a class="headerlink" href="#larger-high-islands-use-the-lsib-outline-exact-spelling-matters" title="Permanent link">&para;</a></h3>
+<h3 id="lsib-country-names-use-these-exact-spellings">LSIB country names — use these exact spellings<a class="headerlink" href="#lsib-country-names-use-these-exact-spellings" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1651,7 +1629,7 @@ country. Run it:
 <td>works (note: <strong>not</strong> "Solomon Islands")</td>
 </tr>
 <tr>
-<td><code>New Caledonia (Fr)</code></td>
+<td><code>New Caledonia</code></td>
 <td>works</td>
 </tr>
 <tr>
@@ -1679,26 +1657,54 @@ country. Run it:
 <td>works</td>
 </tr>
 <tr>
-<td><code>Micronesia, Fed States of</code></td>
+<td><code>Fed States of Micronesia</code></td>
 <td>works</td>
 </tr>
 <tr>
-<td><code>Cook Is (NZ)</code></td>
+<td><code>Cook Is</code></td>
 <td>works</td>
 </tr>
 <tr>
-<td><code>Niue (NZ)</code></td>
+<td><code>Niue</code></td>
 <td>works</td>
+</tr>
+<tr>
+<td><code>American Samoa</code></td>
+<td>works</td>
+</tr>
+<tr>
+<td><code>French Polynesia</code></td>
+<td>works</td>
+</tr>
+<tr>
+<td><code>Guam</code></td>
+<td>works</td>
+</tr>
+<tr>
+<td><code>Northern Mariana Is</code></td>
+<td>works</td>
+</tr>
+<tr>
+<td><code>Tokelau</code></td>
+<td>works</td>
+</tr>
+<tr>
+<td><code>Wallis &amp; Futuna</code></td>
+<td>works</td>
+</tr>
+<tr>
+<td>### Small islands and atolls — point + buffer recommended</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="small-islands-and-territories-use-a-point-buffer-instead">Small islands and territories — use a point + buffer instead<a class="headerlink" href="#small-islands-and-territories-use-a-point-buffer-instead" title="Permanent link">&para;</a></h3>
-<p>Six territories have <strong>no LSIB entry at all</strong>: American Samoa, French
+<p>All 21 SPREP PICTs are present in LSIB. However, LSIB polygons for small
+island and atoll nations can be imprecise — the coarse (5–28 km) climate
+grids may miss tiny land areas. A point + buffer is more reliable for
+these: Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook Islands,
+Marshall Islands, Federated States of Micronesia, American Samoa, French
 Polynesia, Guam, Northern Mariana Islands, Tokelau, Wallis and Futuna.
-Nine more (Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook Islands,
-Marshall Islands, Federated States of Micronesia) <strong>do</strong> have LSIB polygons
-but their tiny atolls are too small for the coarse (5–28 km) climate grids —
-a point + buffer is more reliable.  <strong>All 21 PICTs</strong> can use this approach.
+<strong>Any of the 21 PICTs</strong> can use this approach.
 Define your area as a <strong>point with a circle (buffer)</strong>:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Funafuti, Tuvalu + 350 km of surrounding ocean/atolls</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">.</span><span class="nx">Point</span><span class="p">([</span><span class="mf">178.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">7.8</span><span class="p">]).</span><span class="nx">buffer</span><span class="p">(</span><span class="mf">350000</span><span class="p">);</span>
