@@ -40,8 +40,8 @@ var countryName = 'Samoa';
 var country = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
                 .filter(ee.Filter.eq('country_na', countryName));
 
-// 3. Zoom the map to it
-Map.centerObject(country, 9);
+// 3. Center and zoom the map to fit your country
+Map.centerObject(country);
 
 // 4. Draw it
 Map.addLayer(country, {color: 'red'}, countryName);
