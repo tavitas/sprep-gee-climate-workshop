@@ -5,7 +5,8 @@
 
 **Datasets:**
 - MODIS Land Surface Temperature (`MODIS/061/MOD11A1`) — ~1 km, where heat is.
-- ERA5-Land Daily (`ECMWF/ERA5_LAND/DAILY_AGGR`) — air temperature trend.
+- Air-temperature trend — **hybrid**: ERA5-Land (`ECMWF/ERA5_LAND/DAILY_AGGR`)
+  for high islands; global ERA5 (`ECMWF/ERA5/MONTHLY`) for atoll nations.
 
 **Companion script:**
 [`../scripts/javascript.md`](../scripts/javascript.md)
@@ -48,6 +49,14 @@ high ground stay cooler.
 
 ## Step 3 — The warming trend (ERA5-Land air temperature)
 Build a yearly average air temperature and chart it with a trend line.
+
+!!! warning "Atolls need the global dataset"
+    ERA5-**Land** is land-only and returns **no data** over the smallest atoll
+    nations (Cook Islands, Kiribati, Marshall Islands, Nauru, Niue, Tonga,
+    Tuvalu) — the inline code below would give them a blank chart. The full
+    script [`02_temperature_era5_modis.js`](../scripts/javascript.md) switches
+    those countries to global ERA5 (`ECMWF/ERA5/MONTHLY`, to 2020)
+    automatically. The Samoa example here works because Samoa is a high island.
 ```javascript
 var years = ee.List.sequence(1991, 2024);
 var annualTemp = ee.ImageCollection.fromImages(

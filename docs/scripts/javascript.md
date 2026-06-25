@@ -12,10 +12,10 @@ Reusable country boundaries (hybrid LSIB + point/buffer), legends and palettes.
 --8<-- "scripts/javascript/00_pacific_helpers.js"
 ```
 
-## 1 · Rainfall & drought — `01_rainfall_chirps.js`
+## 1 · Rainfall & drought — `01_rainfall_imerg.js`
 
-```javascript title="01_rainfall_chirps.js"
---8<-- "scripts/javascript/01_rainfall_chirps.js"
+```javascript title="01_rainfall_imerg.js"
+--8<-- "scripts/javascript/01_rainfall_imerg.js"
 ```
 
 ## 2 · Temperature & heat — `02_temperature_era5_modis.js`

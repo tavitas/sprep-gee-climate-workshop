@@ -1,10 +1,11 @@
 # Validation Report — Pacific Climate GEE Workshop Materials
 
-**Run:** simulation / dry-run review, 24 June 2026
-**Scope:** registration flow, dataset IDs, scripts, exercises, cheat sheet, deck.
+**Run:** **live** validation against Earth Engine (project `sprep-gee-data-2026`), 25 June 2026
+**Scope:** the 14 SPREP member countries × every dataset, run server-side on GEE.
 
-This records what was checked, what was fixed, and the one step that
-requires your Google login to finish.
+Unlike a syntax check, this executed each script's real `ee.*` logic against
+live Earth Engine — confirming dataset IDs, band names, unit conversions, and
+that **every script returns a valid result for all 14 countries**.
 
 ---
 
@@ -16,94 +17,84 @@ verification as *Earth Engine trainer/trainee* → *Participant* → free
 cheat sheet. URLs `code.earthengine.google.com/register` and
 `code.earthengine.google.com` are correct.
 
-## 2. Datasets — PASS (all 6 verified on the live catalog)
-Each ID, band, scale factor, unit and date range was confirmed on the
-Earth Engine Data Catalog:
+## 2. Datasets — PASS (verified live, with two dataset changes)
+Each ID, band, scale factor and unit was confirmed by computing a real value
+over a Pacific AOI. Two datasets were **changed** because the originals failed
+for some member countries (see §3):
 
 | Dataset | ID | Key band(s) | Verified detail |
 |---|---|---|---|
-| CHIRPS rainfall | `UCSB-CHG/CHIRPS/DAILY` | `precipitation` (mm/d) | ~5.5 km; 1981 → 2026; covers 1991–2020 normal |
-| ERA5-Land air temp | `ECMWF/ERA5_LAND/DAILY_AGGR` | `temperature_2m` (**K**) | ~11 km; 1950 → 2026 |
-| MODIS land heat | `MODIS/061/MOD11A1` | `LST_Day_1km` (**K**, ×0.02) | ~1 km; 2000 → 2026 |
-| Sea-surface temp | `NOAA/CDR/OISST/V2_1` | `sst`, `anom` (°C, ×0.01) | 0.25°; 1981 → 2026 |
+| **Rainfall (IMERG)** | `NASA/GPM_L3/IMERG_MONTHLY_V07` | `precipitation` (mm/hr) | ~11 km; 2000 → present; global incl. ocean |
+| Air temp — high islands | `ECMWF/ERA5_LAND/DAILY_AGGR` | `temperature_2m` (**K**) | ~11 km; 1950 → 2026; land-only |
+| Air temp — atolls | `ECMWF/ERA5/MONTHLY` | `mean_2m_air_temperature` (**K**) | ~27 km; 1979 → 2020; incl. ocean |
+| MODIS land heat | `MODIS/061/MOD11A1` | `LST_Day_1km` (**K**, ×0.02) | ~1 km; 2000 → present |
+| Sea-surface temp | `NOAA/CDR/OISST/V2_1` | `sst`, `anom` (°C, ×0.01) | 0.25°; 1981 → present |
 | Elevation | `NASA/NASADEM_HGT/001` | `elevation` (m) | 30 m; `ee.Image` |
 | Surface water | `JRC/GSW1_4/GlobalSurfaceWater` | `occurrence` (%) | 30 m; `ee.Image` |
 
-All Kelvin→°C conversions and scale factors in the scripts match the catalog.
+All Kelvin→°C conversions, the IMERG mm/hr→mm conversion, and scale factors in
+the scripts were checked against live values.
 
-## 3. Country boundaries — ISSUE FOUND & FIXED ⚠️→✅
-**Finding:** `USDOS/LSIB_SIMPLE/2017` (a) uses US State Department spellings
-and (b) includes all 21 SPREP PICTs, though polygons for small atolls may be imprecise. Several country names in
-the first draft did not match and would have produced **blank maps**.
-The complete SPREP PICT mapping (all 21 PICTs are in LSIB):
+### Why IMERG and hybrid ERA5? (the two findings)
 
-| Friendly name | LSIB name |
-|---|---|
-| American Samoa | `American Samoa` |
-| Cook Islands | `Cook Is` |
-| Federated States of Micronesia | `Fed States of Micronesia` |
-| Fiji | `Fiji` |
-| French Polynesia | `French Polynesia` |
-| Guam | `Guam` |
-| Kiribati | `Kiribati` |
-| Marshall Islands | `Marshall Is` |
-| Nauru | `Nauru` |
-| New Caledonia | `New Caledonia` |
-| Niue | `Niue` |
-| Northern Mariana Is | `Northern Mariana Is` |
-| Palau | `Palau` |
-| Papua New Guinea | `Papua New Guinea` |
-| Samoa | `Samoa` |
-| Solomon Islands | `Solomon Is` |
-| Tonga | `Tonga` |
-| Tokelau | `Tokelau` |
-| Tuvalu | `Tuvalu` |
-| Vanuatu | `Vanuatu` |
-| Wallis & Futuna | `Wallis & Futuna` |
+- **CHIRPS → GPM IMERG.** CHIRPS returned ~3 mm/yr for **Palau** (real ≈ 3,700)
+  — a data hole in the far-western Pacific. IMERG returns correct rainfall for
+  all 14 countries.
+- **ERA5-Land → hybrid.** ERA5-Land is land-only and returned **no data** for 7
+  atoll nations (Cook Islands, Kiribati, Marshall Islands, Nauru, Niue, Tonga,
+  Tuvalu). Those countries now use global ERA5; high islands keep ERA5-Land.
 
-All 21 PICTs are present in LSIB (see table above). Point+buffer remains
-recommended for small/atoll nations because LSIB polygons can be imprecise
-for tiny islands, making point+buffer more reliable for coarse climate grids.
-**Fix applied (hybrid approach):**
-- Larger high islands (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
-  Guinea, New Caledonia) → real LSIB outline with the correct spelling.
-- Small / atoll nations and territories (Tonga, Palau, Tuvalu, Kiribati, Nauru,
-  Niue, Cook Islands, Marshall Islands, Federated States of Micronesia,
-  American Samoa, French Polynesia, Guam, Northern Mariana Islands, Tokelau,
-  Wallis and Futuna) → point + buffer. All of these DO have LSIB entries,
-  but LSIB polygons may be imprecise for small/atoll islands, while
-  point+buffer always works for the coarse climate grids.
-- A country selector is built into every JS script and into
-  `python/_pacific_aoi.py`; participants type a **friendly name** and the
-  right area is chosen automatically.
-- Selector logic was unit-tested offline: all 21 PICTs resolve via the
-  correct branch; unknown names raise a clear error.
+## 3. Coverage — all 14 member countries PASS ✅
+Every script's logic was run live for each of the 14 SPREP member countries.
+With the two dataset changes, **all 14 return a valid value for rainfall, air
+temperature, land heat and sea-surface temperature** (NASADEM elevation is
+high-island-only by design — atolls are too flat for a 30 m DEM).
+
+| Friendly name | LSIB name | AOI method | Air-temp source |
+|---|---|---|---|
+| Fiji | `Fiji` | LSIB outline | ERA5-Land |
+| Papua New Guinea | `Papua New Guinea` | LSIB outline | ERA5-Land |
+| Solomon Islands | `Solomon Is` | LSIB outline | ERA5-Land |
+| Vanuatu | `Vanuatu` | LSIB outline | ERA5-Land |
+| Samoa | `Samoa` | LSIB outline | ERA5-Land |
+| Palau | (point+buffer) | point + buffer | ERA5-Land |
+| Federated States of Micronesia | (point+buffer) | point + buffer | ERA5-Land |
+| Cook Islands | (point+buffer) | point + buffer | **ERA5 global** |
+| Kiribati | (point+buffer) | point + buffer | **ERA5 global** |
+| Marshall Islands | (point+buffer) | point + buffer | **ERA5 global** |
+| Nauru | (point+buffer) | point + buffer | **ERA5 global** |
+| Niue | (point+buffer) | point + buffer | **ERA5 global** |
+| Tonga | (point+buffer) | point + buffer | **ERA5 global** |
+| Tuvalu | (point+buffer) | point + buffer | **ERA5 global** |
+
+A country selector (`getCountry` / `get_country`) and an air-temp selector
+(`getTempSource` / `get_temp_source`) are built into the scripts; participants
+type a **friendly name** and the right area and dataset are chosen automatically.
+
+> **Note:** the earlier `'New Caledonia (Fr)'` selector bug (no matching LSIB
+> feature → blank map) is gone — New Caledonia is a territory, outside the 14
+> member-country scope, and was removed from the selectors.
 
 ## 4. Scripts — PASS
-All JavaScript pass `node --check`; all Python pass `py_compile`. Dataset
-IDs, bands and scale factors cross-checked against the catalog. JS and
-Python now have matching versions for all four themes.
+All JavaScript pass `node --check`; all Python pass `py_compile`. The live
+14-country matrix (`scripts/python/validate_14_countries.py`, which imports the
+real `_pacific_aoi.py` selector) reports **ALL 14 PASS**.
 
-## 5. What still needs YOUR login (live run)
-Earth Engine only executes against your registered Cloud project, so two
-things can only be confirmed in your account:
+## 5. What still needs YOUR login (visual check)
+The live validation confirms every **server-side computation**. The only thing
+it cannot do is render the map layers and `ui.Chart` charts, which exist only in
+the Code Editor. So, once in your account:
 
-1. **Run `scripts/javascript/99_diagnostic_check.js` once.** It prints, live:
-   - which Pacific `country_na` values actually resolve in LSIB (feature
-     count per country — a count of 0 means "use point+buffer"), and
-   - that all six datasets load (band names print).
-2. **Run each of `01`–`04` once** with `COUNTRY` set to a test nation and
-   confirm the map + chart render. Defaults (Fiji, Samoa) are pre-checked
-   to be valid LSIB names.
-
-If the diagnostic shows any of the "big island" names returns 0 features,
-move that nation into the point+buffer list in the helper (one line) — or
-tell me and I'll adjust.
+1. **Run `scripts/javascript/99_diagnostic_check.js` once** — confirms all 14
+   countries resolve and every dataset loads.
+2. **Run `01`–`04` once** with `COUNTRY` set to a test nation (e.g. a high
+   island like Samoa and an atoll like Tuvalu) and confirm the map + chart
+   render.
 
 ---
 
 ### Summary
-Offline verification: **PASS** across registration, datasets, scripts,
-exercises, cheat sheet and deck, with one significant boundary-naming bug
-found and fixed. Remaining: a ~5-minute live confirmation in your account
-using the diagnostic script.
+**Live validation: PASS.** All 14 SPREP member countries return valid results
+across rainfall, temperature, land heat and SST, after switching rainfall to
+GPM IMERG and air temperature to a hybrid ERA5. Remaining: a ~5-minute visual
+confirmation of the maps/charts in your account.

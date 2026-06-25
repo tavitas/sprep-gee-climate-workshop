@@ -1,34 +1,39 @@
 /**********************************************************************
- * 01_rainfall_chirps.js   —  RAINFALL & DROUGHT
+ * 01_rainfall_imerg.js   —  RAINFALL & DROUGHT
  * SPREP / UNEP GEE Climate Workshop 2026
  *
  * GOAL: Map long-term average rainfall for YOUR country and chart how
  *       rainfall has changed year to year (a simple drought signal).
  *
- * DATASET: CHIRPS Daily v2  (UCSB-CHG/CHIRPS/DAILY)
- *   - Band 'precipitation' (mm/day), ~5.5 km, 1981-present (verified to 2026).
- *   - NOTE (2026): CHIRPS v2 production ends after Dec 2026. The newer v3
- *     product is 'UCSB-CHC/CHIRPS/V3/DAILY_SAT'. v2 is used here because it
- *     gives a clean 1991-2020 climate normal.
+ * DATASET: GPM IMERG Monthly v07  (NASA/GPM_L3/IMERG_MONTHLY_V07)
+ *   - Band 'precipitation' in mm/HOUR (monthly mean rate), ~11 km, 2000-present.
+ *   - We convert each month to a millimetre total, then sum to annual totals.
+ *
+ * WHY IMERG, NOT CHIRPS? (validated live, June 2026)
+ *   CHIRPS (~5.5 km) is widely used, but it has a data hole over Palau and
+ *   parts of the far-western Pacific — it returns near-zero rainfall there.
+ *   GPM IMERG is a true global satellite product (it includes the open ocean)
+ *   and returns correct rainfall for all 14 SPREP member countries. The trade-
+ *   off: IMERG starts in 2000, so the climate normal here is 2001-2020.
  *
  * TO LOCALISE: change the COUNTRY value below to your nation.
  **********************************************************************/
 
-// ===== 1. COUNTRY SELECTOR (works for every Pacific nation) =========
+// ===== 1. COUNTRY SELECTOR (works for every SPREP member country) ===
 // Larger high islands use the real LSIB boundary (note the exact spellings).
-// Small / atoll nations use a point + buffer, because LSIB_SIMPLE drops them.
+// Small / atoll nations use a point + buffer.
 var COUNTRY = 'Fiji';
-var START_YEAR = 1991;
-var END_YEAR   = 2020;            // 1991-2020 = standard 30-year climate normal
+var START_YEAR = 2001;
+var END_YEAR   = 2020;            // 2001-2020 = 20-year climate normal (IMERG starts 2000)
 
 var LSIB_NAMES = {
   'Fiji':'Fiji', 'Papua New Guinea':'Papua New Guinea', 'Solomon Islands':'Solomon Is',
-  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia (Fr)'};
+  'Vanuatu':'Vanuatu', 'Samoa':'Samoa'};
 var POINT_AOI = {
   'Tonga':[-174.8,-20.0,300000], 'Palau':[134.58,7.5,120000], 'Tuvalu':[178.5,-7.8,350000],
   'Kiribati':[173.0,1.4,500000], 'Nauru':[166.93,-0.52,40000], 'Niue':[-169.87,-19.05,40000],
   'Cook Islands':[-159.78,-21.23,300000], 'Marshall Islands':[169.0,8.0,600000],
-  'Federated States of Micronesia':[158.21,6.92,500000], 'Tokelau':[-171.85,-9.2,60000]};
+  'Federated States of Micronesia':[158.21,6.92,500000]};
 var aoi, outline;
 if (LSIB_NAMES[COUNTRY]) {
   outline = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
@@ -41,16 +46,28 @@ if (LSIB_NAMES[COUNTRY]) {
 }
 Map.centerObject(aoi, 8);
 
-// ===== 2. LOAD & FILTER CHIRPS ====================================
-var chirps = ee.ImageCollection('UCSB-CHG/CHIRPS/DAILY')
+// ===== 2. LOAD IMERG & CONVERT mm/hr -> mm PER MONTH ==============
+var imerg = ee.ImageCollection('NASA/GPM_L3/IMERG_MONTHLY_V07')
   .select('precipitation')
   .filter(ee.Filter.date(START_YEAR + '-01-01', (END_YEAR + 1) + '-01-01'));
+
+// IMERG monthly 'precipitation' is a mean rate in mm/hour. Multiply by the
+// number of hours in that month to get the month's total rainfall in mm.
+var monthlyMM = imerg.map(function (img) {
+  var start = ee.Date(img.get('system:time_start'));
+  var days  = start.advance(1, 'month').difference(start, 'day');
+  return img.multiply(24).multiply(days)          // mm/hr -> mm/month
+            .set('system:time_start', img.get('system:time_start'))
+            .set('year', start.get('year'));
+});
 
 // ===== 3. MEAN ANNUAL RAINFALL (climatology) ======================
 var years = ee.List.sequence(START_YEAR, END_YEAR);
 var annualTotals = ee.ImageCollection.fromImages(
   years.map(function (y) {
-    return chirps.filter(ee.Filter.calendarRange(y, y, 'year')).sum().set('year', y);
+    return monthlyMM.filter(ee.Filter.calendarRange(y, y, 'year')).sum()
+      .set('year', y)
+      .set('system:time_start', ee.Date.fromYMD(y, 1, 1).millis());
   })
 );
 var meanAnnualRain = annualTotals.mean().clip(aoi);
@@ -77,10 +94,8 @@ Map.add(legend);
 
 // ===== 6. YEAR-BY-YEAR RAINFALL CHART (drought signal) ============
 var chart = ui.Chart.image.series({
-  imageCollection: annualTotals.map(function (img) {
-    return img.set('system:time_start', ee.Date.fromYMD(img.get('year'), 1, 1).millis());
-  }),
-  region: aoi, reducer: ee.Reducer.mean(), scale: 5000
+  imageCollection: annualTotals,
+  region: aoi, reducer: ee.Reducer.mean(), scale: 11000
 }).setOptions({
   title: 'Total annual rainfall over ' + COUNTRY + ' (' + START_YEAR + '-' + END_YEAR + ')',
   vAxis: {title: 'mm/year'}, hAxis: {title: 'Year'},
@@ -94,5 +109,5 @@ Export.image.toDrive({
   description: COUNTRY.replace(/[ ,]/g, '_') + '_MeanAnnualRainfall_' + START_YEAR + '_' + END_YEAR,
   folder: 'GEE_Workshop_2026',
   fileNamePrefix: COUNTRY.replace(/[ ,]/g, '_') + '_mean_annual_rainfall',
-  scale: 5000, region: aoi.bounds(), maxPixels: 1e13
+  scale: 10000, region: aoi.bounds(), maxPixels: 1e13
 });

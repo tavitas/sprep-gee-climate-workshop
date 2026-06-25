@@ -56,7 +56,8 @@ from your browser, with no large downloads and no powerful computer required.
     Cloud project and verifies for **noncommercial** use. No credit card is
     needed. See [Exercise 1](../exercises/account-setup.md).
 
-!!! note "CHIRPS rainfall is moving v2 → v3"
-    The CHIRPS v2 product used in this course stops production after **December
-    2026**. The successor is `UCSB-CHC/CHIRPS/V3/DAILY_SAT`. We teach the stable
-    v2 for the 1991–2020 climate normal and point to v3 for future work.
+!!! note "Why this course uses IMERG for rainfall"
+    A popular rainfall dataset, CHIRPS, has a **data hole over Palau** and parts
+    of the far-western Pacific. This course uses **GPM IMERG**
+    (`NASA/GPM_L3/IMERG_MONTHLY_V07`) instead — a global satellite product that
+    returns valid rainfall for all 14 SPREP member countries.

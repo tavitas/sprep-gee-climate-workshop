@@ -14,10 +14,10 @@ then run any script below. They produce the same maps plus saved PNG charts.
 --8<-- "scripts/python/00_setup_geemap.py"
 ```
 
-## 1 · Rainfall & drought — `01_rainfall_chirps.py`
+## 1 · Rainfall & drought — `01_rainfall_imerg.py`
 
-```python title="01_rainfall_chirps.py"
---8<-- "scripts/python/01_rainfall_chirps.py"
+```python title="01_rainfall_imerg.py"
+--8<-- "scripts/python/01_rainfall_imerg.py"
 ```
 
 ## 2 · Temperature & heat — `02_temperature_era5_modis.py`

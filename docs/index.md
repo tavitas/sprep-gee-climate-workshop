@@ -15,8 +15,8 @@ SPREP / UNEP CIS-Pac5 — Regional Capacity Building on GIS & Data Management ·
 Google Earth Engine puts decades of free satellite and climate data on Google's
 servers — ready to analyse from your browser, with no large downloads and no
 powerful computer required. This course takes you from creating an account to
-producing a localized climate map for your **own country** across all 21 Pacific
-Island Countries and Territories — American Samoa, Cook Islands, Federated States of Micronesia, Fiji, French Polynesia, Guam, Kiribati, Marshall Islands, Nauru, New Caledonia, Niue, Northern Mariana Islands, Palau, Papua New Guinea, Samoa, Solomon Islands, Tokelau, Tonga, Tuvalu, Vanuatu, and Wallis and Futuna.
+producing a localized climate map for your **own country** across the 14 SPREP
+member countries — Cook Islands, Federated States of Micronesia, Fiji, Kiribati, Marshall Islands, Nauru, Niue, Palau, Papua New Guinea, Samoa, Solomon Islands, Tonga, Tuvalu, and Vanuatu.
 
 <div class="grid cards" markdown>
 
@@ -66,8 +66,8 @@ This course focuses on the datasets that matter most for Pacific Island contexts
 
 | Theme | What you map | Main dataset |
 |-------|--------------|--------------|
-| :material-weather-pouring: Rainfall & drought | Long-term rainfall and dry-year signals | CHIRPS |
-| :material-thermometer: Temperature & heat | Where heat sits + the warming trend | ERA5-Land, MODIS |
+| :material-weather-pouring: Rainfall & drought | Long-term rainfall and dry-year signals | GPM IMERG |
+| :material-thermometer: Temperature & heat | Where heat sits + the warming trend | ERA5 (hybrid), MODIS |
 | :material-fish: Ocean & reefs | Sea-surface temperature & bleaching heat stress | NOAA OISST |
 | :material-image-filter-hdr: Sea level & coast | Low-lying land exposed to sea-level rise | NASADEM, JRC Water |
 

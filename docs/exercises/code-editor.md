@@ -30,14 +30,12 @@ Output appears in the **Console** on the right.
 We use the global **LSIB** boundary dataset. Change `'Samoa'` to your
 country. Run it:
 ```javascript
-//    All 21 SPREP Pacific Island nations and territories:
-//    ── All 21 have LSIB entries (use exact LSIB spelling):
-//    'Fiji', 'Samoa', 'Vanuatu', 'Papua New Guinea', 'Solomon Is',
-//    'New Caledonia', 'Tonga', 'Kiribati', 'Nauru', 'Tuvalu',
-//    'Palau', 'Marshall Is', 'Fed States of Micronesia',
-//    'Cook Is', 'Niue', 'American Samoa', 'French Polynesia',
-//    'Guam', 'Northern Mariana Is', 'Tokelau', 'Wallis & Futuna'
-//    ── Small island/atoll nations may benefit from point+buffer
+//    The 14 SPREP member countries (use exact LSIB spelling):
+//    High islands -> LSIB outline works well:
+//      'Fiji', 'Samoa', 'Vanuatu', 'Papua New Guinea', 'Solomon Is'
+//    Small island / atoll nations -> point+buffer is more reliable:
+//      'Tonga', 'Kiribati', 'Nauru', 'Tuvalu', 'Palau', 'Marshall Is',
+//      'Fed States of Micronesia', 'Cook Is', 'Niue'
 //    (LSIB polygons can be imprecise for tiny atolls; see below)
 var countryName = 'Samoa';
 
@@ -77,7 +75,7 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
    `Solomon Islands`.
 2. It uses a **coarse simplification**, so tiny atoll polygons may be
    imprecise — a point + buffer is more reliable for small nations
-   (see the next section). All 21 PICTs **do** have LSIB entries.
+   (see the next section). All 14 member countries **do** have LSIB entries.
 
 ### LSIB country names — use these exact spellings
 
@@ -88,7 +86,6 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
 | `Vanuatu` | works |
 | `Papua New Guinea` | works |
 | `Solomon Is` | works (note: **not** "Solomon Islands") |
-| `New Caledonia` | works |
 | `Tonga` | works |
 | `Kiribati` | works |
 | `Nauru` | works |
@@ -98,21 +95,14 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
 | `Fed States of Micronesia` | works |
 | `Cook Is` | works |
 | `Niue` | works |
-| `American Samoa` | works |
-| `French Polynesia` | works |
-| `Guam` | works |
-| `Northern Mariana Is` | works |
-| `Tokelau` | works |
-| `Wallis & Futuna` | works |
 ### Small islands and atolls — point + buffer recommended
 
-All 21 SPREP PICTs are present in LSIB. However, LSIB polygons for small
-island and atoll nations can be imprecise — the coarse (5–28 km) climate
+All 14 member countries are present in LSIB. However, LSIB polygons for small
+island and atoll nations can be imprecise — the coarse (11–28 km) climate
 grids may miss tiny land areas. A point + buffer is more reliable for
 these: Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook Islands,
-Marshall Islands, Federated States of Micronesia, American Samoa, French
-Polynesia, Guam, Northern Mariana Islands, Tokelau, Wallis and Futuna.
-**Any of the 21 PICTs** can use this approach.
+Marshall Islands and Federated States of Micronesia.
+**Any of the 14 member countries** can use this approach.
 Define your area as a **point with a circle (buffer)**:
 ```javascript
 // Funafuti, Tuvalu + 350 km of surrounding ocean/atolls

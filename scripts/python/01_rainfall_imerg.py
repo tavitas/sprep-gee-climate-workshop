@@ -1,39 +1,56 @@
 """
-01_rainfall_chirps.py  —  RAINFALL & DROUGHT (Python / geemap)
+01_rainfall_imerg.py  —  RAINFALL & DROUGHT (Python / geemap)
 SPREP / UNEP GEE Climate Workshop 2026
 
-Python equivalent of javascript/01_rainfall_chirps.js.
+Python equivalent of javascript/01_rainfall_imerg.js.
 Run in Google Colab or Jupyter after 00_setup_geemap.py.
 
 Produces an interactive map of mean annual rainfall for your country
 and saves a year-by-year rainfall chart as a PNG.
+
+Dataset: GPM IMERG Monthly v07 (NASA/GPM_L3/IMERG_MONTHLY_V07), band
+'precipitation' in mm/hour. We use IMERG (not CHIRPS) because CHIRPS has a
+data hole over Palau / the far-western Pacific; IMERG returns correct rainfall
+for all 14 SPREP member countries. Trade-off: IMERG starts in 2000, so the
+climate normal here is 2001-2020.
 """
 
 import ee
 import geemap
-from _pacific_aoi import get_country, get_outline   # robust AOI for every nation
+from _pacific_aoi import get_country, get_outline   # AOI for every member country
 
 ee.Initialize(project='your-project-id')   # <-- your registered project
 
 # ===== 1. SETTINGS =====
-COUNTRY    = 'Fiji'        # 'Samoa', 'Solomon Islands', 'Tuvalu', ... (any Pacific nation)
-START_YEAR = 1991
-END_YEAR   = 2020
+COUNTRY    = 'Fiji'        # 'Samoa', 'Solomon Islands', 'Tuvalu', ... (any member country)
+START_YEAR = 2001
+END_YEAR   = 2020         # 2001-2020 = 20-year climate normal (IMERG starts 2000)
 
 # ===== 2. COUNTRY BOUNDARY =====
 aoi = get_country(COUNTRY)       # ee.Geometry (LSIB outline or point+buffer)
 outline = get_outline(COUNTRY)   # ee.FeatureCollection for drawing
 
-# ===== 3. CHIRPS DAILY RAINFALL =====
-chirps = (ee.ImageCollection('UCSB-CHG/CHIRPS/DAILY')
-          .select('precipitation')
-          .filter(ee.Filter.date(f'{START_YEAR}-01-01', f'{END_YEAR + 1}-01-01')))
+# ===== 3. GPM IMERG MONTHLY -> mm PER MONTH =====
+# IMERG monthly 'precipitation' is a mean rate in mm/hour. Multiply by the
+# number of hours in the month to get that month's total rainfall in mm.
+imerg = (ee.ImageCollection('NASA/GPM_L3/IMERG_MONTHLY_V07')
+         .select('precipitation')
+         .filter(ee.Filter.date(f'{START_YEAR}-01-01', f'{END_YEAR + 1}-01-01')))
+
+def to_monthly_mm(img):
+    start = ee.Date(img.get('system:time_start'))
+    days = start.advance(1, 'month').difference(start, 'day')
+    return (img.multiply(24).multiply(days)          # mm/hr -> mm/month
+            .set('system:time_start', img.get('system:time_start'))
+            .set('year', start.get('year')))
+
+monthly_mm = imerg.map(to_monthly_mm)
 
 # ===== 4. MEAN ANNUAL RAINFALL CLIMATOLOGY =====
 years = ee.List.sequence(START_YEAR, END_YEAR)
 
 def annual_total(y):
-    total = chirps.filter(ee.Filter.calendarRange(y, y, 'year')).sum()
+    total = monthly_mm.filter(ee.Filter.calendarRange(y, y, 'year')).sum()
     return total.set('year', y).set(
         'system:time_start', ee.Date.fromYMD(y, 1, 1).millis())
 
@@ -55,12 +72,11 @@ Map.add_colorbar(vis, label='Mean annual rainfall (mm/year)')
 Map   # displays in a notebook
 
 # ===== 6. YEAR-BY-YEAR CHART (drought signal) =====
-# Reduce each yearly image to a single mean value over the country.
 import pandas as pd
 import matplotlib.pyplot as plt
 
 def reduce_year(img):
-    val = img.reduceRegion(ee.Reducer.mean(), aoi, 5000).get('precipitation')
+    val = img.reduceRegion(ee.Reducer.mean(), aoi, 11000).get('precipitation')
     return ee.Feature(None, {'year': img.get('year'), 'rain': val})
 
 table = annual_totals.map(reduce_year).getInfo()
@@ -85,7 +101,7 @@ task = ee.batch.Export.image.toDrive(
     description=f'{COUNTRY}_MeanAnnualRainfall',
     folder='GEE_Workshop_2026',
     fileNamePrefix=f'{COUNTRY.replace(" ", "_")}_mean_annual_rainfall',
-    scale=5000,
+    scale=10000,
     region=aoi.bounds(),
     maxPixels=int(1e13))
 task.start()

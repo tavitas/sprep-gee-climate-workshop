@@ -6,23 +6,28 @@ Python equivalent of javascript/02_temperature_era5_modis.js.
 Run in Google Colab or Jupyter after 00_setup_geemap.py.
 
 Produces (a) an interactive MODIS land-surface-temperature map and
-(b) a saved warming-trend chart from ERA5-Land air temperature.
+(b) a saved warming-trend chart from air temperature.
 
 Datasets:
-  ERA5-Land Daily (ECMWF/ERA5_LAND/DAILY_AGGR) band temperature_2m (Kelvin)
   MODIS LST (MODIS/061/MOD11A1) band LST_Day_1km, scale 0.02 (Kelvin)
+  Air temperature — HYBRID (get_temp_source in _pacific_aoi.py):
+    High islands  -> ERA5-Land (ECMWF/ERA5_LAND/DAILY_AGGR, to present)
+    Atoll nations -> global ERA5 (ECMWF/ERA5/MONTHLY, ends mid-2020)
+  ERA5-Land is land-only and returns no data over tiny atolls, so those
+  nations fall back to the global reanalysis (which includes ocean).
 """
 
 import ee
 import geemap
 import pandas as pd
 import matplotlib.pyplot as plt
-from _pacific_aoi import get_country, get_outline   # robust AOI for every nation
+import numpy as np
+from _pacific_aoi import get_country, get_outline, get_temp_source
 
 ee.Initialize(project='your-project-id')   # <-- your registered project
 
 # ===== 1. SETTINGS =====
-COUNTRY = 'Samoa'        # any Pacific nation, e.g. 'Solomon Islands', 'Tuvalu'
+COUNTRY = 'Samoa'        # any member country, e.g. 'Solomon Islands', 'Tuvalu'
 aoi = get_country(COUNTRY)       # ee.Geometry
 outline = get_outline(COUNTRY)   # ee.FeatureCollection for drawing
 
@@ -47,17 +52,18 @@ Map.addLayer(outline.style(color='black', fillColor='00000000', width=1),
 Map.add_colorbar(vis, label='Land surface temperature (°C)')
 Map   # displays in a notebook
 
-# ===== 3. WARMING TREND (ERA5-Land air temperature) =====
-START_YEAR, END_YEAR = 1991, 2024
+# ===== 3. WARMING TREND (hybrid air-temperature source) =====
+src = get_temp_source(COUNTRY)        # picks ERA5-Land or global ERA5
+START_YEAR, END_YEAR = 1991, src['end_year']
 years = ee.List.sequence(START_YEAR, END_YEAR)
 
 def annual_mean_temp(y):
-    img = (ee.ImageCollection('ECMWF/ERA5_LAND/DAILY_AGGR')
-           .select('temperature_2m')
+    img = (ee.ImageCollection(src['collection'])
+           .select(src['band'])
            .filter(ee.Filter.calendarRange(y, y, 'year'))
            .mean()
            .subtract(273.15))
-    val = img.reduceRegion(ee.Reducer.mean(), aoi, 11000).get('temperature_2m')
+    val = img.reduceRegion(ee.Reducer.mean(), aoi, src['scale']).get(src['band'])
     return ee.Feature(None, {'year': y, 'temp': val})
 
 fc = ee.FeatureCollection(years.map(annual_mean_temp))
@@ -67,7 +73,6 @@ df = (pd.DataFrame([(f['properties']['year'], f['properties']['temp']) for f in 
       .dropna().sort_values('year'))
 
 # Fit a simple linear trend line.
-import numpy as np
 m, b = np.polyfit(df['year'], df['temp'], 1)
 
 plt.figure(figsize=(10, 4))

@@ -25,7 +25,7 @@ Google Colab or a notebook.
 | File | Theme | Output |
 |------|-------|--------|
 | `00_pacific_helpers.js` | — | Country boundaries (hybrid), legends, palettes |
-| `01_rainfall_chirps` | Rainfall & drought | Mean annual rainfall map + drought chart |
+| `01_rainfall_imerg` | Rainfall & drought | Mean annual rainfall map + drought chart |
 | `02_temperature_era5_modis` | Temperature & heat | Heat map + warming trend chart + warming map |
 | `03_sst_reef_heat` | Ocean & reefs | SST map + SST anomaly time series |
 | `04_coastal_exposure` | Sea level & coast | Low-lying land map + exposed area (km²) |
@@ -33,15 +33,12 @@ Google Colab or a notebook.
 
 ## Localising for your country
 
-Set `COUNTRY` to your nation using the **friendly name** — the scripts translate
-it automatically:
+Set `COUNTRY` to one of the **14 SPREP member countries** using the **friendly
+name** — the scripts translate it automatically:
 
-`American Samoa` · `Cook Islands` · `Federated States of Micronesia` ·
-`Fiji` · `French Polynesia` · `Guam` · `Kiribati` ·
-`Marshall Islands` · `Nauru` · `New Caledonia` · `Niue` ·
-`Northern Mariana Islands` · `Palau` · `Papua New Guinea` · `Samoa` ·
-`Solomon Islands` · `Tokelau` · `Tonga` · `Tuvalu` ·
-`Vanuatu` · `Wallis and Futuna`
+`Cook Islands` · `Federated States of Micronesia` · `Fiji` · `Kiribati` ·
+`Marshall Islands` · `Nauru` · `Niue` · `Palau` · `Papua New Guinea` ·
+`Samoa` · `Solomon Islands` · `Tonga` · `Tuvalu` · `Vanuatu`
 
 !!! warning "Why a country selector?"
     The global boundary layer uses State Department spellings (e.g.

@@ -24,9 +24,10 @@ US Department of State — a clean, global set of country outlines.
 boundary. The LSIB outline becomes your **Area of Interest (AOI)**.
 
 > **Note:** LSIB uses US State Department spellings (e.g. `Solomon Is`, not
-> "Solomon Islands"). All 21 SPREP PICTs are present, but small-island
-> polygons can be imprecise. The workshop scripts handle this automatically —
-> see the [Dataset quick reference](reference.md) for the full country-name table.
+> "Solomon Islands"), and small-island polygons can be imprecise. The workshop
+> covers the **14 SPREP member countries** and the scripts handle the boundary
+> quirks automatically — see the [Dataset quick reference](reference.md) for the
+> full country-name table.
 
 **Used in:** **Exercise 2** (setup), **3** (rainfall), **4** (temperature),
 **5** (ocean & coast).
@@ -35,49 +36,32 @@ boundary. The LSIB outline becomes your **Area of Interest (AOI)**.
 
 ## Climate — Rainfall
 
-### CHIRPS Daily v2
+### GPM IMERG Monthly v07
 
 | | |
 |---|---|
-| **Dataset ID** | [`UCSB-CHG/CHIRPS/DAILY`](https://developers.google.com/earth-engine/datasets/catalog/UCSB-CHG_CHIRPS_DAILY) |
-| **Source** | UCSB Climate Hazards Center |
-| **Resolution** | ~5.5 km |
-| **Time span** | 1981 – present |
+| **Dataset ID** | [`NASA/GPM_L3/IMERG_MONTHLY_V07`](https://developers.google.com/earth-engine/datasets/catalog/NASA_GPM_L3_IMERG_MONTHLY_V07) |
+| **Source** | NASA Global Precipitation Measurement (GPM) mission |
+| **Resolution** | ~11 km (0.1°) |
+| **Time span** | 2000 – present |
 
-**What it is:** Quasi-global rainfall estimates blending satellite
-infrared data with rain-gauge observations. Provides daily precipitation
-in millimetres.
+**What it is:** Global satellite precipitation from the GPM constellation —
+truly global, covering land *and* open ocean, so it returns valid rainfall for
+every island.
+
+**Why not CHIRPS?** CHIRPS (~5 km) is widely used, but a live check found it has
+a **data hole over Palau** and parts of the far-western Pacific, reporting almost
+no rain there. IMERG returns correct rainfall for **all 14 SPREP member
+countries**. Trade-off: IMERG starts in 2000, so the normal here is 2001–2020.
 
 **What we derive from it:**
-- A **mean annual rainfall map** (total annual precipitation averaged 1991–2020).
+- A **mean annual rainfall map** (annual totals averaged 2001–2020).
 - A **year-by-year rainfall chart** that reveals drought years as dips.
 
-**Key band:** `precipitation` (mm/day — sum over time for annual totals).
-
-> **Heads up:** v2 stops production after **December 2026**. The successor is
-> [CHIRPS v3](#chirps-daily-v3) below.
+**Key band:** `precipitation` (mm/**hour** — multiply by hours in the month for
+monthly totals, then sum for annual rainfall).
 
 **Used in:** **Exercise 3 — Rainfall & Drought**.
-
----
-
-### CHIRPS Daily v3
-
-| | |
-|---|---|
-| **Dataset ID** | [`UCSB-CHC/CHIRPS/V3/DAILY_SAT`](https://developers.google.com/earth-engine/datasets/catalog/UCSB-CHC_CHIRPS_V3_DAILY_SAT) |
-| **Source** | UCSB Climate Hazards Center |
-| **Resolution** | ~5.5 km |
-| **Time span** | 1981 – present |
-
-**What it is:** The successor to CHIRPS v2. Same methodology, ongoing
-production after v2 sunsets. Drop-in replacement for all workflows in this
-course.
-
-**What we derive from it:** Same as CHIRPS v2 — once v2 is retired, use this
-for future projects.
-
-**Used in:** Referenced as the migration path from **Exercise 3**.
 
 ---
 
@@ -93,8 +77,8 @@ for future projects.
 | **Time span** | 1950 – present |
 
 **What it is:** Reanalysis-based daily air temperature, combining model
-forecasts with observations. The best available long-term record for the
-Pacific.
+forecasts with observations. The best long-term record for the **high
+islands** — but it is **land-only**, so it has no data over tiny atolls.
 
 **What we derive from it:**
 - An **average annual air temperature** from daily mean values (1991–present).
@@ -104,7 +88,27 @@ Pacific.
 
 **Key band:** `temperature_2m` (Kelvin — subtract 273.15 for °C).
 
-**Used in:** **Exercise 4 — Temperature & Heat**.
+**Used in:** **Exercise 4 — Temperature & Heat** (high islands).
+
+---
+
+### ERA5 Monthly (global)
+
+| | |
+|---|---|
+| **Dataset ID** | [`ECMWF/ERA5/MONTHLY`](https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_MONTHLY) |
+| **Source** | ECMWF / Copernicus |
+| **Resolution** | ~27 km |
+| **Time span** | 1979 – 2020 |
+
+**What it is:** The full ERA5 reanalysis (land **and** ocean). The scripts use
+this for the **7 atoll nations** (Cook Islands, Kiribati, Marshall Islands,
+Nauru, Niue, Tonga, Tuvalu) where ERA5-Land returns no data. The country
+selector switches to it automatically.
+
+**Key band:** `mean_2m_air_temperature` (Kelvin — subtract 273.15 for °C).
+
+**Used in:** **Exercise 4 — Temperature & Heat** (atolls).
 
 ---
 
@@ -211,9 +215,9 @@ layer for coastal exposure assessment.
 | Dataset | ID | Type | Resolution | Key band(s) | Exercise |
 |---------|----|------|:----------:|-------------|:--------:|
 | LSIB | `USDOS/LSIB_SIMPLE/2017` | vector | — | `country_na` | 2–5 |
-| CHIRPS v2 | `UCSB-CHG/CHIRPS/DAILY` | image | ~5.5 km | `precipitation` | 3 |
-| CHIRPS v3 | `UCSB-CHC/CHIRPS/V3/DAILY_SAT` | image | ~5.5 km | `precipitation` | (future) |
-| ERA5-Land | `ECMWF/ERA5_LAND/DAILY_AGGR` | image | ~11 km | `temperature_2m` | 4 |
+| GPM IMERG | `NASA/GPM_L3/IMERG_MONTHLY_V07` | image | ~11 km | `precipitation` | 3 |
+| ERA5-Land | `ECMWF/ERA5_LAND/DAILY_AGGR` | image | ~11 km | `temperature_2m` | 4 (high islands) |
+| ERA5 global | `ECMWF/ERA5/MONTHLY` | image | ~27 km | `mean_2m_air_temperature` | 4 (atolls) |
 | MODIS LST | `MODIS/061/MOD11A1` | image | ~1 km | `LST_Day_1km` | 4 |
 | OISST v2.1 | `NOAA/CDR/OISST/V2_1` | image | 0.25° | `sst`, `anom` | 5 |
 | NASADEM | `NASA/NASADEM_HGT/001` | image | ~30 m | `elevation` | 5 |

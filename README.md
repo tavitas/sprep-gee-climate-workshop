@@ -23,8 +23,8 @@ contexts:
 
 | Theme | What you map | Main dataset |
 |-------|--------------|--------------|
-| Rainfall & drought | Long-term rainfall and dry-year signals | CHIRPS |
-| Temperature & heat | Where heat sits + the warming trend | ERA5-Land, MODIS |
+| Rainfall & drought | Long-term rainfall and dry-year signals | GPM IMERG |
+| Temperature & heat | Where heat sits + the warming trend | ERA5 (hybrid), MODIS |
 | Ocean & reefs | Sea-surface temperature & bleaching heat stress | NOAA OISST |
 | Sea level & coast | Low-lying land exposed to sea-level rise | NASADEM, JRC Water |
 
@@ -114,10 +114,10 @@ Your site will be live at
 ## Acknowledgements
 
 Built for SPREP and the UNEP CIS-Pac5 programme. Climate datasets are provided
-free of charge by their producers — the UCSB Climate Hazards Center, ECMWF /
-Copernicus, NASA, NOAA, EC JRC and the US Department of State — via the Google
-Earth Engine Data Catalog. Earth Engine is free for research, education and
-noncommercial use.
+free of charge by their producers — NASA (GPM IMERG, MODIS, NASADEM), ECMWF /
+Copernicus (ERA5), NOAA (OISST), EC JRC (surface water) and the US Department of
+State (boundaries) — via the Google Earth Engine Data Catalog. Earth Engine is
+free for research, education and noncommercial use.
 
 ## Licence
 
