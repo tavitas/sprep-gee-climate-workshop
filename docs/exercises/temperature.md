@@ -18,7 +18,7 @@
 ## Two ideas, two datasets
 - **MODIS** measures the temperature of the **land surface** from space at
   1 km — good for a map of *where* the heat sits. (Land only, so it is sparse
-  over tiny atolls with very little land.)
+  over smaller islands with very little land.)
 - **ERA5** is a climate **reanalysis** of 2 m **air** temperature. We use the
   *global* monthly product (`ECMWF/ERA5/MONTHLY`, 1979 → 2020-06), which covers
   ocean as well as land — so it returns a trend for **every** country,

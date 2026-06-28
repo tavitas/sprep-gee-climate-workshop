@@ -13,7 +13,7 @@
  *       land-only ERA5-Land product is blank. (Verified live, June 2026.)
  *   - MODIS Land Surface Temperature (MODIS/061/MOD11A1)
  *       'LST_Day_1km' = daytime surface temp, scale 0.02, KELVIN, ~1 km.
- *       (Land only — sparse over tiny atolls with little land.)
+ *       (Land only — sparse over smaller islands with little land.)
  *
  * TO LOCALISE: change COUNTRY below.
  **********************************************************************/

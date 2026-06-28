@@ -12,7 +12,7 @@
  * IMPORTANT — why two methods? (verified live, June 2026)
  * All 21 SPREP PICTs DO have an entry in USDOS/LSIB_SIMPLE/2017, but it uses
  * US State Department spellings (e.g. 'Solomon Is', not 'Solomon Islands')
- * and its polygons for tiny atolls are coarse/imprecise. So:
+ * and its polygons for smaller islands are coarse/imprecise. So:
  *   • Larger high islands  -> we use the real LSIB outline.
  *   • Small / atoll nations & territories -> we use a point + buffer (a
  *     circle) that reliably clips the coarse climate grids.
@@ -37,7 +37,7 @@ var LSIB_NAMES = {
 
 // Small / low-lying / scattered nations + territories. Point + buffer is more
 // reliable than the LSIB polygon for clipping the coarse (5-28 km) climate
-// grids over tiny atolls. [longitude, latitude, buffer_radius_in_metres].
+// grids over smaller islands. [longitude, latitude, buffer_radius_in_metres].
 // Together with LSIB_NAMES this covers all 21 SPREP PICTs.
 var POINT_AOI = {
   'Tonga':           [-174.80, -20.00, 300000],
@@ -49,7 +49,7 @@ var POINT_AOI = {
   'Cook Islands':    [-159.78, -21.23, 300000],   // southern group
   'Marshall Islands':[ 169.00,   8.00, 600000],
   'Federated States of Micronesia': [158.21, 6.92, 500000], // centred on Pohnpei
-  'Tokelau':         [-171.85,  -9.20, 150000],   // 3 tiny atolls — wide buffer
+  'Tokelau':         [-171.85,  -9.20, 150000],   // 3 smaller islands — wide buffer
   'American Samoa':  [-170.70, -14.30,  60000],
   'French Polynesia':[-149.50, -17.60, 200000],   // centred on the Society Islands
   'Guam':            [ 144.79,  13.44,  60000],

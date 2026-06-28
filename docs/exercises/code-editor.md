@@ -76,7 +76,7 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
 1. It uses **US State Department spellings**, which are not always the
    plain-English name. For example you must filter on `Solomon Is`, not
    `Solomon Islands`.
-2. It uses a **coarse simplification**, so tiny atoll polygons may be
+2. It uses a **coarse simplification**, so smaller-island polygons may be
    imprecise — a point + buffer is more reliable for small nations
    (see the next section). All 21 PICTs **do** have LSIB entries.
 
