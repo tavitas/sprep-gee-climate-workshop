@@ -23,12 +23,12 @@ LSIB_NAMES = {
     'Solomon Islands': 'Solomon Is',
     'Vanuatu': 'Vanuatu',
     'Samoa': 'Samoa',
-    'New Caledonia': 'New Caledonia',
 }
 
 # friendly name -> [lon, lat, buffer_radius_metres] for small / atoll nations
-# and territories (point+buffer is more reliable than the coarse LSIB polygon).
-# LSIB_NAMES + POINT_AOI together cover all 21 SPREP PICTs.
+# (point+buffer is more reliable than the coarse LSIB polygon).
+# LSIB_NAMES + POINT_AOI together cover the 14 SPREP member countries. To add a
+# territory (e.g. 'New Caledonia', 'Guam'), add a line here or in LSIB_NAMES.
 POINT_AOI = {
     'Tonga': [-174.80, -20.00, 300000],
     'Palau': [134.58, 7.50, 120000],
@@ -39,12 +39,6 @@ POINT_AOI = {
     'Cook Islands': [-159.78, -21.23, 300000],
     'Marshall Islands': [169.00, 8.00, 600000],
     'Federated States of Micronesia': [158.21, 6.92, 500000],
-    'Tokelau': [-171.85, -9.20, 150000],
-    'American Samoa': [-170.70, -14.30, 60000],
-    'French Polynesia': [-149.50, -17.60, 200000],
-    'Guam': [144.79, 13.44, 60000],
-    'Northern Mariana Islands': [145.60, 15.60, 200000],
-    'Wallis & Futuna': [-176.20, -13.30, 80000],
 }
 
 

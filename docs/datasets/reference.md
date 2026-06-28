@@ -11,7 +11,7 @@ Earth Engine Data Catalog in **June 2026**.
 | Sea-surface temp | `NOAA/CDR/OISST/V2_1` | 0.25° | `sst`, `anom` | °C, scale ×0.01 |
 | Elevation / coast | `NASA/NASADEM_HGT/001` | ~30 m | `elevation` (m) | `ee.Image` |
 | Surface water | `JRC/GSW1_4/GlobalSurfaceWater` | 30 m | `occurrence` (%) | `ee.Image` |
-| Boundaries | `USDOS/LSIB_SIMPLE/2017` | vector | `country_na` | all 21 PICTs present; small polygons imprecise |
+| Boundaries | `USDOS/LSIB_SIMPLE/2017` | vector | `country_na` | 14 SPREP members (default); small polygons imprecise |
 
 ## Unit gotchas — apply before mapping
 
@@ -29,24 +29,22 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has two quirks:
 
 1. It uses **US State Department spellings** — e.g. it stores `Solomon Is`, not
    "Solomon Islands".
-2. While all 21 SPREP PICTs are in LSIB, **polygon outlines for small/atoll
-   nations can be imprecise** — tiny landmasses may be poorly resolved.
+2. Its **polygon outlines for small / atoll nations can be imprecise** — small
+   landmasses may be poorly resolved.
 
-The course scripts handle this with a **hybrid** country selector:
+The course scripts default to the **14 SPREP member countries** and handle the
+boundary quirks with a **hybrid** country selector:
 
 - **Larger high islands** (use LSIB outlines): Fiji, Samoa, Vanuatu, Papua New
-  Guinea, Solomon Islands (LSIB: `Solomon Is`), New Caledonia.
-- **Small / atoll / territory nations** (use point + buffer — all 21 PICTs are
-  in LSIB, but point+buffer is recommended for small/atoll nations because LSIB
-  polygons may be imprecise for tiny landmasses): American Samoa, Cook Islands
-  (LSIB: `Cook Is`), Federated States of Micronesia (LSIB:
-  `Fed States of Micronesia`), French Polynesia, Guam, Kiribati, Marshall
-  Islands (LSIB: `Marshall Is`), Nauru, Niue (LSIB: `Niue`), Northern Mariana
-  Islands (LSIB: `Northern Mariana Is`), Palau, Tokelau, Tonga, Tuvalu, Wallis
-  and Futuna (LSIB: `Wallis & Futuna`).
+  Guinea, Solomon Islands (LSIB: `Solomon Is`).
+- **Small / atoll nations** (use point + buffer, more reliable than the coarse
+  LSIB polygon): Cook Islands (LSIB: `Cook Is`), Federated States of Micronesia
+  (LSIB: `Fed States of Micronesia`), Kiribati, Marshall Islands (LSIB:
+  `Marshall Is`), Nauru, Niue, Palau, Tonga, Tuvalu.
 
-You just type the friendly name; the script picks the right area. Confirm it
-live in your own account with the
+You just type the friendly name; the script picks the right area. To add a
+territory (e.g. New Caledonia, Guam — both also present in LSIB), add one line
+to the selector. Confirm names live in your own account with the
 [diagnostic check](../scripts/diagnostic.md).
 
 ## Sources

@@ -35,21 +35,19 @@ Google Colab or a notebook.
 ## Localising for your country
 
 Set `COUNTRY` to your nation using the **friendly name** — the scripts translate
-it automatically:
+it automatically. The default scope is the **14 SPREP member countries**:
 
-`American Samoa` · `Cook Islands` · `Federated States of Micronesia` ·
-`Fiji` · `French Polynesia` · `Guam` · `Kiribati` ·
-`Marshall Islands` · `Nauru` · `New Caledonia` · `Niue` ·
-`Northern Mariana Islands` · `Palau` · `Papua New Guinea` · `Samoa` ·
-`Solomon Islands` · `Tokelau` · `Tonga` · `Tuvalu` ·
-`Vanuatu` · `Wallis and Futuna`
+`Cook Islands` · `Federated States of Micronesia` · `Fiji` · `Kiribati` ·
+`Marshall Islands` · `Nauru` · `Niue` · `Palau` · `Papua New Guinea` ·
+`Samoa` · `Solomon Islands` · `Tonga` · `Tuvalu` · `Vanuatu`
 
 !!! warning "Why a country selector?"
     The global boundary layer uses State Department spellings (e.g.
-    `Solomon Is`) and drops smaller islands. The built-in selector uses the real
-    outline for larger high islands and a point + buffer for small / atoll
-    nations — so any nation works. See the
+    `Solomon Is`) and its polygons for smaller islands are imprecise. The
+    built-in selector uses the real outline for larger high islands and a point +
+    buffer for small / atoll nations — so every member country works. See the
     [dataset reference](../datasets/reference.md#country-boundaries-important).
+    To add a territory (e.g. New Caledonia, Guam), add one line to the selector.
 
 Before a workshop, run the [live diagnostic check](diagnostic.md) once to
 confirm which names resolve in your account.

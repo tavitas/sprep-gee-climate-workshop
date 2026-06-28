@@ -31,14 +31,15 @@ var LSIB_NAMES = {
   'Papua New Guinea': 'Papua New Guinea',
   'Solomon Islands': 'Solomon Is',          // note the State Dept spelling
   'Vanuatu': 'Vanuatu',
-  'Samoa': 'Samoa',
-  'New Caledonia': 'New Caledonia'          // exact LSIB country_na (verified 2026)
+  'Samoa': 'Samoa'
 };
 
-// Small / low-lying / scattered nations + territories. Point + buffer is more
-// reliable than the LSIB polygon for clipping the coarse (5-28 km) climate
-// grids over smaller islands. [longitude, latitude, buffer_radius_in_metres].
-// Together with LSIB_NAMES this covers all 21 SPREP PICTs.
+// Small / low-lying / scattered nations. Point + buffer is more reliable than
+// the LSIB polygon for clipping the coarse (5-28 km) climate grids over smaller
+// islands. [longitude, latitude, buffer_radius_in_metres].
+// Together with LSIB_NAMES this covers the 14 SPREP member countries. To add a
+// territory (e.g. 'New Caledonia', 'Guam', 'French Polynesia'), drop in a line
+// here (point + buffer) or in LSIB_NAMES with its exact country_na.
 var POINT_AOI = {
   'Tonga':           [-174.80, -20.00, 300000],
   'Palau':           [ 134.58,   7.50, 120000],
@@ -48,13 +49,7 @@ var POINT_AOI = {
   'Niue':            [-169.87, -19.05,  40000],
   'Cook Islands':    [-159.78, -21.23, 300000],   // southern group
   'Marshall Islands':[ 169.00,   8.00, 600000],
-  'Federated States of Micronesia': [158.21, 6.92, 500000], // centred on Pohnpei
-  'Tokelau':         [-171.85,  -9.20, 150000],   // 3 smaller islands — wide buffer
-  'American Samoa':  [-170.70, -14.30,  60000],
-  'French Polynesia':[-149.50, -17.60, 200000],   // centred on the Society Islands
-  'Guam':            [ 144.79,  13.44,  60000],
-  'Northern Mariana Islands': [145.60, 15.60, 200000], // Saipan / Tinian / Rota
-  'Wallis & Futuna': [-176.20, -13.30,  80000]
+  'Federated States of Micronesia': [158.21, 6.92, 500000]  // centred on Pohnpei
 };
 
 /**

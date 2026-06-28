@@ -12,11 +12,11 @@ Paste the whole script into the
 it only prints.
 
 !!! tip "Facilitators"
-    Run this before a workshop. All 21 PICTs should report **1 feature** (every
-    name is verified to exist in `LSIB_SIMPLE`). The scripts still use a point +
-    buffer for small / atoll nations because the LSIB polygon is too coarse for
-    the climate grids — that is by design, not an error. Every band list in
-    section (B) should also print.
+    Run this before a workshop. All 14 SPREP member countries should report
+    **1 feature** (every name is verified to exist in `LSIB_SIMPLE`). The scripts
+    still use a point + buffer for small / atoll nations because the LSIB polygon
+    is too coarse for the climate grids — that is by design, not an error. Every
+    band list in section (B) should also print.
 
 ```javascript title="99_diagnostic_check.js"
 --8<-- "scripts/javascript/99_diagnostic_check.js"

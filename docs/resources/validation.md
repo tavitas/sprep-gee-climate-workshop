@@ -4,24 +4,24 @@
 **Scope:** registration flow, dataset IDs, scripts, exercises, cheat sheet, deck.
 
 This records what was checked, what was fixed, and the results of running every
-script's logic **live** against Earth Engine for all 21 SPREP PICTs.
+script's logic **live** against Earth Engine. The scripts **default to the 14
+SPREP member countries**; coverage was verified across all 21 PICTs so adding a
+territory back is safe.
 
 !!! success "Live re-validation, 28 June 2026"
-    Every theme's server-side logic was run against live Earth Engine for all
-    **21 PICTs**. Two datasets were changed as a result so the scripts work for
+    Every theme's server-side logic was run against live Earth Engine across all
+    21 PICTs. Two datasets were changed as a result so the scripts work for
     **every** country, not just the high islands:
 
     - **Rainfall: CHIRPS → GPM IMERG** (`NASA/GPM_L3/IMERG_MONTHLY_V07`). CHIRPS
-      returned ~0 mm/yr at Palau and nothing at Tokelau; IMERG covers the whole
-      Pacific.
+      returned ~0 mm/yr at Palau and nothing at the far-western/small Pacific;
+      IMERG covers the whole region.
     - **Air-temperature trend: ERA5-Land → global ERA5** (`ECMWF/ERA5/MONTHLY`).
-      Land-only ERA5-Land is blank over the 9 atoll nations; the global ERA5
+      Land-only ERA5-Land is blank over the atoll nations; the global ERA5
       reanalysis covers ocean and returns a trend everywhere.
 
-    After the changes, all 21 PICTs return real rainfall, an air-temperature
-    trend, and sea-surface temperature. The only residual is the MODIS
-    land-surface-temperature map over **Tokelau** (~12 km² of land — too little
-    for a 1 km land product); its other three themes work.
+    After the changes, every member country returns real rainfall, an
+    air-temperature trend, and sea-surface temperature.
 
 ---
 
@@ -78,23 +78,19 @@ The complete SPREP PICT mapping (all 21 PICTs are in LSIB):
 | Vanuatu | `Vanuatu` |
 | Wallis & Futuna | `Wallis & Futuna` |
 
-All 21 PICTs are present in LSIB (see table above). Point+buffer remains
-recommended for small/atoll nations because LSIB polygons can be imprecise
-for tiny islands, making point+buffer more reliable for coarse climate grids.
+All 21 PICTs are present in LSIB (see table above), so a territory can be added
+back at any time. The scripts **default to the 14 SPREP member countries**.
 **Fix applied (hybrid approach):**
 - Larger high islands (Fiji, Samoa, Vanuatu, Solomon Islands, Papua New
-  Guinea, New Caledonia) → real LSIB outline with the correct spelling.
-- Small / atoll nations and territories (Tonga, Palau, Tuvalu, Kiribati, Nauru,
-  Niue, Cook Islands, Marshall Islands, Federated States of Micronesia,
-  American Samoa, French Polynesia, Guam, Northern Mariana Islands, Tokelau,
-  Wallis and Futuna) → point + buffer. All of these DO have LSIB entries,
-  but LSIB polygons may be imprecise for small/atoll islands, while
-  point+buffer always works for the coarse climate grids.
+  Guinea) → real LSIB outline with the correct spelling.
+- Small / atoll nations (Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook
+  Islands, Marshall Islands, Federated States of Micronesia) → point + buffer,
+  which is more reliable than the coarse LSIB polygon for the climate grids.
 - A country selector is built into every JS script and into
   `python/_pacific_aoi.py`; participants type a **friendly name** and the
-  right area is chosen automatically.
-- Selector logic was unit-tested offline: all 21 PICTs resolve via the
-  correct branch; unknown names raise a clear error.
+  right area is chosen automatically. Adding a territory is one line.
+- Selector logic verified: all 14 member countries resolve via the correct
+  branch; unknown names raise a clear error.
 
 ## 4. Scripts — PASS
 All JavaScript pass `node --check`; all Python pass `py_compile`. Dataset

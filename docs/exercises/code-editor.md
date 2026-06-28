@@ -78,9 +78,11 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
    `Solomon Islands`.
 2. It uses a **coarse simplification**, so smaller-island polygons may be
    imprecise — a point + buffer is more reliable for small nations
-   (see the next section). All 21 PICTs **do** have LSIB entries.
+   (see the next section).
 
 ### LSIB country names — use these exact spellings
+
+The 14 SPREP member countries (each is present in LSIB):
 
 | Type this `countryName` | Result |
 |-------------------------|--------|
@@ -89,7 +91,6 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
 | `Vanuatu` | works |
 | `Papua New Guinea` | works |
 | `Solomon Is` | works (note: **not** "Solomon Islands") |
-| `New Caledonia` | works |
 | `Tonga` | works |
 | `Kiribati` | works |
 | `Nauru` | works |
@@ -99,21 +100,16 @@ The boundary layer `USDOS/LSIB_SIMPLE/2017` has **two quirks** you must know:
 | `Fed States of Micronesia` | works |
 | `Cook Is` | works |
 | `Niue` | works |
-| `American Samoa` | works |
-| `French Polynesia` | works |
-| `Guam` | works |
-| `Northern Mariana Is` | works |
-| `Tokelau` | works |
-| `Wallis & Futuna` | works |
+
+(The other PICTs/territories — e.g. `New Caledonia`, `Guam`, `American Samoa` —
+are also in LSIB if you need them.)
+
 ### Small islands and atolls — point + buffer recommended
 
-All 21 SPREP PICTs are present in LSIB. However, LSIB polygons for small
-island and atoll nations can be imprecise — the coarse (5–28 km) climate
-grids may miss tiny land areas. A point + buffer is more reliable for
-these: Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook Islands,
-Marshall Islands, Federated States of Micronesia, American Samoa, French
-Polynesia, Guam, Northern Mariana Islands, Tokelau, Wallis and Futuna.
-**Any of the 21 PICTs** can use this approach.
+LSIB polygons for small island and atoll nations can be imprecise — the coarse
+(5–28 km) climate grids may miss tiny land areas. A point + buffer is more
+reliable for these: Tonga, Palau, Tuvalu, Kiribati, Nauru, Niue, Cook Islands,
+Marshall Islands, Federated States of Micronesia.
 Define your area as a **point with a circle (buffer)**:
 ```javascript
 // Funafuti, Tuvalu + 350 km of surrounding ocean/atolls

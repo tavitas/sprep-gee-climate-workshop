@@ -24,9 +24,10 @@ US Department of State — a clean, global set of country outlines.
 boundary. The LSIB outline becomes your **Area of Interest (AOI)**.
 
 > **Note:** LSIB uses US State Department spellings (e.g. `Solomon Is`, not
-> "Solomon Islands"). All 21 SPREP PICTs are present, but small-island
-> polygons can be imprecise. The workshop scripts handle this automatically —
-> see the [Dataset quick reference](reference.md) for the full country-name table.
+> "Solomon Islands"), and small-island polygons can be imprecise. The workshop
+> scripts default to the **14 SPREP member countries** and handle this
+> automatically — see the [Dataset quick reference](reference.md) for the
+> country-name table.
 
 **Used in:** **Exercise 2** (setup), **3** (coral reefs), **4** (rainfall),
 **5** (temperature), **6** (ocean & coast).

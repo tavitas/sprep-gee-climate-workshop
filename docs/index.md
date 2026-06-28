@@ -15,8 +15,10 @@ SPREP / UNEP CIS-Pac5 — Regional Capacity Building on GIS & Data Management ·
 Google Earth Engine puts decades of free satellite and climate data on Google's
 servers — ready to analyse from your browser, with no large downloads and no
 powerful computer required. This course takes you from creating an account to
-producing a localized climate map for your **own country** across all 21 Pacific
-Island Countries and Territories — American Samoa, Cook Islands, Federated States of Micronesia, Fiji, French Polynesia, Guam, Kiribati, Marshall Islands, Nauru, New Caledonia, Niue, Northern Mariana Islands, Palau, Papua New Guinea, Samoa, Solomon Islands, Tokelau, Tonga, Tuvalu, Vanuatu, and Wallis and Futuna.
+producing a localized climate map for your **own country**, covering the 14
+SPREP member countries — Cook Islands, Federated States of Micronesia, Fiji,
+Kiribati, Marshall Islands, Nauru, Niue, Palau, Papua New Guinea, Samoa,
+Solomon Islands, Tonga, Tuvalu and Vanuatu.
 
 <div class="grid cards" markdown>
 

@@ -18,16 +18,14 @@ print('===== PACIFIC GEE WORKSHOP — DIAGNOSTIC =====');
 var LSIB = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017');
 
 // Friendly name -> exact 'country_na' in the dataset (verified live, June 2026).
-// All 21 SPREP PICTs ARE present in LSIB_SIMPLE — each should report 1 feature.
+// The 14 SPREP member countries — each ARE present in LSIB_SIMPLE and should
+// report 1 feature.
 var EXPECTED = {
   'Fiji':'Fiji', 'Papua New Guinea':'Papua New Guinea', 'Solomon Islands':'Solomon Is',
-  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia',
+  'Vanuatu':'Vanuatu', 'Samoa':'Samoa',
   'Tonga':'Tonga', 'Palau':'Palau', 'Kiribati':'Kiribati', 'Nauru':'Nauru',
   'Tuvalu':'Tuvalu', 'Niue':'Niue', 'Cook Islands':'Cook Is',
-  'Marshall Islands':'Marshall Is', 'Federated States of Micronesia':'Fed States of Micronesia',
-  'Tokelau':'Tokelau', 'American Samoa':'American Samoa',
-  'French Polynesia':'French Polynesia', 'Guam':'Guam',
-  'Northern Mariana Islands':'Northern Mariana Is', 'Wallis & Futuna':'Wallis & Futuna'
+  'Marshall Islands':'Marshall Is', 'Federated States of Micronesia':'Fed States of Micronesia'
 };
 
 print('--- (A) LSIB_SIMPLE polygon check (feature count per country) ---');

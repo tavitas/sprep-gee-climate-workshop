@@ -109,7 +109,7 @@ land area.
 ## Capstone — your turn
 Produce **one localised climate map + chart for your country** and export
 it. Choose the theme that matters most to your nation:
-- **Atolls (Tuvalu, Kiribati, RMI, Tokelau):** SST anomaly chart + SST map
+- **Atolls (Tuvalu, Kiribati, RMI, Tonga):** SST anomaly chart + SST map
   using a point+buffer ocean AOI.
 - **High islands (Fiji, Samoa, Vanuatu, Solomon Islands, PNG):** rainfall
   or temperature map *plus* the low-lying coast layer.
