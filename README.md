@@ -18,14 +18,14 @@ powerful computer required. By the end of the course you can sign in, find a
 dataset, clip it to your country, map it, chart change over decades, and export
 the result for use in QGIS or ArcGIS.
 
-The course focuses on the four climate themes that matter most for Pacific
-contexts:
+The course focuses on five themes that matter most for Pacific contexts:
 
 | Theme | What you map | Main dataset |
 |-------|--------------|--------------|
+| Coral reefs & habitats | Coral, seagrass and reef structures | Allen Coral Atlas |
 | Rainfall & drought | Long-term rainfall and dry-year signals | GPM IMERG |
 | Temperature & heat | Where heat sits + the warming trend | ERA5, MODIS |
-| Ocean & reefs | Sea-surface temperature & bleaching heat stress | NOAA OISST |
+| Ocean & SST | Sea-surface temperature & bleaching heat stress | NOAA OISST |
 | Sea level & coast | Low-lying land exposed to sea-level rise | NASADEM, JRC Water |
 
 **Time required:** ~3–3.5 hours for the six exercises, or one workshop day with
@@ -41,7 +41,7 @@ and is built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/
 
 | Section | What you'll find |
 |---------|------------------|
-| [Home](https://tavitas.github.io/sprep-gee-climate-workshop/) | Course overview, the four themes, where to start |
+| [Home](https://tavitas.github.io/sprep-gee-climate-workshop/) | Course overview, the workshop themes, where to start |
 | [Course details](https://tavitas.github.io/sprep-gee-climate-workshop/course-details/overview/) | Overview, navigation guide, slide deck & cheat sheet |
 | [Climate datasets](https://tavitas.github.io/sprep-gee-climate-workshop/datasets/what-is-gee/) | What GEE is, the themes, and a dataset quick-reference |
 | [Exercises](https://tavitas.github.io/sprep-gee-climate-workshop/exercises/account-setup/) | Six hands-on activities, building step by step |

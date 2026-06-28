@@ -1,7 +1,21 @@
-# The four climate themes
+# Workshop themes
 
-This course focuses on four themes that matter most to Pacific Island nations.
-Each has a hands-on exercise and a ready-to-run script.
+This course focuses on five themes that matter most to Pacific Island nations —
+their reefs, rainfall, temperature, ocean and coast. Each has a hands-on
+exercise and a ready-to-run script.
+
+## :material-waves: Coral reefs & habitats
+
+Reefs are central to Pacific food security, coastal protection and tourism. The
+Allen Coral Atlas mapped the world's shallow reefs at 5 m, so for each country
+you can see the **benthic habitat** (coral, seagrass, sand, rubble, rock) and
+the **geomorphic zones** (reef flat, crest, slope, lagoon).
+
+- **Dataset:** Allen Coral Atlas (`ACA/reef_habitat/v2_0`), 5 m, 2018–2021.
+  Bands `benthic`, `geomorphic`, `reef_mask`.
+- **You make:** a benthic-habitat map + a geomorphic-zones map + the coral and
+  seagrass habitat area in km².
+- **Go to:** [Exercise 3](../exercises/coral-reefs.md).
 
 ## :material-weather-pouring: Rainfall & drought
 
@@ -29,7 +43,7 @@ Two datasets, two questions: *where* is it hottest, and *how fast* is it warming
 !!! warning "Both are in Kelvin"
     Subtract 273.15 to get °C. MODIS LST also needs a ×0.02 scale factor first.
 
-## :material-fish: Ocean, reefs & sea-surface temperature
+## :material-fish: Ocean & sea-surface temperature
 
 A positive SST **anomaly** means the ocean is warmer than normal. Anomalies
 sustained above about **+1 °C** are coral-bleaching heat stress.
@@ -39,11 +53,6 @@ sustained above about **+1 °C** are coral-bleaching heat stress.
 - **You make:** an SST map + a monthly anomaly chart that reveals marine
   heatwaves (e.g. the strong 2016 El Niño event).
 - **Go to:** [Exercise 6](../exercises/ocean-coast.md).
-
-!!! tip "See the reefs themselves"
-    To map the coral, seagrass and reef structures around your islands (from the
-    Allen Coral Atlas), start with [Exercise 3 — Coral reef
-    habitats](../exercises/coral-reefs.md).
 
 ## :material-image-filter-hdr: Sea level & low-lying coast
 

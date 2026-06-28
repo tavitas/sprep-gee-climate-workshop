@@ -62,15 +62,16 @@ By the end of this course you can sign in to Earth Engine, find climate
 datasets, clip them to your country, visualise them, chart change over decades,
 and export the result for use in QGIS or ArcGIS.
 
-## The four climate themes
+## The workshop themes
 
 This course focuses on the datasets that matter most for Pacific Island contexts:
 
 | Theme | What you map | Main dataset |
 |-------|--------------|--------------|
+| :material-waves: Coral reefs & habitats | Coral, seagrass and reef structures | Allen Coral Atlas |
 | :material-weather-pouring: Rainfall & drought | Long-term rainfall and dry-year signals | GPM IMERG |
 | :material-thermometer: Temperature & heat | Where heat sits + the warming trend | ERA5, MODIS |
-| :material-fish: Ocean & reefs | Sea-surface temperature & bleaching heat stress | NOAA OISST |
+| :material-fish: Ocean & SST | Sea-surface temperature & bleaching heat stress | NOAA OISST |
 | :material-image-filter-hdr: Sea level & coast | Low-lying land exposed to sea-level rise | NASADEM, JRC Water |
 
 !!! tip "First time here?"

@@ -95,7 +95,8 @@ back at any time. The scripts **default to the 14 SPREP member countries**.
 ## 4. Scripts — PASS
 All JavaScript pass `node --check`; all Python pass `py_compile`. Dataset
 IDs, bands and scale factors cross-checked against the catalog. JS and
-Python now have matching versions for all four themes.
+Python now have matching versions for all five themes (coral reefs, rainfall,
+temperature, ocean SST, sea level & coast).
 
 ## 5. What still needs YOUR login (live run)
 Earth Engine only executes against your registered Cloud project, so two

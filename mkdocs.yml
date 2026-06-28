@@ -58,7 +58,7 @@ nav:
   - Datasets: datasets/index.md
   - Google Earth Engine:
       - What is Earth Engine?: datasets/what-is-gee.md
-      - The four climate themes: datasets/themes.md
+      - Workshop themes: datasets/themes.md
       - Dataset quick reference: datasets/reference.md
   - Exercises:
       - "1 · Set up your account": exercises/account-setup.md
