@@ -26,11 +26,19 @@ It is a single image, so there is no date range to filter — you just clip it t
 your country and display it.
 
 ## Step 1 — Set up your reef area
-Reefs sit just offshore, so we grow the coastline outward by ~25 km. Change
-`COUNTRY` to your nation (the full script's selector handles spelling and
-atolls for you).
+Reefs sit just offshore, so we grow the coastline outward by ~25 km.
 ```javascript
-var COUNTRY = 'Fiji';   // reef-rich examples: Papua New Guinea, Solomon Islands, Palau, Kiribati
+// IMPORTANT — in this simplified snippet, COUNTRY must match the boundary
+// layer's EXACT spelling (US State Dept names). The 14 SPREP members are:
+//   'Fiji'   'Papua New Guinea'   'Vanuatu'   'Samoa'   'Tonga'   'Tuvalu'
+//   'Kiribati'   'Nauru'   'Niue'   'Palau'
+//   'Solomon Is'                <- NOT 'Solomon Islands'
+//   'Cook Is'                   <- NOT 'Cook Islands'
+//   'Marshall Is'               <- NOT 'Marshall Islands'
+//   'Fed States of Micronesia'  <- NOT 'FSM' or 'Micronesia'
+// Reef-rich examples: 'Fiji', 'Papua New Guinea', 'Solomon Is', 'Palau', 'Cook Is'.
+// (The full downloadable script accepts the plain name, e.g. 'Cook Islands'.)
+var COUNTRY = 'Fiji';
 var land = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
              .filter(ee.Filter.eq('country_na', COUNTRY));
 var aoi = land.geometry().bounds().buffer(25000);
@@ -86,7 +94,7 @@ neighbour's.
 ```javascript
 Export.image.toDrive({
   image: aca.select('benthic'),
-  description: COUNTRY + '_ACA_Benthic',
+  description: COUNTRY.replace(/[ ,]/g, '_') + '_ACA_Benthic',   // no spaces allowed
   folder: 'GEE_Workshop_2026',
   scale: 10,
   region: aoi.bounds(),

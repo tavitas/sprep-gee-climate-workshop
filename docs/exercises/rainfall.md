@@ -99,7 +99,7 @@ years.** Which years were driest for your country?
 ```javascript
 Export.image.toDrive({
   image: meanAnnualRain,
-  description: COUNTRY + '_MeanAnnualRainfall',
+  description: COUNTRY.replace(/[ ,]/g, '_') + '_MeanAnnualRainfall',   // no spaces allowed
   folder: 'GEE_Workshop_2026',
   scale: 5000,
   region: aoi.geometry().bounds(),
