@@ -10,6 +10,9 @@ hide:
 
 SPREP / UNEP CIS-Pac5 — Regional Capacity Building on GIS & Data Management · 2026
 
+Delivered by SPREP under the UNEP / GCF CIS-Pac5 programme (FP147).
+[About the programme →](about/cis-pac5.md)
+
 ---
 
 Google Earth Engine puts decades of free satellite and climate data on Google's
