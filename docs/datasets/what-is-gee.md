@@ -56,7 +56,9 @@ from your browser, with no large downloads and no powerful computer required.
     Cloud project and verifies for **noncommercial** use. No credit card is
     needed. See [Exercise 1](../exercises/account-setup.md).
 
-!!! note "CHIRPS rainfall is moving v2 → v3"
-    The CHIRPS v2 product used in this course stops production after **December
-    2026**. The successor is `UCSB-CHC/CHIRPS/V3/DAILY_SAT`. We teach the stable
-    v2 for the 1991–2020 climate normal and point to v3 for future work.
+!!! note "Why GPM IMERG for rainfall (not CHIRPS)?"
+    CHIRPS is a popular rainfall dataset, but it has data holes over the
+    far-western and very small Pacific (Palau reads ~0 mm/yr, Tokelau is empty).
+    This course uses **GPM IMERG** (`NASA/GPM_L3/IMERG_MONTHLY_V07`), a NASA
+    satellite product with full ocean+island coverage, so the same script
+    works for **every** Pacific country.

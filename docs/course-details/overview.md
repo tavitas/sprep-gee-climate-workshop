@@ -25,8 +25,8 @@ country.
 1. Create a free Earth Engine account linked to a Google Cloud project.
 2. Find your way around the Earth Engine Code Editor.
 3. Load and clip global climate datasets to your country.
-4. Map **rainfall and drought** (CHIRPS).
-5. Map **temperature and heat** and the warming trend (ERA5-Land, MODIS).
+4. Map **rainfall and drought** (GPM IMERG).
+5. Map **temperature and heat** and the warming trend (ERA5, MODIS).
 6. Map **sea-surface temperature** and reef heat stress (NOAA OISST).
 7. Flag **low-lying coast** exposed to sea-level rise (NASADEM, JRC Surface Water).
 8. Export your results for use in QGIS / ArcGIS.

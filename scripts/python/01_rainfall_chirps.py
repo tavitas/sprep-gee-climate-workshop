@@ -7,6 +7,12 @@ Run in Google Colab or Jupyter after 00_setup_geemap.py.
 
 Produces an interactive map of mean annual rainfall for your country
 and saves a year-by-year rainfall chart as a PNG.
+
+Dataset: GPM IMERG Monthly v07 (NASA/GPM_L3/IMERG_MONTHLY_V07)
+  band 'precipitation' = monthly mean rain RATE in mm/HOUR, ~11 km, 2000-present.
+  IMERG (not CHIRPS) is used so the same script works for EVERY Pacific
+  country — CHIRPS has data holes over the far-west / small Pacific (Palau,
+  Tokelau). Verified live, June 2026.
 """
 
 import ee
@@ -17,23 +23,28 @@ ee.Initialize(project='your-project-id')   # <-- your registered project
 
 # ===== 1. SETTINGS =====
 COUNTRY    = 'Fiji'        # 'Samoa', 'Solomon Islands', 'Tuvalu', ... (any Pacific nation)
-START_YEAR = 1991
-END_YEAR   = 2020
+START_YEAR = 2001
+END_YEAR   = 2020          # 2001-2020 = 20-year climate normal (IMERG era)
 
 # ===== 2. COUNTRY BOUNDARY =====
 aoi = get_country(COUNTRY)       # ee.Geometry (LSIB outline or point+buffer)
 outline = get_outline(COUNTRY)   # ee.FeatureCollection for drawing
 
-# ===== 3. CHIRPS DAILY RAINFALL =====
-chirps = (ee.ImageCollection('UCSB-CHG/CHIRPS/DAILY')
-          .select('precipitation')
-          .filter(ee.Filter.date(f'{START_YEAR}-01-01', f'{END_YEAR + 1}-01-01')))
+# ===== 3. IMERG MONTHLY RAINFALL =====
+# 'precipitation' is a monthly mean RATE in mm/hour; multiply by the hours in
+# a month (~730.5) to get millimetres.
+HOURS_PER_MONTH = 730.5          # 8766 hours/year / 12
+imerg = (ee.ImageCollection('NASA/GPM_L3/IMERG_MONTHLY_V07')
+         .select('precipitation')
+         .filter(ee.Filter.date(f'{START_YEAR}-01-01', f'{END_YEAR + 1}-01-01')))
 
 # ===== 4. MEAN ANNUAL RAINFALL CLIMATOLOGY =====
 years = ee.List.sequence(START_YEAR, END_YEAR)
 
 def annual_total(y):
-    total = chirps.filter(ee.Filter.calendarRange(y, y, 'year')).sum()
+    # sum the 12 monthly totals (rate * hours) to get annual mm
+    total = (imerg.filter(ee.Filter.calendarRange(y, y, 'year'))
+             .map(lambda img: img.multiply(HOURS_PER_MONTH)).sum())
     return total.set('year', y).set(
         'system:time_start', ee.Date.fromYMD(y, 1, 1).millis())
 

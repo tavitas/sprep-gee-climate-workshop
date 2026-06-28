@@ -1,10 +1,27 @@
 # Validation Report — Pacific Climate GEE Workshop Materials
 
-**Run:** simulation / dry-run review, 24 June 2026
+**Run:** live validation against Earth Engine, 28 June 2026 (updated)
 **Scope:** registration flow, dataset IDs, scripts, exercises, cheat sheet, deck.
 
-This records what was checked, what was fixed, and the one step that
-requires your Google login to finish.
+This records what was checked, what was fixed, and the results of running every
+script's logic **live** against Earth Engine for all 21 SPREP PICTs.
+
+!!! success "Live re-validation, 28 June 2026"
+    Every theme's server-side logic was run against live Earth Engine for all
+    **21 PICTs**. Two datasets were changed as a result so the scripts work for
+    **every** country, not just the high islands:
+
+    - **Rainfall: CHIRPS → GPM IMERG** (`NASA/GPM_L3/IMERG_MONTHLY_V07`). CHIRPS
+      returned ~0 mm/yr at Palau and nothing at Tokelau; IMERG covers the whole
+      Pacific.
+    - **Air-temperature trend: ERA5-Land → global ERA5** (`ECMWF/ERA5/MONTHLY`).
+      Land-only ERA5-Land is blank over the 9 atoll nations; the global ERA5
+      reanalysis covers ocean and returns a trend everywhere.
+
+    After the changes, all 21 PICTs return real rainfall, an air-temperature
+    trend, and sea-surface temperature. The only residual is the MODIS
+    land-surface-temperature map over **Tokelau** (~12 km² of land — too little
+    for a 1 km land product); its other three themes work.
 
 ---
 
@@ -22,8 +39,8 @@ Earth Engine Data Catalog:
 
 | Dataset | ID | Key band(s) | Verified detail |
 |---|---|---|---|
-| CHIRPS rainfall | `UCSB-CHG/CHIRPS/DAILY` | `precipitation` (mm/d) | ~5.5 km; 1981 → 2026; covers 1991–2020 normal |
-| ERA5-Land air temp | `ECMWF/ERA5_LAND/DAILY_AGGR` | `temperature_2m` (**K**) | ~11 km; 1950 → 2026 |
+| GPM IMERG rainfall | `NASA/GPM_L3/IMERG_MONTHLY_V07` | `precipitation` (mm/hr) | ~11 km; 2000 → present; full Pacific coverage |
+| ERA5 air temp | `ECMWF/ERA5/MONTHLY` | `mean_2m_air_temperature` (**K**) | ~28 km; 1979 → 2020-06; global (covers atolls) |
 | MODIS land heat | `MODIS/061/MOD11A1` | `LST_Day_1km` (**K**, ×0.02) | ~1 km; 2000 → 2026 |
 | Sea-surface temp | `NOAA/CDR/OISST/V2_1` | `sst`, `anom` (°C, ×0.01) | 0.25°; 1981 → 2026 |
 | Elevation | `NASA/NASADEM_HGT/001` | `elevation` (m) | 30 m; `ee.Image` |

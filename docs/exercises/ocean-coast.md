@@ -11,8 +11,8 @@ localised climate map for **your** country.
 - JRC Global Surface Water (`JRC/GSW1_4/GlobalSurfaceWater`) — where water sits.
 
 **Companion scripts:**
-[`../scripts/javascript.md`](../scripts/javascript.md) ·
-[`../scripts/javascript.md`](../scripts/javascript.md)
+[`03_sst_reef_heat`](../scripts/javascript.md) ·
+[`04_coastal_exposure`](../scripts/javascript.md)
 
 **Time:** ~40 minutes · **Before you start:** finish Exercise 4.
 

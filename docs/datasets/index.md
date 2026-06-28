@@ -35,74 +35,56 @@ boundary. The LSIB outline becomes your **Area of Interest (AOI)**.
 
 ## Climate — Rainfall
 
-### CHIRPS Daily v2
+### GPM IMERG Monthly v07
 
 | | |
 |---|---|
-| **Dataset ID** | [`UCSB-CHG/CHIRPS/DAILY`](https://developers.google.com/earth-engine/datasets/catalog/UCSB-CHG_CHIRPS_DAILY) |
-| **Source** | UCSB Climate Hazards Center |
-| **Resolution** | ~5.5 km |
-| **Time span** | 1981 – present |
+| **Dataset ID** | [`NASA/GPM_L3/IMERG_MONTHLY_V07`](https://developers.google.com/earth-engine/datasets/catalog/NASA_GPM_L3_IMERG_MONTHLY_V07) |
+| **Source** | NASA Global Precipitation Measurement (GPM) mission |
+| **Resolution** | ~11 km (0.1°) |
+| **Time span** | 2000 – present |
 
-**What it is:** Quasi-global rainfall estimates blending satellite
-infrared data with rain-gauge observations. Provides daily precipitation
-in millimetres.
+**What it is:** Satellite-based monthly precipitation from NASA's GPM
+mission. Unlike CHIRPS, IMERG has full coverage over the open ocean and the
+small / far-western Pacific, so the same script works for **every** country —
+including Palau and Tokelau, where CHIRPS is empty. (Verified live, June 2026.)
 
 **What we derive from it:**
-- A **mean annual rainfall map** (total annual precipitation averaged 1991–2020).
+- A **mean annual rainfall map** (annual precipitation averaged 2001–2020).
 - A **year-by-year rainfall chart** that reveals drought years as dips.
 
-**Key band:** `precipitation` (mm/day — sum over time for annual totals).
-
-> **Heads up:** v2 stops production after **December 2026**. The successor is
-> [CHIRPS v3](#chirps-daily-v3) below.
+**Key band:** `precipitation` — a monthly mean **rate in mm/hour**. Multiply by
+the hours in a month (~730.5) to get millimetres, then sum the 12 months for an
+annual total.
 
 **Used in:** **Exercise 3 — Rainfall & Drought**.
 
 ---
 
-### CHIRPS Daily v3
-
-| | |
-|---|---|
-| **Dataset ID** | [`UCSB-CHC/CHIRPS/V3/DAILY_SAT`](https://developers.google.com/earth-engine/datasets/catalog/UCSB-CHC_CHIRPS_V3_DAILY_SAT) |
-| **Source** | UCSB Climate Hazards Center |
-| **Resolution** | ~5.5 km |
-| **Time span** | 1981 – present |
-
-**What it is:** The successor to CHIRPS v2. Same methodology, ongoing
-production after v2 sunsets. Drop-in replacement for all workflows in this
-course.
-
-**What we derive from it:** Same as CHIRPS v2 — once v2 is retired, use this
-for future projects.
-
-**Used in:** Referenced as the migration path from **Exercise 3**.
-
----
-
 ## Climate — Temperature
 
-### ERA5-Land Daily Aggregated
+### ERA5 Monthly
 
 | | |
 |---|---|
-| **Dataset ID** | [`ECMWF/ERA5_LAND/DAILY_AGGR`](https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_DAILY_AGGR) |
+| **Dataset ID** | [`ECMWF/ERA5/MONTHLY`](https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_MONTHLY) |
 | **Source** | European Centre for Medium-Range Weather Forecasts (ECMWF) |
-| **Resolution** | ~11 km |
-| **Time span** | 1950 – present |
+| **Resolution** | ~28 km (0.25°) |
+| **Time span** | 1979 – 2020-06 |
 
-**What it is:** Reanalysis-based daily air temperature, combining model
-forecasts with observations. The best available long-term record for the
-Pacific.
+**What it is:** Reanalysis-based monthly air temperature, combining model
+forecasts with observations. This is the **global** ERA5 product, so it covers
+ocean as well as land — and therefore returns a warming trend for **every**
+country, including atolls where the land-only ERA5-Land product is blank.
+(Verified live, June 2026.)
 
 **What we derive from it:**
-- An **average annual air temperature** from daily mean values (1991–present).
+- An **average annual air temperature** from the monthly means (1991–2019).
 - A **warming trend chart** with a trend line showing how much temperatures
   have risen since the 1990s.
 - A **warming map** comparing the most recent decade against an earlier decade.
 
-**Key band:** `temperature_2m` (Kelvin — subtract 273.15 for °C).
+**Key band:** `mean_2m_air_temperature` (Kelvin — subtract 273.15 for °C).
 
 **Used in:** **Exercise 4 — Temperature & Heat**.
 
@@ -211,9 +193,8 @@ layer for coastal exposure assessment.
 | Dataset | ID | Type | Resolution | Key band(s) | Exercise |
 |---------|----|------|:----------:|-------------|:--------:|
 | LSIB | `USDOS/LSIB_SIMPLE/2017` | vector | — | `country_na` | 2–5 |
-| CHIRPS v2 | `UCSB-CHG/CHIRPS/DAILY` | image | ~5.5 km | `precipitation` | 3 |
-| CHIRPS v3 | `UCSB-CHC/CHIRPS/V3/DAILY_SAT` | image | ~5.5 km | `precipitation` | (future) |
-| ERA5-Land | `ECMWF/ERA5_LAND/DAILY_AGGR` | image | ~11 km | `temperature_2m` | 4 |
+| GPM IMERG | `NASA/GPM_L3/IMERG_MONTHLY_V07` | image | ~11 km | `precipitation` | 3 |
+| ERA5 Monthly | `ECMWF/ERA5/MONTHLY` | image | ~28 km | `mean_2m_air_temperature` | 4 |
 | MODIS LST | `MODIS/061/MOD11A1` | image | ~1 km | `LST_Day_1km` | 4 |
 | OISST v2.1 | `NOAA/CDR/OISST/V2_1` | image | 0.25° | `sst`, `anom` | 5 |
 | NASADEM | `NASA/NASADEM_HGT/001` | image | ~30 m | `elevation` | 5 |

@@ -6,10 +6,11 @@ Each has a hands-on exercise and a ready-to-run script.
 ## :material-weather-pouring: Rainfall & drought
 
 Rainfall in any single year is noisy. To describe a country's *climate* we
-average rainfall over the standard **1991–2020** 30-year period, then plot each
-year against that average so **drought years show up as dips**.
+average rainfall over a **2001–2020** 20-year period, then plot each year
+against that average so **drought years show up as dips**.
 
-- **Dataset:** CHIRPS Daily (`UCSB-CHG/CHIRPS/DAILY`), ~5.5 km, 1981–present.
+- **Dataset:** GPM IMERG Monthly (`NASA/GPM_L3/IMERG_MONTHLY_V07`), ~11 km,
+  2000–present. Full Pacific ocean+island coverage — works for every country.
 - **You make:** a mean annual rainfall map + a year-by-year rainfall chart.
 - **Go to:** [Exercise 3](../exercises/rainfall.md).
 
@@ -19,8 +20,9 @@ Two datasets, two questions: *where* is it hottest, and *how fast* is it warming
 
 - **MODIS Land Surface Temperature** (`MODIS/061/MOD11A1`, ~1 km) shows where
   heat sits on the land.
-- **ERA5-Land air temperature** (`ECMWF/ERA5_LAND/DAILY_AGGR`, ~11 km, since
-  1950) shows the long-term warming trend.
+- **ERA5 air temperature** (`ECMWF/ERA5/MONTHLY`, ~28 km, 1979 → 2020-06) shows
+  the long-term warming trend. This *global* reanalysis covers ocean as well as
+  land, so the trend works for atolls too.
 - **You make:** a heat map + an air-temperature trend chart + a warming map.
 - **Go to:** [Exercise 4](../exercises/temperature.md).
 

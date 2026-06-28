@@ -12,9 +12,11 @@ Paste the whole script into the
 it only prints.
 
 !!! tip "Facilitators"
-    Run this before a workshop. If a country shows **0 features**, it is not in
-    `LSIB_SIMPLE` — the scripts already use a point + buffer for those, so no
-    action is needed unless you want to add a new nation.
+    Run this before a workshop. All 21 PICTs should report **1 feature** (every
+    name is verified to exist in `LSIB_SIMPLE`). The scripts still use a point +
+    buffer for small / atoll nations because the LSIB polygon is too coarse for
+    the climate grids — that is by design, not an error. Every band list in
+    section (B) should also print.
 
 ```javascript title="99_diagnostic_check.js"
 --8<-- "scripts/javascript/99_diagnostic_check.js"

@@ -22,12 +22,15 @@ var FLOOD_HEIGHT = 5;    // metres above sea level to flag as "low-lying"
 
 var LSIB_NAMES = {
   'Fiji':'Fiji', 'Papua New Guinea':'Papua New Guinea', 'Solomon Islands':'Solomon Is',
-  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia (Fr)'};
+  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia'};
 var POINT_AOI = {
   'Tonga':[-174.8,-20.0,300000], 'Palau':[134.58,7.5,120000], 'Tuvalu':[178.5,-7.8,350000],
   'Kiribati':[173.0,1.4,500000], 'Nauru':[166.93,-0.52,40000], 'Niue':[-169.87,-19.05,40000],
   'Cook Islands':[-159.78,-21.23,300000], 'Marshall Islands':[169.0,8.0,600000],
-  'Federated States of Micronesia':[158.21,6.92,500000], 'Tokelau':[-171.85,-9.2,60000]};
+  'Federated States of Micronesia':[158.21,6.92,500000], 'Tokelau':[-171.85,-9.2,150000],
+  'American Samoa':[-170.70,-14.30,60000], 'French Polynesia':[-149.5,-17.6,200000],
+  'Guam':[144.79,13.44,60000], 'Northern Mariana Islands':[145.6,15.6,200000],
+  'Wallis & Futuna':[-176.2,-13.3,80000]};
 var aoi, outline;
 if (LSIB_NAMES[COUNTRY]) {
   outline = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')

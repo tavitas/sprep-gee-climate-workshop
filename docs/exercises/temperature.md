@@ -5,7 +5,8 @@
 
 **Datasets:**
 - MODIS Land Surface Temperature (`MODIS/061/MOD11A1`) — ~1 km, where heat is.
-- ERA5-Land Daily (`ECMWF/ERA5_LAND/DAILY_AGGR`) — air temperature trend.
+- ERA5 Monthly (`ECMWF/ERA5/MONTHLY`) — air temperature trend (global
+  reanalysis; covers ocean + atolls, so it works for every country).
 
 **Companion script:**
 [`../scripts/javascript.md`](../scripts/javascript.md)
@@ -16,9 +17,12 @@
 
 ## Two ideas, two datasets
 - **MODIS** measures the temperature of the **land surface** from space at
-  1 km — good for a map of *where* the heat sits.
-- **ERA5-Land** is a climate **reanalysis** of 2 m **air** temperature back
-  to 1950 — good for a *trend over time*.
+  1 km — good for a map of *where* the heat sits. (Land only, so it is sparse
+  over tiny atolls with very little land.)
+- **ERA5** is a climate **reanalysis** of 2 m **air** temperature. We use the
+  *global* monthly product (`ECMWF/ERA5/MONTHLY`, 1979 → 2020-06), which covers
+  ocean as well as land — so it returns a trend for **every** country,
+  including atolls.
 
 Both store temperature in **Kelvin**, so we subtract 273.15 to get °C.
 
@@ -46,14 +50,15 @@ Map.addLayer(modisLST, {min: 20, max: 40, palette: tempPalette},
 Run it. Towns, cleared land and airports usually glow hot; forest and
 high ground stay cooler.
 
-## Step 3 — The warming trend (ERA5-Land air temperature)
+## Step 3 — The warming trend (ERA5 air temperature)
 Build a yearly average air temperature and chart it with a trend line.
+(ERA5 Monthly ends 2020-06, so the last full year is 2019.)
 ```javascript
-var years = ee.List.sequence(1991, 2024);
+var years = ee.List.sequence(1991, 2019);
 var annualTemp = ee.ImageCollection.fromImages(
   years.map(function (y) {
-    var img = ee.ImageCollection('ECMWF/ERA5_LAND/DAILY_AGGR')
-      .select('temperature_2m')
+    var img = ee.ImageCollection('ECMWF/ERA5/MONTHLY')
+      .select('mean_2m_air_temperature')
       .filter(ee.Filter.calendarRange(y, y, 'year'))
       .mean().subtract(273.15);
     return img.set('system:time_start', ee.Date.fromYMD(y, 1, 1).millis());
@@ -61,7 +66,7 @@ var annualTemp = ee.ImageCollection.fromImages(
 );
 print(ui.Chart.image.series({
   imageCollection: annualTemp, region: aoi,
-  reducer: ee.Reducer.mean(), scale: 11000
+  reducer: ee.Reducer.mean(), scale: 28000
 }).setOptions({
   title: 'Average annual air temperature over ' + COUNTRY,
   vAxis: {title: '°C'}, hAxis: {title: 'Year'},
@@ -75,14 +80,14 @@ how much warmer the last few years are than the early 1990s.
 ## Step 4 — A warming map (recent decade minus earlier decade)
 ```javascript
 function decadeMean(y1, y2) {
-  return ee.ImageCollection('ECMWF/ERA5_LAND/DAILY_AGGR')
-    .select('temperature_2m')
+  return ee.ImageCollection('ECMWF/ERA5/MONTHLY')
+    .select('mean_2m_air_temperature')
     .filter(ee.Filter.date(y1 + '-01-01', (y2 + 1) + '-01-01')).mean();
 }
-var warming = decadeMean(2015, 2024).subtract(decadeMean(1991, 2000)).clip(aoi);
+var warming = decadeMean(2010, 2019).subtract(decadeMean(1991, 2000)).clip(aoi);
 Map.addLayer(warming, {min: -1, max: 1,
   palette: ['2166ac','67a9cf','d1e5f0','f7f7f7','fddbc7','ef8a62','b2182b']},
-  'Warming 2015-2024 minus 1991-2000 (°C)');
+  'Warming 2010-2019 minus 1991-2000 (°C)');
 ```
 Red = areas that have warmed.
 

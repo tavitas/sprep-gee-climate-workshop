@@ -66,8 +66,8 @@ This course focuses on the datasets that matter most for Pacific Island contexts
 
 | Theme | What you map | Main dataset |
 |-------|--------------|--------------|
-| :material-weather-pouring: Rainfall & drought | Long-term rainfall and dry-year signals | CHIRPS |
-| :material-thermometer: Temperature & heat | Where heat sits + the warming trend | ERA5-Land, MODIS |
+| :material-weather-pouring: Rainfall & drought | Long-term rainfall and dry-year signals | GPM IMERG |
+| :material-thermometer: Temperature & heat | Where heat sits + the warming trend | ERA5, MODIS |
 | :material-fish: Ocean & reefs | Sea-surface temperature & bleaching heat stress | NOAA OISST |
 | :material-image-filter-hdr: Sea level & coast | Low-lying land exposed to sea-level rise | NASADEM, JRC Water |
 

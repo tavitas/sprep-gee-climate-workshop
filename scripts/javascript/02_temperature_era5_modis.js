@@ -6,10 +6,14 @@
  *       (b) the long-term warming trend in air temperature.
  *
  * DATASETS:
- *   - ERA5-Land Daily Aggregated (ECMWF/ERA5_LAND/DAILY_AGGR)
- *       'temperature_2m' = 2 m air temperature in KELVIN, ~11 km, 1950-present.
+ *   - ERA5 Monthly (ECMWF/ERA5/MONTHLY)
+ *       'mean_2m_air_temperature' = 2 m air temperature in KELVIN, ~28 km,
+ *       1979 to 2020-06. This GLOBAL reanalysis covers ocean as well as land,
+ *       so it returns a value for EVERY country — including atolls, where the
+ *       land-only ERA5-Land product is blank. (Verified live, June 2026.)
  *   - MODIS Land Surface Temperature (MODIS/061/MOD11A1)
  *       'LST_Day_1km' = daytime surface temp, scale 0.02, KELVIN, ~1 km.
+ *       (Land only — sparse over tiny atolls with little land.)
  *
  * TO LOCALISE: change COUNTRY below.
  **********************************************************************/
@@ -18,12 +22,15 @@
 var COUNTRY = 'Samoa';
 var LSIB_NAMES = {
   'Fiji':'Fiji', 'Papua New Guinea':'Papua New Guinea', 'Solomon Islands':'Solomon Is',
-  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia (Fr)'};
+  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia'};
 var POINT_AOI = {
   'Tonga':[-174.8,-20.0,300000], 'Palau':[134.58,7.5,120000], 'Tuvalu':[178.5,-7.8,350000],
   'Kiribati':[173.0,1.4,500000], 'Nauru':[166.93,-0.52,40000], 'Niue':[-169.87,-19.05,40000],
   'Cook Islands':[-159.78,-21.23,300000], 'Marshall Islands':[169.0,8.0,600000],
-  'Federated States of Micronesia':[158.21,6.92,500000], 'Tokelau':[-171.85,-9.2,60000]};
+  'Federated States of Micronesia':[158.21,6.92,500000], 'Tokelau':[-171.85,-9.2,150000],
+  'American Samoa':[-170.70,-14.30,60000], 'French Polynesia':[-149.5,-17.6,200000],
+  'Guam':[144.79,13.44,60000], 'Northern Mariana Islands':[145.6,15.6,200000],
+  'Wallis & Futuna':[-176.2,-13.3,80000]};
 var aoi, outline;
 if (LSIB_NAMES[COUNTRY]) {
   outline = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
@@ -49,15 +56,15 @@ var modisLST = ee.ImageCollection('MODIS/061/MOD11A1')
 Map.addLayer(modisLST, {min: 20, max: 40, palette: tempPalette},
              'Mean daytime land surface temp 2024 (°C)');
 
-// ===== 3. WARMING TREND (ERA5-Land air temperature) ================
+// ===== 3. WARMING TREND (ERA5 air temperature) =====================
 var START_YEAR = 1991;
-var END_YEAR   = 2024;
+var END_YEAR   = 2019;           // ERA5 Monthly ends 2020-06; 2019 = last full year
 var years = ee.List.sequence(START_YEAR, END_YEAR);
 
 var annualMeanTemp = ee.ImageCollection.fromImages(
   years.map(function (y) {
-    var img = ee.ImageCollection('ECMWF/ERA5_LAND/DAILY_AGGR')
-      .select('temperature_2m')
+    var img = ee.ImageCollection('ECMWF/ERA5/MONTHLY')
+      .select('mean_2m_air_temperature')
       .filter(ee.Filter.calendarRange(y, y, 'year'))
       .mean()
       .subtract(273.15);   // Kelvin -> Celsius
@@ -67,7 +74,7 @@ var annualMeanTemp = ee.ImageCollection.fromImages(
 
 print(ui.Chart.image.series({
   imageCollection: annualMeanTemp, region: aoi,
-  reducer: ee.Reducer.mean(), scale: 11000
+  reducer: ee.Reducer.mean(), scale: 28000
 }).setOptions({
   title: 'Average annual air temperature over ' + COUNTRY + ' (' + START_YEAR + '-' + END_YEAR + ')',
   vAxis: {title: 'Temperature (°C)'}, hAxis: {title: 'Year'},
@@ -77,14 +84,14 @@ print(ui.Chart.image.series({
 
 // ===== 4. WARMING MAP: recent decade minus earlier decade ==========
 function decadeMean(y1, y2) {
-  return ee.ImageCollection('ECMWF/ERA5_LAND/DAILY_AGGR')
-    .select('temperature_2m')
+  return ee.ImageCollection('ECMWF/ERA5/MONTHLY')
+    .select('mean_2m_air_temperature')
     .filter(ee.Filter.date(y1 + '-01-01', (y2 + 1) + '-01-01')).mean();
 }
-var warming = decadeMean(2015, 2024).subtract(decadeMean(1991, 2000)).clip(aoi);
+var warming = decadeMean(2010, 2019).subtract(decadeMean(1991, 2000)).clip(aoi);
 Map.addLayer(warming, {min: -1, max: 1,
   palette: ['2166ac','67a9cf','d1e5f0','f7f7f7','fddbc7','ef8a62','b2182b']},
-  'Warming: 2015-2024 minus 1991-2000 (°C)');
+  'Warming: 2010-2019 minus 1991-2000 (°C)');
 
 Map.addLayer(outline.style({color: 'black', fillColor: '00000000', width: 1}), {}, COUNTRY + ' outline');
 

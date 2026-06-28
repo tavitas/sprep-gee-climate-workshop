@@ -3,8 +3,8 @@
 **Goal:** Make a map of long-term average rainfall for your country, and a
 chart that reveals which years were unusually dry (drought) or wet.
 
-**Dataset:** CHIRPS Daily rainfall (`UCSB-CHG/CHIRPS/DAILY`), ~5 km,
-1981–present. **Companion script:**
+**Dataset:** GPM IMERG Monthly rainfall (`NASA/GPM_L3/IMERG_MONTHLY_V07`),
+~11 km, 2000–present. **Companion script:**
 [`../scripts/javascript.md`](../scripts/javascript.md)
 
 **Time:** ~30 minutes · **Before you start:** finish Exercise 2.
@@ -13,14 +13,19 @@ chart that reveals which years were unusually dry (drought) or wet.
 
 ## The idea
 Rainfall in any single year is noisy. To describe a country's *climate* we
-average rainfall over a 30-year period (the standard **1991–2020 climate
-normal**). Then, by plotting each year against that average, dry years
-(droughts) stand out as dips.
+average rainfall over a 20-year period (a **2001–2020 climate normal**, the
+satellite-rainfall era). Then, by plotting each year against that average, dry
+years (droughts) stand out as dips.
+
+> **Why IMERG, not CHIRPS?** CHIRPS has data holes over the far-western and
+> very small Pacific (Palau reads ~0 mm/yr, Tokelau is empty). GPM **IMERG** is
+> a satellite product with full ocean+island coverage, so the same script works
+> for **every** Pacific country.
 
 ## Step 1 — Set up your country and dates
 ```javascript
 var COUNTRY    = 'Fiji';     // change to your country
-var START_YEAR = 1991;
+var START_YEAR = 2001;
 var END_YEAR   = 2020;
 
 var aoi = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
@@ -29,20 +34,25 @@ Map.centerObject(aoi, 8);
 ```
 
 ## Step 2 — Load and filter the rainfall data
+IMERG's `precipitation` band is a monthly mean **rate** in mm/hour, so we keep
+the hours-in-a-month constant handy to turn it into millimetres.
 ```javascript
-var chirps = ee.ImageCollection('UCSB-CHG/CHIRPS/DAILY')
+var HOURS_PER_MONTH = 730.5;   // 8766 hours/year ÷ 12
+var imerg = ee.ImageCollection('NASA/GPM_L3/IMERG_MONTHLY_V07')
   .select('precipitation')
   .filter(ee.Filter.date(START_YEAR + '-01-01', (END_YEAR + 1) + '-01-01'));
 ```
 
 ## Step 3 — Build the mean annual rainfall map
-We total the rainfall for each year, then average across all years.
+For each year we sum the 12 monthly totals (rate × hours) to get annual
+millimetres, then average across all years.
 ```javascript
 var years = ee.List.sequence(START_YEAR, END_YEAR);
 var annualTotals = ee.ImageCollection.fromImages(
   years.map(function (y) {
-    return chirps.filter(ee.Filter.calendarRange(y, y, 'year'))
-                 .sum().set('year', y);
+    return imerg.filter(ee.Filter.calendarRange(y, y, 'year'))
+                .map(function (img) { return img.multiply(HOURS_PER_MONTH); })
+                .sum().set('year', y);
   })
 );
 var meanAnnualRain = annualTotals.mean().clip(aoi);
@@ -101,13 +111,14 @@ lands in your Google Drive — open it in QGIS or ArcGIS later.
 
 ## Your turn
 1. Change `COUNTRY` to your country and re-run.
-2. **Seasonality:** add `.filter(ee.Filter.calendarRange(11, 4, 'month'))`
-   logic to look at the wet season only — or copy the April-only approach
-   from the original `MeanRainfallTemplate.js`.
+2. **Seasonality:** add a `.filter(ee.Filter.calendarRange(11, 4, 'month'))`
+   step to look at the wet season (Nov–Apr) only, and compare it with the
+   dry season.
 3. Identify the **three driest years** in your country's record.
 
-> **2026 note:** CHIRPS v2 ends after Dec 2026. For future-proof work,
-> swap the dataset ID to the v3 product `UCSB-CHC/CHIRPS/V3/DAILY_SAT`.
+> **Tip:** for any nation (including atolls and territories), use the full
+> script [`scripts/javascript/01_rainfall_chirps.js`](../scripts/javascript.md)
+> — it has the built-in country selector so you just set the friendly name.
 
 ## Check — did it work?
 ✅ A rainfall map clipped to your country (blue = wet, yellow = dry).

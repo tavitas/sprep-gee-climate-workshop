@@ -10,8 +10,8 @@ A quick reference to the terms used across this course.
 : The region you analyse — here, a country boundary or a point + buffer.
 
 **Band**
-: A single layer of values in a dataset (e.g. `precipitation`, `temperature_2m`,
-  `sst`).
+: A single layer of values in a dataset (e.g. `precipitation`,
+  `mean_2m_air_temperature`, `sst`).
 
 **Climate normal**
 : The 30-year average used to describe a "typical" climate. This course uses

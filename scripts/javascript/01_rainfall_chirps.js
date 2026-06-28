@@ -5,30 +5,35 @@
  * GOAL: Map long-term average rainfall for YOUR country and chart how
  *       rainfall has changed year to year (a simple drought signal).
  *
- * DATASET: CHIRPS Daily v2  (UCSB-CHG/CHIRPS/DAILY)
- *   - Band 'precipitation' (mm/day), ~5.5 km, 1981-present (verified to 2026).
- *   - NOTE (2026): CHIRPS v2 production ends after Dec 2026. The newer v3
- *     product is 'UCSB-CHC/CHIRPS/V3/DAILY_SAT'. v2 is used here because it
- *     gives a clean 1991-2020 climate normal.
+ * DATASET: GPM IMERG Monthly v07  (NASA/GPM_L3/IMERG_MONTHLY_V07)
+ *   - Band 'precipitation' = monthly mean rain RATE in mm/HOUR, ~11 km,
+ *     2000-present. We convert the rate to annual millimetres.
+ *   - WHY NOT CHIRPS? CHIRPS has data holes over the far-western / small
+ *     Pacific (e.g. Palau reads ~0 mm/yr, Tokelau is empty). IMERG is a
+ *     satellite product with full Pacific ocean+island coverage, so the
+ *     same script works for EVERY country. (Verified live, June 2026.)
  *
  * TO LOCALISE: change the COUNTRY value below to your nation.
  **********************************************************************/
 
 // ===== 1. COUNTRY SELECTOR (works for every Pacific nation) =========
 // Larger high islands use the real LSIB boundary (note the exact spellings).
-// Small / atoll nations use a point + buffer, because LSIB_SIMPLE drops them.
+// Small / atoll nations & territories use a point + buffer.
 var COUNTRY = 'Fiji';
-var START_YEAR = 1991;
-var END_YEAR   = 2020;            // 1991-2020 = standard 30-year climate normal
+var START_YEAR = 2001;
+var END_YEAR   = 2020;            // 2001-2020 = 20-year climate normal (IMERG era)
 
 var LSIB_NAMES = {
   'Fiji':'Fiji', 'Papua New Guinea':'Papua New Guinea', 'Solomon Islands':'Solomon Is',
-  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia (Fr)'};
+  'Vanuatu':'Vanuatu', 'Samoa':'Samoa', 'New Caledonia':'New Caledonia'};
 var POINT_AOI = {
   'Tonga':[-174.8,-20.0,300000], 'Palau':[134.58,7.5,120000], 'Tuvalu':[178.5,-7.8,350000],
   'Kiribati':[173.0,1.4,500000], 'Nauru':[166.93,-0.52,40000], 'Niue':[-169.87,-19.05,40000],
   'Cook Islands':[-159.78,-21.23,300000], 'Marshall Islands':[169.0,8.0,600000],
-  'Federated States of Micronesia':[158.21,6.92,500000], 'Tokelau':[-171.85,-9.2,60000]};
+  'Federated States of Micronesia':[158.21,6.92,500000], 'Tokelau':[-171.85,-9.2,150000],
+  'American Samoa':[-170.70,-14.30,60000], 'French Polynesia':[-149.5,-17.6,200000],
+  'Guam':[144.79,13.44,60000], 'Northern Mariana Islands':[145.6,15.6,200000],
+  'Wallis & Futuna':[-176.2,-13.3,80000]};
 var aoi, outline;
 if (LSIB_NAMES[COUNTRY]) {
   outline = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
@@ -41,16 +46,23 @@ if (LSIB_NAMES[COUNTRY]) {
 }
 Map.centerObject(aoi, 8);
 
-// ===== 2. LOAD & FILTER CHIRPS ====================================
-var chirps = ee.ImageCollection('UCSB-CHG/CHIRPS/DAILY')
+// ===== 2. LOAD & FILTER IMERG =====================================
+// 'precipitation' is a monthly mean RATE in mm/hour. Multiply by the hours
+// in a month (~730.5) to turn each monthly image into millimetres.
+var HOURS_PER_MONTH = 730.5;     // 8766 hours/year ÷ 12
+var imerg = ee.ImageCollection('NASA/GPM_L3/IMERG_MONTHLY_V07')
   .select('precipitation')
   .filter(ee.Filter.date(START_YEAR + '-01-01', (END_YEAR + 1) + '-01-01'));
 
 // ===== 3. MEAN ANNUAL RAINFALL (climatology) ======================
+// For each year, sum the 12 monthly totals to get annual mm, then average
+// across all years.
 var years = ee.List.sequence(START_YEAR, END_YEAR);
 var annualTotals = ee.ImageCollection.fromImages(
   years.map(function (y) {
-    return chirps.filter(ee.Filter.calendarRange(y, y, 'year')).sum().set('year', y);
+    return imerg.filter(ee.Filter.calendarRange(y, y, 'year'))
+                .map(function (img) { return img.multiply(HOURS_PER_MONTH); })
+                .sum().set('year', y);     // sum of 12 months = annual mm
   })
 );
 var meanAnnualRain = annualTotals.mean().clip(aoi);

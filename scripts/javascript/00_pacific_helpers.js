@@ -9,13 +9,13 @@
  * getCountry('Fiji') which returns an area of interest (AOI) for any
  * Pacific nation.
  *
- * IMPORTANT — why two methods? (verified June 2026)
- * The global boundary layer USDOS/LSIB_SIMPLE/2017 "excludes medium and
- * smaller islands" and uses US State Department spellings (e.g. it stores
- * 'Solomon Is', not 'Solomon Islands'). So:
+ * IMPORTANT — why two methods? (verified live, June 2026)
+ * All 21 SPREP PICTs DO have an entry in USDOS/LSIB_SIMPLE/2017, but it uses
+ * US State Department spellings (e.g. 'Solomon Is', not 'Solomon Islands')
+ * and its polygons for tiny atolls are coarse/imprecise. So:
  *   • Larger high islands  -> we use the real LSIB outline.
- *   • Small / atoll nations -> LSIB has no polygon, so we use a point +
- *     buffer (a circle) that always works for clipping gridded data.
+ *   • Small / atoll nations & territories -> we use a point + buffer (a
+ *     circle) that reliably clips the coarse climate grids.
  * getCountry() handles both automatically.
  **********************************************************************/
 
@@ -32,11 +32,13 @@ var LSIB_NAMES = {
   'Solomon Islands': 'Solomon Is',          // note the State Dept spelling
   'Vanuatu': 'Vanuatu',
   'Samoa': 'Samoa',
-  'New Caledonia': 'New Caledonia (Fr)'
+  'New Caledonia': 'New Caledonia'          // exact LSIB country_na (verified 2026)
 };
 
-// Small / low-lying / scattered nations that LSIB_SIMPLE drops.
-// [longitude, latitude, buffer_radius_in_metres] centred on the main group.
+// Small / low-lying / scattered nations + territories. Point + buffer is more
+// reliable than the LSIB polygon for clipping the coarse (5-28 km) climate
+// grids over tiny atolls. [longitude, latitude, buffer_radius_in_metres].
+// Together with LSIB_NAMES this covers all 21 SPREP PICTs.
 var POINT_AOI = {
   'Tonga':           [-174.80, -20.00, 300000],
   'Palau':           [ 134.58,   7.50, 120000],
@@ -47,8 +49,12 @@ var POINT_AOI = {
   'Cook Islands':    [-159.78, -21.23, 300000],   // southern group
   'Marshall Islands':[ 169.00,   8.00, 600000],
   'Federated States of Micronesia': [158.21, 6.92, 500000], // centred on Pohnpei
-  'Tokelau':         [-171.85,  -9.20,  60000],
-  'American Samoa':  [-170.70, -14.30,  60000]
+  'Tokelau':         [-171.85,  -9.20, 150000],   // 3 tiny atolls — wide buffer
+  'American Samoa':  [-170.70, -14.30,  60000],
+  'French Polynesia':[-149.50, -17.60, 200000],   // centred on the Society Islands
+  'Guam':            [ 144.79,  13.44,  60000],
+  'Northern Mariana Islands': [145.60, 15.60, 200000], // Saipan / Tinian / Rota
+  'Wallis & Futuna': [-176.20, -13.30,  80000]
 };
 
 /**

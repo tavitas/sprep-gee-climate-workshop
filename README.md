@@ -23,8 +23,8 @@ contexts:
 
 | Theme | What you map | Main dataset |
 |-------|--------------|--------------|
-| Rainfall & drought | Long-term rainfall and dry-year signals | CHIRPS |
-| Temperature & heat | Where heat sits + the warming trend | ERA5-Land, MODIS |
+| Rainfall & drought | Long-term rainfall and dry-year signals | GPM IMERG |
+| Temperature & heat | Where heat sits + the warming trend | ERA5, MODIS |
 | Ocean & reefs | Sea-surface temperature & bleaching heat stress | NOAA OISST |
 | Sea level & coast | Low-lying land exposed to sea-level rise | NASADEM, JRC Water |
 

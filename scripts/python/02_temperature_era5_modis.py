@@ -9,7 +9,9 @@ Produces (a) an interactive MODIS land-surface-temperature map and
 (b) a saved warming-trend chart from ERA5-Land air temperature.
 
 Datasets:
-  ERA5-Land Daily (ECMWF/ERA5_LAND/DAILY_AGGR) band temperature_2m (Kelvin)
+  ERA5 Monthly (ECMWF/ERA5/MONTHLY) band mean_2m_air_temperature (Kelvin),
+    ~28 km, 1979 to 2020-06. Global reanalysis (covers ocean + atolls), so it
+    returns a value for EVERY country, unlike the land-only ERA5-Land.
   MODIS LST (MODIS/061/MOD11A1) band LST_Day_1km, scale 0.02 (Kelvin)
 """
 
@@ -47,17 +49,17 @@ Map.addLayer(outline.style(color='black', fillColor='00000000', width=1),
 Map.add_colorbar(vis, label='Land surface temperature (°C)')
 Map   # displays in a notebook
 
-# ===== 3. WARMING TREND (ERA5-Land air temperature) =====
-START_YEAR, END_YEAR = 1991, 2024
+# ===== 3. WARMING TREND (ERA5 air temperature) =====
+START_YEAR, END_YEAR = 1991, 2019   # ERA5 Monthly ends 2020-06; 2019 = last full year
 years = ee.List.sequence(START_YEAR, END_YEAR)
 
 def annual_mean_temp(y):
-    img = (ee.ImageCollection('ECMWF/ERA5_LAND/DAILY_AGGR')
-           .select('temperature_2m')
+    img = (ee.ImageCollection('ECMWF/ERA5/MONTHLY')
+           .select('mean_2m_air_temperature')
            .filter(ee.Filter.calendarRange(y, y, 'year'))
            .mean()
            .subtract(273.15))
-    val = img.reduceRegion(ee.Reducer.mean(), aoi, 11000).get('temperature_2m')
+    val = img.reduceRegion(ee.Reducer.mean(), aoi, 28000).get('mean_2m_air_temperature')
     return ee.Feature(None, {'year': y, 'temp': val})
 
 fc = ee.FeatureCollection(years.map(annual_mean_temp))
