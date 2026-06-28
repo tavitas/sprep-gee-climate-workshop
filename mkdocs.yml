@@ -52,7 +52,7 @@ theme:
 nav:
   - Home: index.md
   - About:
-      - The CIS-Pac5 programme: about/cis-pac5.md
+      - The UNEP CIS-Pac5 programme: about/cis-pac5.md
   - Course details:
       - Overview: course-details/overview.md
       - Navigating this course: course-details/navigation.md

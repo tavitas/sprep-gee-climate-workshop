@@ -1,11 +1,11 @@
 # About the programme — UNEP CIS-Pac5
 
-This training course is delivered by **SPREP** as part of the **UN Environment
-Programme (UNEP) / Green Climate Fund (GCF) CIS-Pac5 programme**. This page
-explains what that programme is and where SPREP's component — and this
-workshop — fit within it.
+This training course is delivered by **SPREP** as part of the **UNEP CIS-Pac5
+programme**, funded by the **Green Climate Fund (GCF)** and implemented by the
+**UN Environment Programme (UNEP)**. This page explains what that programme is
+and where SPREP's component — and this workshop — fit within it.
 
-## CIS-Pac5 at a glance
+## UNEP CIS-Pac5 at a glance
 
 > **Enhancing Climate Information and Knowledge Services for resilience in 5
 > island countries of the Pacific Ocean**
