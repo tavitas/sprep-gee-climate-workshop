@@ -24,23 +24,24 @@ country.
 
 1. Create a free Earth Engine account linked to a Google Cloud project.
 2. Find your way around the Earth Engine Code Editor.
-3. Load and clip global climate datasets to your country.
-4. Map **rainfall and drought** (GPM IMERG).
-5. Map **temperature and heat** and the warming trend (ERA5, MODIS).
-6. Map **sea-surface temperature** and reef heat stress (NOAA OISST).
-7. Flag **low-lying coast** exposed to sea-level rise (NASADEM, JRC Surface Water).
-8. Export your results for use in QGIS / ArcGIS.
+3. Load and clip global datasets to your country.
+4. Map **coral reef habitats** — coral, seagrass and reef zones (Allen Coral Atlas).
+5. Map **rainfall and drought** (GPM IMERG).
+6. Map **temperature and heat** and the warming trend (ERA5, MODIS).
+7. Map **sea-surface temperature** and reef heat stress (NOAA OISST).
+8. Flag **low-lying coast** exposed to sea-level rise (NASADEM, JRC Surface Water).
+9. Export your results for use in QGIS / ArcGIS.
 
 ## How it's structured
 
   - **Google Earth Engine** — Earth Engine concepts and the datasets we use.
-- **Exercises** — five hands-on activities that build on each other.
+- **Exercises** — six hands-on activities that build on each other.
 - **Scripts & code** — every script, ready to copy, in JavaScript and Python.
 - **Resources** — glossary, dataset reference, downloads and a validation report.
 
 ## Time required
 
-About 2.5–3 hours for all five exercises, or one workshop day with discussion
+About 3–3.5 hours for all six exercises, or one workshop day with discussion
 and your own data.
 
 ## Acknowledgements

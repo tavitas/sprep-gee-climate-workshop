@@ -28,8 +28,37 @@ boundary. The LSIB outline becomes your **Area of Interest (AOI)**.
 > polygons can be imprecise. The workshop scripts handle this automatically —
 > see the [Dataset quick reference](reference.md) for the full country-name table.
 
-**Used in:** **Exercise 2** (setup), **3** (rainfall), **4** (temperature),
-**5** (ocean & coast).
+**Used in:** **Exercise 2** (setup), **3** (coral reefs), **4** (rainfall),
+**5** (temperature), **6** (ocean & coast).
+
+---
+
+## Marine — Coral reefs
+
+### Allen Coral Atlas
+
+| | |
+|---|---|
+| **Dataset ID** | [`ACA/reef_habitat/v2_0`](https://developers.google.com/earth-engine/datasets/catalog/ACA_reef_habitat_v2_0) |
+| **Source** | Allen Coral Atlas / Arizona State University & partners |
+| **Resolution** | 5 m |
+| **Time span** | mapped 2018–2021 (single image) |
+
+**What it is:** A satellite-derived map of the world's shallow coral reefs.
+A single `ee.Image` with three bands: `benthic` (seafloor cover — Coral/Algae,
+Seagrass, Sand, Rubble, Rock, Microalgal Mats), `geomorphic` (reef zones — reef
+flat, crest, slope, lagoon, patch reef) and `reef_mask` (1 = reef). Coverage is
+excellent for the Pacific (verified live for every SPREP country, June 2026).
+
+**What we derive from it:**
+- A **benthic habitat map** showing where the coral and seagrass are.
+- A **geomorphic zones map** showing the reef's structure.
+- The **area of coral and seagrass habitat** (km²) for your country.
+
+**Key bands:** `benthic`, `geomorphic`, `reef_mask` (integer class codes —
+remap to a palette; see the script).
+
+**Used in:** **Exercise 3 — Coral Reef Habitats**.
 
 ---
 
@@ -57,7 +86,7 @@ including Palau and Tokelau, where CHIRPS is empty. (Verified live, June 2026.)
 the hours in a month (~730.5) to get millimetres, then sum the 12 months for an
 annual total.
 
-**Used in:** **Exercise 3 — Rainfall & Drought**.
+**Used in:** **Exercise 4 — Rainfall & Drought**.
 
 ---
 
@@ -86,7 +115,7 @@ country, including atolls where the land-only ERA5-Land product is blank.
 
 **Key band:** `mean_2m_air_temperature` (Kelvin — subtract 273.15 for °C).
 
-**Used in:** **Exercise 4 — Temperature & Heat**.
+**Used in:** **Exercise 5 — Temperature & Heat**.
 
 ---
 
@@ -108,7 +137,7 @@ awareness.
 
 **Key band:** `LST_Day_1km` (Kelvin ×0.02 scale factor; subtract 273.15 for °C).
 
-**Used in:** **Exercise 4 — Temperature & Heat**.
+**Used in:** **Exercise 5 — Temperature & Heat**.
 
 ---
 
@@ -134,7 +163,7 @@ ocean heat stress.
 
 **Key bands:** `sst` (×0.01 → °C), `anom` (×0.01 → °C anomaly vs 1971–2000).
 
-**Used in:** **Exercise 5 — Ocean, Reefs & Coast**.
+**Used in:** **Exercise 6 — Ocean & Coast**.
 
 ---
 
@@ -162,7 +191,7 @@ vulnerable to sea-level rise and storm surge.
 > **Note on atolls:** 30 m DEMs are coarse for very flat atolls. Treat this
 > as an awareness / screening tool, not a survey-grade flood model.
 
-**Used in:** **Exercise 5 — Ocean, Reefs & Coast**.
+**Used in:** **Exercise 6 — Ocean & Coast**.
 
 ---
 
@@ -184,7 +213,7 @@ layer for coastal exposure assessment.
 
 **Key band:** `occurrence` (percentage of time water was detected).
 
-**Used in:** **Exercise 5 — Ocean, Reefs & Coast**.
+**Used in:** **Exercise 6 — Ocean & Coast**.
 
 ---
 
@@ -192,13 +221,14 @@ layer for coastal exposure assessment.
 
 | Dataset | ID | Type | Resolution | Key band(s) | Exercise |
 |---------|----|------|:----------:|-------------|:--------:|
-| LSIB | `USDOS/LSIB_SIMPLE/2017` | vector | — | `country_na` | 2–5 |
-| GPM IMERG | `NASA/GPM_L3/IMERG_MONTHLY_V07` | image | ~11 km | `precipitation` | 3 |
-| ERA5 Monthly | `ECMWF/ERA5/MONTHLY` | image | ~28 km | `mean_2m_air_temperature` | 4 |
-| MODIS LST | `MODIS/061/MOD11A1` | image | ~1 km | `LST_Day_1km` | 4 |
-| OISST v2.1 | `NOAA/CDR/OISST/V2_1` | image | 0.25° | `sst`, `anom` | 5 |
-| NASADEM | `NASA/NASADEM_HGT/001` | image | ~30 m | `elevation` | 5 |
-| JRC Water | `JRC/GSW1_4/GlobalSurfaceWater` | image | 30 m | `occurrence` | 5 |
+| LSIB | `USDOS/LSIB_SIMPLE/2017` | vector | — | `country_na` | 2–6 |
+| Allen Coral Atlas | `ACA/reef_habitat/v2_0` | image | 5 m | `benthic`, `geomorphic`, `reef_mask` | 3 |
+| GPM IMERG | `NASA/GPM_L3/IMERG_MONTHLY_V07` | image | ~11 km | `precipitation` | 4 |
+| ERA5 Monthly | `ECMWF/ERA5/MONTHLY` | image | ~28 km | `mean_2m_air_temperature` | 5 |
+| MODIS LST | `MODIS/061/MOD11A1` | image | ~1 km | `LST_Day_1km` | 5 |
+| OISST v2.1 | `NOAA/CDR/OISST/V2_1` | image | 0.25° | `sst`, `anom` | 6 |
+| NASADEM | `NASA/NASADEM_HGT/001` | image | ~30 m | `elevation` | 6 |
+| JRC Water | `JRC/GSW1_4/GlobalSurfaceWater` | image | 30 m | `occurrence` | 6 |
 
 For scale factors, unit conversions and the official country-name table, see
 the [Dataset quick reference](reference.md) under **Google Earth Engine**.

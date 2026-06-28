@@ -1,4 +1,4 @@
-# Exercise 5 — Ocean, Reefs & Coast (Capstone)
+# Exercise 6 — Ocean & Coast (Capstone)
 
 **Goal:** Bring it all together. Map sea surface temperature (SST) around
 your islands, chart the SST anomalies that stress coral reefs, and flag
@@ -14,7 +14,7 @@ localised climate map for **your** country.
 [`03_sst_reef_heat`](../scripts/javascript.md) ·
 [`04_coastal_exposure`](../scripts/javascript.md)
 
-**Time:** ~40 minutes · **Before you start:** finish Exercise 4.
+**Time:** ~40 minutes · **Before you start:** finish Exercise 2.
 
 ---
 

@@ -1,4 +1,4 @@
-# Exercise 3 — Rainfall & Drought
+# Exercise 4 — Rainfall & Drought
 
 **Goal:** Make a map of long-term average rainfall for your country, and a
 chart that reveals which years were unusually dry (drought) or wet.
@@ -8,6 +8,7 @@ chart that reveals which years were unusually dry (drought) or wet.
 [`../scripts/javascript.md`](../scripts/javascript.md)
 
 **Time:** ~30 minutes · **Before you start:** finish Exercise 2.
+Exercises 4–6 are independent — do them in any order.
 
 ---
 
@@ -135,4 +136,4 @@ lands in your Google Drive — open it in QGIS or ArcGIS later.
 ✅ A line chart of yearly rainfall with visible dry-year dips.
 ✅ (Optional) an export task that completes in the Tasks tab.
 
-**Next:** [Exercise 4 — Temperature & heat](temperature.md)
+**Next:** [Exercise 5 — Temperature & heat](temperature.md)

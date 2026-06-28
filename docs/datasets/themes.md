@@ -12,7 +12,7 @@ against that average so **drought years show up as dips**.
 - **Dataset:** GPM IMERG Monthly (`NASA/GPM_L3/IMERG_MONTHLY_V07`), ~11 km,
   2000–present. Full Pacific ocean+island coverage — works for every country.
 - **You make:** a mean annual rainfall map + a year-by-year rainfall chart.
-- **Go to:** [Exercise 3](../exercises/rainfall.md).
+- **Go to:** [Exercise 4](../exercises/rainfall.md).
 
 ## :material-thermometer: Temperature & heat
 
@@ -24,7 +24,7 @@ Two datasets, two questions: *where* is it hottest, and *how fast* is it warming
   the long-term warming trend. This *global* reanalysis covers ocean as well as
   land, so the trend works for atolls too.
 - **You make:** a heat map + an air-temperature trend chart + a warming map.
-- **Go to:** [Exercise 4](../exercises/temperature.md).
+- **Go to:** [Exercise 5](../exercises/temperature.md).
 
 !!! warning "Both are in Kelvin"
     Subtract 273.15 to get °C. MODIS LST also needs a ×0.02 scale factor first.
@@ -38,7 +38,12 @@ sustained above about **+1 °C** are coral-bleaching heat stress.
   Bands `sst` and `anom` (×0.01 → °C).
 - **You make:** an SST map + a monthly anomaly chart that reveals marine
   heatwaves (e.g. the strong 2016 El Niño event).
-- **Go to:** [Exercise 5](../exercises/ocean-coast.md).
+- **Go to:** [Exercise 6](../exercises/ocean-coast.md).
+
+!!! tip "See the reefs themselves"
+    To map the coral, seagrass and reef structures around your islands (from the
+    Allen Coral Atlas), start with [Exercise 3 — Coral reef
+    habitats](../exercises/coral-reefs.md).
 
 ## :material-image-filter-hdr: Sea level & low-lying coast
 
@@ -48,7 +53,7 @@ surface water already sits.
 - **Datasets:** NASADEM elevation (`NASA/NASADEM_HGT/001`, ~30 m) and JRC Global
   Surface Water (`JRC/GSW1_4/GlobalSurfaceWater`, 30 m).
 - **You make:** a map of land below 5 m + the exposed area in km².
-- **Go to:** [Exercise 5](../exercises/ocean-coast.md).
+- **Go to:** [Exercise 6](../exercises/ocean-coast.md).
 
 !!! note "Atolls need care"
     30 m elevation data is coarse for very flat atolls. Treat the coastal layer

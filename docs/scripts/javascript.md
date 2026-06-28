@@ -35,3 +35,12 @@ Reusable country boundaries (hybrid LSIB + point/buffer), legends and palettes.
 ```javascript title="04_coastal_exposure.js"
 --8<-- "scripts/javascript/04_coastal_exposure.js"
 ```
+
+## 5 · Coral reef habitats — `05_coral_reefs_aca.js`
+
+The companion script for [Exercise 3 — Coral reef habitats](../exercises/coral-reefs.md)
+(Allen Coral Atlas).
+
+```javascript title="05_coral_reefs_aca.js"
+--8<-- "scripts/javascript/05_coral_reefs_aca.js"
+```

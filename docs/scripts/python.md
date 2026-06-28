@@ -5,7 +5,7 @@ run the setup once (easiest in [Google Colab](https://colab.research.google.com)
 then run any script below. They produce the same maps plus saved PNG charts.
 
 !!! note "Shared helper"
-    `01`–`04` import a small country selector from `_pacific_aoi.py` (shown last).
+    `01`–`05` import a small country selector from `_pacific_aoi.py` (shown last).
     Keep all the Python files in the same folder.
 
 ## Setup (run once) — `00_setup_geemap.py`
@@ -36,6 +36,15 @@ then run any script below. They produce the same maps plus saved PNG charts.
 
 ```python title="04_coastal_exposure.py"
 --8<-- "scripts/python/04_coastal_exposure.py"
+```
+
+## 5 · Coral reef habitats — `05_coral_reefs_aca.py`
+
+The companion script for [Exercise 3 — Coral reef habitats](../exercises/coral-reefs.md)
+(Allen Coral Atlas).
+
+```python title="05_coral_reefs_aca.py"
+--8<-- "scripts/python/05_coral_reefs_aca.py"
 ```
 
 ## Shared country selector — `_pacific_aoi.py`

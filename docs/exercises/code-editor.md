@@ -139,4 +139,4 @@ names resolve in your account.
 ✅ Clicking with the Inspector shows properties.
 ✅ Your script is saved in the Scripts panel.
 
-**Next:** [Exercise 3 — Rainfall & drought](rainfall.md)
+**Next:** [Exercise 3 — Coral reef habitats](coral-reefs.md)

@@ -28,7 +28,7 @@ contexts:
 | Ocean & reefs | Sea-surface temperature & bleaching heat stress | NOAA OISST |
 | Sea level & coast | Low-lying land exposed to sea-level rise | NASADEM, JRC Water |
 
-**Time required:** ~2.5–3 hours for the five exercises, or one workshop day with
+**Time required:** ~3–3.5 hours for the six exercises, or one workshop day with
 discussion and your own data. No programming experience is assumed.
 
 ---
@@ -44,7 +44,7 @@ and is built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/
 | [Home](https://tavitas.github.io/sprep-gee-climate-workshop/) | Course overview, the four themes, where to start |
 | [Course details](https://tavitas.github.io/sprep-gee-climate-workshop/course-details/overview/) | Overview, navigation guide, slide deck & cheat sheet |
 | [Climate datasets](https://tavitas.github.io/sprep-gee-climate-workshop/datasets/what-is-gee/) | What GEE is, the themes, and a dataset quick-reference |
-| [Exercises](https://tavitas.github.io/sprep-gee-climate-workshop/exercises/account-setup/) | Five hands-on activities, building step by step |
+| [Exercises](https://tavitas.github.io/sprep-gee-climate-workshop/exercises/account-setup/) | Six hands-on activities, building step by step |
 | [Scripts & code](https://tavitas.github.io/sprep-gee-climate-workshop/scripts/) | Every script, in JavaScript and Python, ready to copy |
 | [Resources](https://tavitas.github.io/sprep-gee-climate-workshop/resources/glossary/) | Glossary and a validation report |
 
@@ -58,7 +58,7 @@ sprep-gee-climate-workshop/
 │  ├─ index.md             # home
 │  ├─ course-details/      # overview, navigation, downloads
 │  ├─ datasets/            # what is GEE, themes, dataset reference
-│  ├─ exercises/           # the five hands-on exercises
+│  ├─ exercises/           # the six hands-on exercises
 │  ├─ scripts/             # script reference pages (embed the real scripts)
 │  ├─ resources/           # glossary, validation report
 │  └─ downloads/           # slide deck + cheat sheet (PDF, PPTX)

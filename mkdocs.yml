@@ -63,9 +63,10 @@ nav:
   - Exercises:
       - "1 · Set up your account": exercises/account-setup.md
       - "2 · Code Editor basics": exercises/code-editor.md
-      - "3 · Rainfall & drought": exercises/rainfall.md
-      - "4 · Temperature & heat": exercises/temperature.md
-      - "5 · Ocean, reefs & coast": exercises/ocean-coast.md
+      - "3 · Coral reef habitats": exercises/coral-reefs.md
+      - "4 · Rainfall & drought": exercises/rainfall.md
+      - "5 · Temperature & heat": exercises/temperature.md
+      - "6 · Ocean & coast": exercises/ocean-coast.md
   - Scripts & code:
       - Using the scripts: scripts/index.md
       - JavaScript (Code Editor): scripts/javascript.md

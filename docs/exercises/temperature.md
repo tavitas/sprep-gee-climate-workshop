@@ -1,4 +1,4 @@
-# Exercise 4 — Temperature & Heat
+# Exercise 5 — Temperature & Heat
 
 **Goal:** Show *where* it is hottest across your country, and reveal the
 *long-term warming trend* in air temperature.
@@ -11,7 +11,7 @@
 **Companion script:**
 [`../scripts/javascript.md`](../scripts/javascript.md)
 
-**Time:** ~30 minutes · **Before you start:** finish Exercise 3.
+**Time:** ~30 minutes · **Before you start:** finish Exercise 2.
 
 ---
 
@@ -121,4 +121,4 @@ Red = areas that have warmed.
 ✅ An air-temperature chart with an upward red trend line.
 ✅ A warming-difference map (mostly red).
 
-**Next:** [Exercise 5 — Ocean, reefs & coast (capstone)](ocean-coast.md)
+**Next:** [Exercise 6 — Ocean & coast (capstone)](ocean-coast.md)

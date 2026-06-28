@@ -28,11 +28,11 @@ Island Countries and Territories — American Samoa, Cook Islands, Federated Sta
 
     [:octicons-arrow-right-24: Set up your account](exercises/account-setup.md)
 
--   :material-book-open-variant:{ .lg .middle } __Five exercises__
+-   :material-book-open-variant:{ .lg .middle } __Six exercises__
 
     ---
 
-    Build skills step by step: account → rainfall → temperature → ocean & coast.
+    Build skills step by step: account → coral reefs → rainfall → temperature → ocean & coast.
 
     [:octicons-arrow-right-24: Browse the exercises](exercises/account-setup.md)
 

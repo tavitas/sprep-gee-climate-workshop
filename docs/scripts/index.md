@@ -25,6 +25,7 @@ Google Colab or a notebook.
 | File | Theme | Output |
 |------|-------|--------|
 | `00_pacific_helpers.js` | — | Country boundaries (hybrid), legends, palettes |
+| `05_coral_reefs_aca` | Coral reef habitats | Benthic & geomorphic reef map + habitat area (km²) |
 | `01_rainfall_chirps` | Rainfall & drought | Mean annual rainfall map + drought chart |
 | `02_temperature_era5_modis` | Temperature & heat | Heat map + warming trend chart + warming map |
 | `03_sst_reef_heat` | Ocean & reefs | SST map + SST anomaly time series |
