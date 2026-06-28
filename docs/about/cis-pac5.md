@@ -115,11 +115,6 @@ Science for Sustainable Development**.
 
 ## Contact
 
-**Jochem Zoetelief** — Senior Programme Officer, Climate Services and Capacity
-Building Unit, Science Division, UN Environment Programme ·
-[jochem.zoetelief@un.org](mailto:jochem.zoetelief@un.org)
-
----
-
-*Source: UNEP / GCF Programme Brief, “Enhancing Climate Information and Knowledge
-Services for resilience in 5 island countries of the Pacific Ocean” (FP147).*
+**Tavita Su'a** — Pacific Environment Portal Systems Developer and Analyst,
+Environmental Governance, Secretariat of the Pacific Regional Environment
+Programme (SPREP) · [tavitas@sprep.org](mailto:tavitas@sprep.org)
