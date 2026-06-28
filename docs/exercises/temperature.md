@@ -28,6 +28,16 @@ Both store temperature in **Kelvin**, so we subtract 273.15 to get °C.
 
 ## Step 1 — Country and palette
 ```javascript
+// IMPORTANT — in this simplified snippet, COUNTRY must match the boundary
+// layer's EXACT spelling (US State Dept names). The 14 SPREP members are:
+//   'Fiji'   'Papua New Guinea'   'Vanuatu'   'Samoa'   'Tonga'   'Tuvalu'
+//   'Kiribati'   'Nauru'   'Niue'   'Palau'
+//   'Solomon Is'                <- NOT 'Solomon Islands'
+//   'Cook Is'                   <- NOT 'Cook Islands'
+//   'Marshall Is'               <- NOT 'Marshall Islands'
+//   'Fed States of Micronesia'  <- NOT 'FSM' or 'Micronesia'
+// (The full downloadable script accepts the plain name, e.g. 'Solomon Islands',
+//  and handles atoll nations automatically.)
 var COUNTRY = 'Samoa';
 var aoi = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
             .filter(ee.Filter.eq('country_na', COUNTRY));

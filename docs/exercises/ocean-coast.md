@@ -24,6 +24,16 @@ localised climate map for **your** country.
 Ocean data needs an offshore area, not just the land outline. We grow the
 country's bounding box by ~150 km.
 ```javascript
+// IMPORTANT — in this simplified snippet, COUNTRY must match the boundary
+// layer's EXACT spelling (US State Dept names). The 14 SPREP members are:
+//   'Fiji'   'Papua New Guinea'   'Vanuatu'   'Samoa'   'Tonga'   'Tuvalu'
+//   'Kiribati'   'Nauru'   'Niue'   'Palau'
+//   'Solomon Is'                <- NOT 'Solomon Islands'
+//   'Cook Is'                   <- NOT 'Cook Islands'
+//   'Marshall Is'               <- NOT 'Marshall Islands'
+//   'Fed States of Micronesia'  <- NOT 'FSM' or 'Micronesia'
+// (The full downloadable script accepts the plain name, e.g. 'Solomon Islands',
+//  and handles atoll nations automatically.)
 var COUNTRY = 'Fiji';
 var land = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
              .filter(ee.Filter.eq('country_na', COUNTRY));

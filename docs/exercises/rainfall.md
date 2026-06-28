@@ -24,6 +24,16 @@ years (droughts) stand out as dips.
 
 ## Step 1 — Set up your country and dates
 ```javascript
+// IMPORTANT — in this simplified snippet, COUNTRY must match the boundary
+// layer's EXACT spelling (US State Dept names). The 14 SPREP members are:
+//   'Fiji'   'Papua New Guinea'   'Vanuatu'   'Samoa'   'Tonga'   'Tuvalu'
+//   'Kiribati'   'Nauru'   'Niue'   'Palau'
+//   'Solomon Is'                <- NOT 'Solomon Islands'
+//   'Cook Is'                   <- NOT 'Cook Islands'
+//   'Marshall Is'               <- NOT 'Marshall Islands'
+//   'Fed States of Micronesia'  <- NOT 'FSM' or 'Micronesia'
+// (The full downloadable script accepts the plain name, e.g. 'Solomon Islands',
+//  and handles atoll nations automatically.)
 var COUNTRY    = 'Fiji';     // change to your country
 var START_YEAR = 2001;
 var END_YEAR   = 2020;

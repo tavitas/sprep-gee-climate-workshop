@@ -30,15 +30,16 @@ Output appears in the **Console** on the right.
 We use the global **LSIB** boundary dataset. Change `'Samoa'` to your
 country. Run it:
 ```javascript
-//    All 21 SPREP Pacific Island nations and territories:
-//    ── All 21 have LSIB entries (use exact LSIB spelling):
-//    'Fiji', 'Samoa', 'Vanuatu', 'Papua New Guinea', 'Solomon Is',
-//    'New Caledonia', 'Tonga', 'Kiribati', 'Nauru', 'Tuvalu',
-//    'Palau', 'Marshall Is', 'Fed States of Micronesia',
-//    'Cook Is', 'Niue', 'American Samoa', 'French Polynesia',
-//    'Guam', 'Northern Mariana Is', 'Tokelau', 'Wallis & Futuna'
-//    ── Small island/atoll nations may benefit from point+buffer
-//    (LSIB polygons can be imprecise for tiny atolls; see below)
+// IMPORTANT — type the name EXACTLY as the LSIB boundary layer stores it
+// (US State Dept spellings). The 14 SPREP member countries are:
+//   'Fiji'   'Papua New Guinea'   'Vanuatu'   'Samoa'   'Tonga'   'Tuvalu'
+//   'Kiribati'   'Nauru'   'Niue'   'Palau'
+//   'Solomon Is'                <- NOT 'Solomon Islands'
+//   'Cook Is'                   <- NOT 'Cook Islands'
+//   'Marshall Is'               <- NOT 'Marshall Islands'
+//   'Fed States of Micronesia'  <- NOT 'FSM' or 'Micronesia'
+// (Other PICTs/territories also have LSIB entries — see the table below. Tiny
+//  atolls clip best with the point+buffer method shown later.)
 var countryName = 'Samoa';
 
 // 2. Load the global boundaries and keep just your country
