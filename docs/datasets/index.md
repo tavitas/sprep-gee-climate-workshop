@@ -49,7 +49,7 @@ boundary. The LSIB outline becomes your **Area of Interest (AOI)**.
 A single `ee.Image` with three bands: `benthic` (seafloor cover — Coral/Algae,
 Seagrass, Sand, Rubble, Rock, Microalgal Mats), `geomorphic` (reef zones — reef
 flat, crest, slope, lagoon, patch reef) and `reef_mask` (1 = reef). Coverage is
-excellent for the Pacific (verified live for every SPREP country, June 2026).
+excellent for the Pacific.
 
 **What we derive from it:**
 - A **benthic habitat map** showing where the coral and seagrass are.

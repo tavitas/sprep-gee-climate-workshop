@@ -15,8 +15,7 @@ Dataset: Allen Coral Atlas (ACA/reef_habitat/v2_0)
                  Microalgal Mats)
     'geomorphic' reef zone (reef flat, crest, slope, lagoon, patch reef...)
     'reef_mask'  1 = reef, 0 = not reef
-  Covers the world's shallow tropical reefs — verified live for every SPREP
-  country (June 2026).
+  Covers the world's shallow tropical reefs.
 """
 
 import ee
