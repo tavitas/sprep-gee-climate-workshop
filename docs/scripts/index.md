@@ -4,6 +4,11 @@ Every script in this course is **copy-paste ready**. The JavaScript runs in the
 Earth Engine Code Editor with nothing to install; the Python versions run in
 Google Colab or a notebook.
 
+!!! tip "Stuck, or want to adapt a script?"
+    The Code Editor has a built-in **AI assistant** that can write, explain and
+    debug scripts from a plain-English request — see
+    [AI assistant (Ask)](ai-assistant.md).
+
 ## JavaScript (recommended for the workshop)
 
 1. Open the Code Editor at

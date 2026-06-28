@@ -16,8 +16,10 @@ When you open https://code.earthengine.google.com you see four areas:
 - **Right — Console:** where `print()` output and charts appear.
 - **Bottom — Map:** where layers you add appear.
 
-There are three tabs top-right: **Inspector** (click the map to read pixel
-values), **Console** (text output), and **Tasks** (exports).
+There are tabs top-right: **Inspector** (click the map to read pixel
+values), **Console** (text output), **Tasks** (exports), and **Ask** — a
+built-in **AI assistant** that can write, explain and debug scripts for you.
+See [AI assistant (Ask)](../scripts/ai-assistant.md).
 
 ## Step 1 — Print a message
 Type this and click **Run**:
