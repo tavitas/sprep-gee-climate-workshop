@@ -62,6 +62,10 @@ nav:
       - What is Earth Engine?: datasets/what-is-gee.md
       - Workshop themes: datasets/themes.md
       - Dataset quick reference: datasets/reference.md
+  - Google Colab:
+      - What is Google Colab?: colab/index.md
+      - Set up Colab & Earth Engine: colab/setup.md
+      - Run the workshop scripts: colab/run-scripts.md
   - Exercises:
       - "1 · Set up your account": exercises/account-setup.md
       - "2 · Code Editor basics": exercises/code-editor.md

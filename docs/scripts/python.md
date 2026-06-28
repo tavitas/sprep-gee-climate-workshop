@@ -4,6 +4,11 @@ The Code Editor needs nothing installed. To use Earth Engine from **Python**,
 run the setup once (easiest in [Google Colab](https://colab.research.google.com))
 then run any script below. They produce the same maps plus saved PNG charts.
 
+!!! tip "New to Colab? Start in the Google Colab section"
+    See [**Set up Colab & Earth Engine**](../colab/setup.md) for the step-by-step
+    notebook setup, and [**Run the workshop scripts**](../colab/run-scripts.md)
+    for how to load the helper and run the code below in Colab.
+
 !!! note "Shared helper"
     `01`–`05` import a small country selector from `_pacific_aoi.py` (shown last).
     Keep all the Python files in the same folder.
