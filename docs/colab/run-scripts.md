@@ -4,24 +4,27 @@ Once your notebook is [set up](setup.md), you can run any of the Python versions
 of the workshop scripts. They produce the **same maps** as the JavaScript
 versions, plus **saved PNG charts**.
 
-## Step 1 — Load the shared country selector
-Scripts `01`–`05` import a small helper, `_pacific_aoi.py`, that turns a
-friendly country name into the right map area. Get it into your Colab session in
-**one line** — run this in a cell:
-```python
-!wget -q https://raw.githubusercontent.com/tavitas/sprep-gee-climate-workshop/main/scripts/python/_pacific_aoi.py
-```
-??? note "Prefer to upload it by hand?"
-    Open the **:material-folder: Files** panel (left sidebar) → **Upload**, and
-    upload `_pacific_aoi.py` from the
-    [downloads](../course-details/downloads.md) / the `scripts/python/` folder.
-    It must sit next to your notebook for `import` to find it.
+## Step 1 — The shared country selector loads itself
+Scripts `01`–`05` use a small helper, `_pacific_aoi.py`, that turns a friendly
+country name into the right map area. **You don't need to do anything** — each
+script automatically downloads the helper if it isn't already in your session:
 
-Check it loaded:
 ```python
-from _pacific_aoi import get_country, get_outline
-print('Helper loaded ✔')
+try:
+    from _pacific_aoi import get_country, get_outline
+except ModuleNotFoundError:        # e.g. a fresh Colab session
+    import urllib.request
+    urllib.request.urlretrieve(
+        'https://raw.githubusercontent.com/tavitas/sprep-gee-climate-workshop/'
+        'main/scripts/python/_pacific_aoi.py', '_pacific_aoi.py')
+    from _pacific_aoi import get_country, get_outline
 ```
+
+??? note "Want to load it yourself instead?"
+    You can pre-load it in one line — `!wget -q https://raw.githubusercontent.com/tavitas/sprep-gee-climate-workshop/main/scripts/python/_pacific_aoi.py`
+    — or open the **:material-folder: Files** panel (left sidebar) → **Upload**
+    and upload `_pacific_aoi.py` from the `scripts/python/` folder. It must sit
+    next to your notebook for `import` to find it.
 
 ## Step 2 — Paste and run a script
 1. Open the [Python scripts page](../scripts/python.md) and copy a script — for
@@ -67,9 +70,9 @@ for **QGIS** or **ArcGIS**.
 | `03_sst_reef_heat.py` | Ocean & SST | [6](../exercises/ocean-coast.md) |
 | `04_coastal_exposure.py` | Sea level & coast | [6](../exercises/ocean-coast.md) |
 
-!!! note "Keep all the files together"
-    `_pacific_aoi.py` must be in the session for `01`–`05` to import it. If you
-    **Runtime → Disconnect** or start a fresh notebook, re-run Step 1.
+!!! note "Fresh session?"
+    If you **Runtime → Disconnect** or start a new notebook, the scripts simply
+    re-download `_pacific_aoi.py` the next time you run one — no action needed.
 
 **See also:** the full [Python scripts](../scripts/python.md), and the
 [live diagnostic check](../scripts/diagnostic.md) to confirm every dataset loads

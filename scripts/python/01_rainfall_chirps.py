@@ -17,7 +17,17 @@ Dataset: GPM IMERG Monthly v07 (NASA/GPM_L3/IMERG_MONTHLY_V07)
 
 import ee
 import geemap
-from _pacific_aoi import get_country, get_outline   # robust AOI for every nation
+
+# Shared country selector (the 14 SPREP member countries). In Colab / Jupyter
+# this helper file may not be present, so fetch it from the workshop repo if so.
+try:
+    from _pacific_aoi import get_country, get_outline
+except ModuleNotFoundError:
+    import urllib.request
+    urllib.request.urlretrieve(
+        'https://raw.githubusercontent.com/tavitas/sprep-gee-climate-workshop/'
+        'main/scripts/python/_pacific_aoi.py', '_pacific_aoi.py')
+    from _pacific_aoi import get_country, get_outline
 
 ee.Initialize(project='your-project-id')   # <-- your registered project
 
